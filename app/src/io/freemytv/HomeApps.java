@@ -474,15 +474,8 @@ final class HomeApps {
             cleanHeavyBackgroundApps(a, it.pkg);
             lastLaunchedPackage = it.pkg;
         }
-        if ("com.amazon.amazonvideo.livingroom".equals(it.pkg) 
-                || "com.netflix.ninja".equals(it.pkg)
-                || "com.google.android.youtube.tv".equals(it.pkg)
-                || "app.blaze.spofficial".equals(it.pkg)
-                || "org.videolan.vlc".equals(it.pkg)) {
-            NetOverlayService.hide();
-        } else {
-            NetOverlayService.show();
-        }
+        NetOverlayService.start(a);
+        NetOverlayService.show();
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
             a.startActivity(intent, ActivityOptions.makeScaleUpAnimation(from, x, y, Math.max(w, 1), Math.max(h, 1)).toBundle());
