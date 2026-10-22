@@ -65,20 +65,42 @@ public class NetOverlayService extends Service {
     }
 
     public static void hide() {
+        hide(null);
+    }
+
+    public static void hide(Context context) {
         NetOverlayService s = instance;
         if (s != null && s.overlayView != null) {
             s.handler.post(() -> {
                 if (s.overlayView != null) s.overlayView.setVisibility(View.GONE);
             });
         }
+        if (context != null) {
+            try {
+                Intent intent = new Intent(context, NetOverlayService.class);
+                intent.setAction("HIDE");
+                context.startService(intent);
+            } catch (Throwable ignored) {}
+        }
     }
 
     public static void show() {
+        show(null);
+    }
+
+    public static void show(Context context) {
         NetOverlayService s = instance;
         if (s != null && s.overlayView != null) {
             s.handler.post(() -> {
                 if (s.overlayView != null) s.overlayView.setVisibility(View.VISIBLE);
             });
+        }
+        if (context != null) {
+            try {
+                Intent intent = new Intent(context, NetOverlayService.class);
+                intent.setAction("SHOW");
+                context.startService(intent);
+            } catch (Throwable ignored) {}
         }
     }
 
@@ -137,6 +159,15 @@ public class NetOverlayService extends Service {
     }
 
     @Override public int onStartCommand(Intent intent, int flags, int startId) {
+        if (intent != null) {
+            String action = intent.getAction();
+            if ("HIDE".equals(action)) {
+                if (overlayView != null) overlayView.setVisibility(View.GONE);
+                return START_STICKY;
+            } else if ("SHOW".equals(action)) {
+                if (overlayView != null) overlayView.setVisibility(View.VISIBLE);
+            }
+        }
         if (overlayView != null && windowManager != null && !running) {
             instance = this;
             handler.removeCallbacks(netTick);

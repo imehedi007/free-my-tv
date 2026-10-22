@@ -13,7 +13,23 @@ public class RemoteKeyService extends AccessibilityService {
         return RemoteKeys.onKey(this, event);
     }
 
-    @Override public void onAccessibilityEvent(AccessibilityEvent event) {}
+    @Override public void onAccessibilityEvent(AccessibilityEvent event) {
+        if (event == null) return;
+        if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            CharSequence pkg = event.getPackageName();
+            if (pkg != null) {
+                String p = pkg.toString();
+                if ("com.amazon.amazonvideo.livingroom".equals(p) || "com.netflix.ninja".equals(p)) {
+                    NetOverlayService.hide(this);
+                } else if ("io.freemytv".equals(p)
+                        || "com.google.android.youtube.tv".equals(p)
+                        || "app.blaze.spofficial".equals(p)
+                        || "org.videolan.vlc".equals(p)) {
+                    NetOverlayService.show(this);
+                }
+            }
+        }
+    }
 
     @Override public void onInterrupt() {}
 }
