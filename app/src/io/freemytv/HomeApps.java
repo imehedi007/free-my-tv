@@ -60,6 +60,82 @@ final class HomeApps {
     /** Image size of each card (16:9; on screen it shows up to ~330 px wide). */
     static final int TILE_W = 384, TILE_H = 216;
 
+    static String lastLaunchedPackage;
+    private static final String[] HEAVY_APPS = {
+        "com.google.android.youtube.tv",
+        "com.google.android.youtube.tvmusic",
+        "com.netflix.ninja",
+        "com.amazon.amazonvideo.livingroom",
+        "app.blaze.spofficial",
+        "org.videolan.vlc",
+        "com.phlox.tvwebbrowser",
+        "com.disney.disneyplus",
+        "com.apple.atve.androidtv.appletv",
+        "com.wbd.stream",
+        "com.hbo.hbonow",
+        "com.spotify.tv.android",
+        "com.google.android.videos"
+    };
+
+    private static final java.util.concurrent.ExecutorService KILL_EXECUTOR =
+            java.util.concurrent.Executors.newSingleThreadExecutor();
+
+    /** Called when returning to Home: terminates previous app and cleans background memory */
+    static void onReturnToHome(Context context) {
+        if (context == null) return;
+        String prev = lastLaunchedPackage;
+        lastLaunchedPackage = null;
+        if (prev != null) {
+            terminateApp(context, prev);
+        }
+        cleanHeavyBackgroundApps(context, null);
+    }
+
+    /** Cleans heavy background apps to keep available RAM high. Excludes pkgToKeep if launching an app. */
+    static void cleanHeavyBackgroundApps(Context context, String pkgToKeep) {
+        if (context == null) return;
+        try {
+            android.app.ActivityManager am = (android.app.ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            if (am != null) {
+                for (String pkg : HEAVY_APPS) {
+                    if (pkg.equals(pkgToKeep)) continue;
+                    try { am.killBackgroundProcesses(pkg); } catch (Throwable ignore) {}
+                }
+            }
+        } catch (Throwable ignore) {}
+        KILL_EXECUTOR.execute(() -> {
+            try (Adb adb = Adb.connect(context, 3000, null)) {
+                StringBuilder sb = new StringBuilder();
+                for (String pkg : HEAVY_APPS) {
+                    if (pkg.equals(pkgToKeep)) continue;
+                    sb.append("am force-stop ").append(pkg).append("; ");
+                }
+                adb.shell(sb.toString());
+                AppLog.i("cleanHeavyBackgroundApps: background apps force-stopped");
+            } catch (Throwable t) {
+                AppLog.w("cleanHeavyBackgroundApps ADB failed: " + t.getMessage());
+            }
+        });
+    }
+
+    static void terminateApp(Context context, String pkg) {
+        if (pkg == null || pkg.isEmpty() || pkg.equals("io.freemytv") || (context != null && pkg.equals(context.getPackageName()))) return;
+        if (context != null) {
+            try {
+                android.app.ActivityManager am = (android.app.ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+                if (am != null) am.killBackgroundProcesses(pkg);
+            } catch (Throwable ignore) {}
+        }
+        KILL_EXECUTOR.execute(() -> {
+            try (Adb adb = Adb.connect(context, 3000, null)) {
+                adb.shell("am force-stop " + pkg);
+                AppLog.i("terminateApp: force-stopped " + pkg);
+            } catch (Throwable t) {
+                AppLog.w("terminateApp ADB failed for " + pkg + ": " + t.getMessage());
+            }
+        });
+    }
+
     static final class Item {
         int kind;
         String key, label, pkg, inputId, number;
@@ -394,7 +470,15 @@ final class HomeApps {
                 return false;
         }
         if (intent == null) return false;
-        if ("com.amazon.amazonvideo.livingroom".equals(it.pkg) || "com.netflix.ninja".equals(it.pkg)) {
+        if (it.pkg != null && !it.pkg.isEmpty()) {
+            cleanHeavyBackgroundApps(a, it.pkg);
+            lastLaunchedPackage = it.pkg;
+        }
+        if ("com.amazon.amazonvideo.livingroom".equals(it.pkg) 
+                || "com.netflix.ninja".equals(it.pkg)
+                || "com.google.android.youtube.tv".equals(it.pkg)
+                || "app.blaze.spofficial".equals(it.pkg)
+                || "org.videolan.vlc".equals(it.pkg)) {
             NetOverlayService.hide();
         } else {
             NetOverlayService.show();

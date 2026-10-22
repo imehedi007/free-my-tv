@@ -6,6 +6,10 @@ import android.util.Log;
 final class AppLog {
     private AppLog() {}
 
+    static void i(String message) {
+        Log.i("FreeMyTV", message);
+    }
+
     static void w(String message) {
         Log.i("FreeMyTV", message);
     }

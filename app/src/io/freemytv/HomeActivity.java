@@ -45,6 +45,7 @@ public class HomeActivity extends Activity {
         super.onResume();
         NetOverlayService.start(this);
         NetOverlayService.show();
+        HomeApps.onReturnToHome(this);
         if (prefsVersion != Prefs.version) {
             prefsVersion = Prefs.version;
             HomeData.get(this).settingsChanged();
@@ -63,6 +64,7 @@ public class HomeActivity extends Activity {
     @Override protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (home != null) home.reset(true);
+        HomeApps.onReturnToHome(this);
     }
 
     @Override protected void onDestroy() {
