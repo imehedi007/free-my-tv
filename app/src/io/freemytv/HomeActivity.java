@@ -35,6 +35,7 @@ public class HomeActivity extends Activity {
             return;
         }
         Ui.init(this);
+        NetOverlayService.start(this);
         home = new HomeView(this);
         setContentView(home);
         getWindow().setBackgroundDrawable(null);
@@ -42,6 +43,8 @@ public class HomeActivity extends Activity {
 
     @Override protected void onResume() {
         super.onResume();
+        NetOverlayService.start(this);
+        NetOverlayService.show();
         if (prefsVersion != Prefs.version) {
             prefsVersion = Prefs.version;
             HomeData.get(this).settingsChanged();
@@ -73,6 +76,13 @@ public class HomeActivity extends Activity {
     }
 
     @Override public boolean dispatchKeyEvent(KeyEvent event) {
+        int code = event.getKeyCode();
+        if (code == KeyEvent.KEYCODE_SETTINGS || code == 312 /* KEYCODE_QUICK_OPTIONS */) {
+            if (event.getAction() == KeyEvent.ACTION_UP) {
+                startActivity(new Intent(this, SettingsActivity.class));
+            }
+            return true;
+        }
         if (RemoteKeys.onKey(this, event)) return true;
         if (home != null && home.onKey(event)) return true;
         return super.dispatchKeyEvent(event);

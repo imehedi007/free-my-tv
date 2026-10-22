@@ -394,6 +394,11 @@ final class HomeApps {
                 return false;
         }
         if (intent == null) return false;
+        if ("com.amazon.amazonvideo.livingroom".equals(it.pkg) || "com.netflix.ninja".equals(it.pkg)) {
+            NetOverlayService.hide();
+        } else {
+            NetOverlayService.show();
+        }
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
             a.startActivity(intent, ActivityOptions.makeScaleUpAnimation(from, x, y, Math.max(w, 1), Math.max(h, 1)).toBundle());

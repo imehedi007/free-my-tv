@@ -78,6 +78,12 @@ final class HomeMode {
         // KTC (NextStar; MediaTek)
         "tv.anoki.acr.controller",                                                    // Anoki ACR: watches what's on screen
         "com.mediatek.tv.retaildemo", "com.electronic.manual",                        // store demo, manual
+        // Haier / Candy (MediaTek / CVTE board)
+        "com.haier.tvhousekeeper", "com.haierubic.usmartdevice",                     // TV Assistant (50 MB), uSmart IoT
+        "com.haier.yudee.tv", "com.haier.apps",                                       // Yudee smart/telemetry, Haier App Store
+        "com.haier.launcher.haiermatrix", "com.haier.sharetv.webview",                // matrix promo launcher, promo webview
+        "ru.haier.evo",                                                               // Evo promo
+        "com.telink.lt.ota",                                                          // Telink OTA background daemon
     };
 
     /** The voice assistant, only with disable_assistant=true in config.properties (the mic button stops working). */
@@ -135,7 +141,10 @@ final class HomeMode {
         "com.fengmi.projector.imaging", "com.fengmi.platform", "com.fengmi.Autopair", "com.fengmi.fmsettings",
         "com.fengmi.testsuite", "android.autoinstalls.config.fomovie",
         "uk.co.freeview.tifbridge",
-        "uk.co.freeview.mdsclient", "uk.co.freeview.fvpconfigauth"));
+        "uk.co.freeview.mdsclient", "uk.co.freeview.fvpconfigauth",
+        // Haier / Candy / CVTE: app manager, factory menu, pairing, magic board / quick settings
+        "com.haier.tv.hmagicboard", "com.cvte.haier.tv.appmanager", "com.cvte.r_agent_overlay", "com.cvte.tv.fac.menu", "com.cvte.tv.hkcfac",
+        "com.example.bt_pair_tips", "android.autoinstalls.config.haier.hanyang"));
 
     /** One switch at a time (jobs can overlap: a boot check and a button press). */
     private static final Object RUN = new Object();

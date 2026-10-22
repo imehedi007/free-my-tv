@@ -16,6 +16,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.media.tv.TvInputManager;
+import android.net.TrafficStats;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
@@ -37,6 +38,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
@@ -178,6 +180,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
     private float wiggle;
     private Spring[] tileSlide = new Spring[0];
     private final Spring moveLift = new Spring(0.3f, 0.72f, 0);
+    private final Spring pressFocus = new Spring(0.12f, 0.92f, 0);
     private List<HomeApps.Item> reorderOrigin;
     private final Runnable holdStart = () -> { if (this.okDown && this.holdArmed) startReorder(); };
 
@@ -194,7 +197,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
     private int pickIndex, heroSlide = 1;
     private Hero hero, heroFrom;
     private long heroFadeAt, bgFadeAt;
-    private final Spring heroFocus = new Spring(0.28f, 0.85f, 0);
+    private final Spring heroFocus = new Spring(0.22f, 0.88f, 0);
     private final RectF heroButton = new RectF();
     private Backdrop bgFrom, bgTo;     // null = gradient (no photo)
     private final int[] frostMix = new int[Backdrop.FW * Backdrop.FH];
@@ -218,6 +221,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
     private final RectF focusedCell = new RectF();
     private boolean sheetOpen;
     private int gridIndex;
+
 
     // Toasts
     private final ArrayDeque<String> toasts = new ArrayDeque<>();
@@ -375,11 +379,11 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         setContentDescription("Free My TV");
         drawerLayer.setVisibility(INVISIBLE);
         for (int i = 0; i < 6; i++) {
-            topFocus[i] = new Spring(0.26f, 0.85f, 0);
+            topFocus[i] = new Spring(0.20f, 0.90f, 0);
             topRects[i] = new RectF();
         }
         for (int i = 0; i < 3; i++) {
-            cardFocus[i] = new Spring(0.32f, 0.78f, 0);
+            cardFocus[i] = new Spring(0.24f, 0.88f, 0);
             cardRects[i] = new RectF();
         }
         makeLightButtons();
@@ -635,6 +639,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
 
         boolean tilesMoving = step(tileFocus, dt);
         if (reorderAnim) tilesMoving |= stepReorder(dt, up);
+        boolean pressMoving = pressFocus.step(dt);
         boolean statusMoving = step(statusFocus, dt);
         boolean heroMoving = heroFocus.step(dt);
         boolean topMoving = step(topFocus, dt), cardsMoving = step(cardFocus, dt);
@@ -648,6 +653,13 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         boolean heroFading = tickHeroFade(up);
         boolean bgFading = tickBackgroundFade(up);
         boolean nightMoving = tickNight(up);
+
+        if (pressMoving) {
+            tilesDirty = true;
+            if (zone == Z_CARDS || zone == Z_TOP) heroDirty = true;
+            if (zone == Z_DRAWER) drawerDirty = true;
+            if (sheetOpen) gridDirty = true;
+        }
 
         if (drawerMoving || sheetMoving || motionDirty) updateMotion();
         // Opening and closing the drawer only moves the cached layers: redrawing the glass on every frame made the TV
@@ -674,7 +686,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         }
 
         // Busy: something is moving, or the sheet or the drawer is open.
-        boolean busy = tilesMoving || statusMoving || heroMoving || drawerItemsMoving || gridMoving || drawerMoving
+        boolean busy = tilesMoving || pressMoving || statusMoving || heroMoving || drawerItemsMoving || gridMoving || drawerMoving
                 || sheetMoving || toastFading || heroFading || bgFading || nightMoving || sheetOpen || sheet.value > 0.001f
                 || drawerOpen || drawer.value > 0.001f || toast != null || !toasts.isEmpty();
         idle = !busy;
@@ -1049,7 +1061,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
             statusRects = new RectF[list.size()];
             int index = Math.min(statusIndex, Math.max(0, list.size() - 1));
             for (int i = 0; i < statusFocus.length; i++) {
-                statusFocus[i] = new Spring(0.26f, 0.85f, 0);
+                statusFocus[i] = new Spring(0.20f, 0.90f, 0);
                 statusRects[i] = new RectF();
                 if (list.get(i).key.equals(focusedKey)) index = i;   // a device came on: keep focus on the same button
             }
@@ -1106,8 +1118,8 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
             tileSlide = new Spring[list.size()];
             tileRects = new RectF[list.size()];
             for (int i = 0; i < tileFocus.length; i++) {
-                tileFocus[i] = new Spring(0.34f, 0.74f, 0);
-                tileSlide[i] = new Spring(0.32f, 0.86f, 0);
+                tileFocus[i] = new Spring(0.22f, 0.90f, 0);
+                tileSlide[i] = new Spring(0.24f, 0.90f, 0);
                 tileRects[i] = new RectF();
             }
             shelfIndex = Math.min(shelfIndex, Math.max(0, list.size() - 1));
@@ -1266,7 +1278,9 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         HomeApps.Item it = shelf.get(i);
         // Lifted to be moved: a little bigger than focused, with a deeper shadow.
         float l = i == liftIndex ? Math.max(0, moveLift.value) : 0;
-        float f = tileFocus[i].value, fc = Ui.clamp(f), s = 1 + FOCUS_GROW * f + LIFT_GROW * l;
+        float f = tileFocus[i].value, fc = Ui.clamp(f);
+        float press = (zone == Z_SHELF && i == shelfIndex && !reordering) ? pressFocus.value : 0;
+        float s = 1 + FOCUS_GROW * f + LIFT_GROW * l - 0.05f * press * fc;
         RectF base = tileRects[i];
         float bw = base.width(), bh = base.height(), r0 = TILE_RADIUS * k;
         float cx = base.centerX(), cy = base.centerY();
@@ -1420,7 +1434,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
             drawerFocus = new Spring[list.size()];
             drawerRects = new RectF[list.size()];
             for (int i = 0; i < drawerFocus.length; i++) {
-                drawerFocus[i] = new Spring(0.28f, 0.85f, 0);
+                drawerFocus[i] = new Spring(0.22f, 0.88f, 0);
                 drawerRects[i] = new RectF();
             }
             drawerIndex = Math.min(drawerIndex, Math.max(0, list.size() - 1));
@@ -1515,7 +1529,9 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
     /** Square drawer button: symbol and name; an input with no device is dimmed. Focused: white, with dark text. */
     private void drawDrawerTile(Canvas c, int i) {
         HomeApps.Item it = drawerItems.get(i);
-        float f = Ui.clamp(drawerFocus[i].value), s = 1 + 0.07f * f;
+        float f = Ui.clamp(drawerFocus[i].value);
+        float press = (zone == Z_DRAWER && i == drawerIndex) ? pressFocus.value : 0;
+        float s = 1 + 0.07f * f - 0.04f * press * f;
         RectF base = drawerRects[i];
         float cx = base.centerX(), cy = base.centerY();
         cell.set(cx - base.width() * s / 2, cy - base.height() * s / 2, cx + base.width() * s / 2, cy + base.height() * s / 2);
@@ -1732,7 +1748,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
     private void setOthers(List<HomeApps.Item> list) {
         others = list;
         gridFocus = new Spring[list.size()];
-        for (int i = 0; i < gridFocus.length; i++) gridFocus[i] = new Spring(0.3f, 0.82f, 0);
+        for (int i = 0; i < gridFocus.length; i++) gridFocus[i] = new Spring(0.22f, 0.88f, 0);
         gridLabels = null;
         gridIndex = Math.min(gridIndex, Math.max(0, list.size() - 1));
         retargetGrid(true);
@@ -1792,7 +1808,8 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
             float x = left + col * (GRID_W + GRID_GAP) * k;
             gridCell.set(x, y, x + GRID_W * k, y + GRID_H * k);
             float f = gridFocus[i].value;
-            drawCard(c, others.get(i).tile, gridCell, GRID_RADIUS * k, f, 0.08f);
+            float press = (sheetOpen && i == gridIndex) ? pressFocus.value : 0;
+            drawCard(c, others.get(i).tile, gridCell, GRID_RADIUS * k, f, 0.08f, press);
             if (sheetOpen && i == gridIndex) focusedCell.set(cell);
             gridLabel.setColor(blend(0x99FFFFFF, 0xFFFFFFFF, Ui.clamp(f)));
             c.drawText(gridLabels[i], gridCell.centerX(), gridCell.bottom + (40 + 6 * f) * k, gridLabel);
@@ -1800,12 +1817,12 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
     }
 
     /** 16:9 sheet card. Focused (the shelf's subtle focus): it grows, with a shadow, a soft sheen and a thin border. */
-    private void drawCard(Canvas c, Bitmap image, RectF base, float radius, float f, float grow) {
-        float s = 1 + grow * f;
+    private void drawCard(Canvas c, Bitmap image, RectF base, float radius, float f, float grow, float press) {
+        float fc = Ui.clamp(f);
+        float s = 1 + grow * f - 0.04f * press * fc;
         float cx = base.centerX(), cy = base.centerY();
         cell.set(cx - base.width() * s / 2, cy - base.height() * s / 2, cx + base.width() * s / 2, cy + base.height() * s / 2);
         float r = radius * s;
-        float fc = Ui.clamp(f);
         if (f > 0.01f) {
             tmp.set(cell);
             tmp.offset(0, 16 * k * f);
@@ -1949,6 +1966,10 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
                 && code != KeyEvent.KEYCODE_NUMPAD_ENTER) {
             holdArmed = false;      // another key while OK is held: no move mode
             handler.removeCallbacks(holdStart);
+            if (pressFocus.target != 0) {
+                pressFocus.target = 0;
+                wake();
+            }
         }
         switch (code) {
             case KeyEvent.KEYCODE_DPAD_LEFT:
@@ -1977,12 +1998,18 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
                         handler.removeCallbacks(holdStart);
                         holdArmed = canReorder();
                         if (holdArmed) handler.postDelayed(holdStart, HOLD_MS);
+                        pressFocus.target = 1;
+                        wake();
                     } else if (okDown && holdArmed && e.isLongPress()) {
                         startReorder();
+                        pressFocus.target = 0;
+                        wake();
                     }
                 } else {
                     holdArmed = false;
                     handler.removeCallbacks(holdStart);
+                    pressFocus.target = 0;
+                    wake();
                     if (okDown && !okHeld && !e.isCanceled() && spoken.keyClick()) activate();
                     okDown = okHeld = false;
                 }
@@ -2016,6 +2043,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
     }
 
     private void move(int dx, int dy) {
+        pressFocus.snap(0);
         if (sheetOpen) {
             moveGrid(dx, dy);
             return;
@@ -2114,6 +2142,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
     }
 
     private void moveGrid(int dx, int dy) {
+        pressFocus.snap(0);
         int n = others.size();
         if (n == 0) return;
         int r = gridIndex / COLUMNS, col = gridIndex % COLUMNS;
@@ -2134,6 +2163,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
     }
 
     private void activate() {
+        pressFocus.target = 0;
         wake();
         if (reordering) {   // TalkBack's click while moving an app: drop it
             dropReorder();
@@ -2754,7 +2784,9 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
     private void drawLightCard(Canvas c, int i) {
         RectF base = cardRects[i];
         Recs.Pick p = i < cards.size() ? cards.get(i) : null;
-        float v = cardFocus[i].value, f = Ui.clamp(v), s = 1 + 0.05f * v;
+        float v = cardFocus[i].value, f = Ui.clamp(v);
+        float press = (zone == Z_CARDS && i == cardIndex) ? pressFocus.value : 0;
+        float s = 1 + 0.05f * v - 0.03f * press * f;
         float bw = base.width(), bh = base.height(), r0 = 18 * k;
         float cx = base.centerX(), cy = base.centerY() - 6 * k * v;
         cell.set(cx - bw * s / 2, cy - bh * s / 2, cx + bw * s / 2, cy + bh * s / 2);
@@ -2821,7 +2853,9 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         applyTone();
         for (int i = 0; i < 3; i++) {
             RectF r = topRects[3 + i];
-            float f = Ui.clamp(topFocus[3 + i].value), s = 1 + 0.1f * f, rad = r.width() / 2 * s;
+            float f = Ui.clamp(topFocus[3 + i].value);
+            float press = (zone == Z_TOP && topIndex == 3 + i) ? pressFocus.value : 0;
+            float s = 1 + 0.1f * f - 0.04f * press * f, rad = r.width() / 2 * s;
             cell.set(r.centerX() - rad, r.centerY() - rad, r.centerX() + rad, r.centerY() + rad);
             tmp.set(cell);
             tmp.offset(0, (6 + 8 * f) * k);
@@ -2923,4 +2957,6 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         return (Math.round(aa + (ba - aa) * f) << 24) | (Math.round(ar + (br - ar) * f) << 16)
                 | (Math.round(ag + (bg - ag) * f) << 8) | Math.round(ab + (bb - ab) * f);
     }
+
 }
+

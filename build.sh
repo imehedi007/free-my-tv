@@ -16,6 +16,11 @@ fi
 BT="$SDK/build-tools/$(ls "$SDK/build-tools" | sort -V | tail -1)"
 AJ="$(ls -d "$SDK"/platforms/android-*/android.jar 2>/dev/null | sort -V | tail -1 || true)"
 [ -f "${AJ:-}" ] || { echo "Android platform not found. Run: sdkmanager \"platforms;android-34\""; exit 1; }
+if [ -z "${JAVA_HOME:-}" ]; then
+  for d in "/opt/homebrew/opt/openjdk@17" "/opt/homebrew/opt/openjdk" "$HOME/tizen-studio/jdk"; do
+    if [ -x "$d/bin/javac" ]; then export JAVA_HOME="$d"; break; fi
+  done
+fi
 JAVAC="${JAVA_HOME:+$JAVA_HOME/bin/}javac"
 KEYTOOL="${JAVA_HOME:+$JAVA_HOME/bin/}keytool"
 command -v "$JAVAC" >/dev/null 2>&1 || { echo "JDK not found. Install JDK 17 and set JAVA_HOME."; exit 1; }
