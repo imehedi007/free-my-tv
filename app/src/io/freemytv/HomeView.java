@@ -14,6 +14,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.RadialGradient;
 import android.graphics.Shader;
 import android.media.tv.TvInputManager;
 import android.net.TrafficStats;
@@ -135,7 +136,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
     private final int[] glassNight = new int[Backdrop.GW * Backdrop.GH], frostNight = new int[Backdrop.FW * Backdrop.FH];
     private final int[] neutralGlassPx = new int[Backdrop.GW * Backdrop.GH], neutralFrostPx = new int[Backdrop.FW * Backdrop.FH];
     private boolean nightPair;          // the glass holds both photos (day and night), blended by `night`
-    private Shader nightGradient;
+    private Shader nightGradient, nightAura1, nightAura2;
 
     // At the top: tabs (0 to 2) and icon-only buttons (3 to 5); the three cards
     private int tab, topIndex, cardIndex;
@@ -147,7 +148,13 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
     private final RectF[] cardRects = new RectF[3];
     private final List<HomeApps.Item> lightButtons = new ArrayList<>();
     private Paint lTitle, lTab, lTabOn, lCardTitle, lCardMeta, lQuote, lTip, lDate, lClock, lWeather, lClockQuote;
-    private Shader lightGradient;
+    private Shader lightGradient, lightAura1, lightAura2;
+    private Shader lightScrim, nightScrim;
+    private final Paint auraPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Bitmap customWallpaper;
+    private long customWallpaperStamp;
+    private String customWallpaperPath;
+    private boolean customWallpaperDark;
 
     // Shelf
     private List<HomeApps.Item> shelf = new ArrayList<>();
@@ -342,6 +349,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
             wake();
             data.refreshIfStale();
             recs.refreshIfStale();
+            checkCustomWallpaper();
             checkNotices();
             updatePalette();
             checkNight(true);
@@ -404,6 +412,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         if (running) return;
         running = true;
         checkNight(false);
+        checkCustomWallpaper();
         resumedAt = SystemClock.uptimeMillis();
         lastNanos = 0;
         lastStep = 0;
@@ -587,6 +596,9 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         lWeather = Ui.text(Ui.medium, 34 * k, L_DIM);
         lClockQuote = Ui.numbers(Ui.medium, 28 * k, L_DIM);
         lightGradient = null;
+        lightAura1 = lightAura2 = null;
+        nightGradient = nightAura1 = nightAura2 = null;
+        lightScrim = nightScrim = null;
         buttonPaint = Ui.text(Ui.semibold, 29 * k, INK);
         capsuleText = Ui.numbers(Ui.medium, 29 * k, 0xF2FFFFFF);
         tipPaint = Ui.text(Ui.semibold, 25 * k, 0xF2FFFFFF);
@@ -858,9 +870,16 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
 
     /** No photo: the glass reads the background's own gray (not Scene's default aurora, which isn't on screen). */
     private void neutralGlass() {
-        int color = blend(0xFFEBEBF0, 0xFF141416, night);
-        java.util.Arrays.fill(neutralFrostPx, color);
-        java.util.Arrays.fill(neutralGlassPx, color);
+        int colorTop = blend(0xFFF2F5FB, 0xFF141826, night);
+        int colorBot = blend(0xFFDCE2EF, 0xFF080A12, night);
+        for (int y = 0; y < Backdrop.FH; y++) {
+            int c = mix(colorTop, colorBot, (float) y / Backdrop.FH);
+            java.util.Arrays.fill(neutralFrostPx, y * Backdrop.FW, (y + 1) * Backdrop.FW, c);
+        }
+        for (int y = 0; y < Backdrop.GH; y++) {
+            int c = mix(colorTop, colorBot, (float) y / Backdrop.GH);
+            java.util.Arrays.fill(neutralGlassPx, y * Backdrop.GW, (y + 1) * Backdrop.GW, c);
+        }
         scene.setFrost(neutralFrostPx);
         scene.setGlassImage(neutralGlassPx);
         nightPair = false;
@@ -929,7 +948,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
 
     /** How dark it is: 0 = day, 1 = night (in between during the transition). */
     private float dark() {
-        return night;
+        return (customWallpaper != null && customWallpaperDark) ? 1f : night;
     }
 
     /** The day color or the night color, depending on the night value (blended during the transition). */
@@ -2680,28 +2699,188 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         boolean fading = bgFadeAt != 0;
         // Drawer open: the background lightens (by day) or darkens (at night), as a filter on the drawing itself.
         android.graphics.ColorFilter v = veil(tone(0.32f, 0.42f) * Ui.clamp(drawer.value), blend(0xFFFFFFFF, 0xFF000000, night));
-        if (bgTo == null || (fading && bgFrom == null)) {
-            if (lightGradient == null) lightGradient = new LinearGradient(0, 0, 0, h, 0xFFF5F5F7, 0xFFE2E2E7, Shader.TileMode.CLAMP);
-            if (nightGradient == null) nightGradient = new LinearGradient(0, 0, 0, h, 0xFF1C1C1E, 0xFF0B0B0D, Shader.TileMode.CLAMP);
-            fill.setColorFilter(v);
-            fill.setColor(0xFF000000);
-            if (night < 0.999f) {
-                fill.setShader(lightGradient);
-                c.drawRect(screen, fill);
-            }
-            if (night > 0.001f) {
-                fill.setShader(nightGradient);
-                fill.setAlpha(Math.round(255 * night));
-                c.drawRect(screen, fill);
-                fill.setAlpha(255);
-            }
-            fill.setShader(null);
-            fill.setColorFilter(null);
+        if (customWallpaper != null && !customWallpaper.isRecycled()) {
+            drawCustomWallpaper(c, v);
+        } else if (bgTo == null || (fading && bgFrom == null)) {
+            drawAppleAmbientMesh(c, v);
         }
         imagePaint.setColorFilter(v);
         if (fading && bgFrom != null) drawLightImage(c, bgFrom, bgTo == null ? 1 - e : 1);
         if (bgTo != null) drawLightImage(c, bgTo, fading ? e : 1);
         imagePaint.setColorFilter(null);
+    }
+
+    private void drawAppleAmbientMesh(Canvas c, android.graphics.ColorFilter v) {
+        if (lightGradient == null || w <= 0 || h <= 0) {
+            float fw = Math.max(1, w), fh = Math.max(1, h);
+            lightGradient = new LinearGradient(0, 0, fw, fh,
+                    new int[] {0xFFF7F8FC, 0xFFEFF2F9, 0xFFE3E8F4, 0xFFD8DDEB},
+                    new float[] {0f, 0.35f, 0.7f, 1f}, Shader.TileMode.CLAMP);
+            lightAura1 = new RadialGradient(fw * 0.22f, fh * 0.20f, fw * 0.58f,
+                    0x2AFFF4E6, 0x00FFF4E6, Shader.TileMode.CLAMP);
+            lightAura2 = new RadialGradient(fw * 0.82f, fh * 0.78f, fw * 0.52f,
+                    0x30C4D6F8, 0x00C4D6F8, Shader.TileMode.CLAMP);
+
+            nightGradient = new LinearGradient(0, 0, fw, fh,
+                    new int[] {0xFF0B0D16, 0xFF080910, 0xFF040508},
+                    new float[] {0f, 0.55f, 1f}, Shader.TileMode.CLAMP);
+            nightAura1 = new RadialGradient(fw * 0.32f, fh * 0.30f, fw * 0.65f,
+                    0x40284078, 0x00284078, Shader.TileMode.CLAMP);
+            nightAura2 = new RadialGradient(fw * 0.78f, fh * 0.80f, fw * 0.55f,
+                    0x36382052, 0x00382052, Shader.TileMode.CLAMP);
+        }
+        fill.setColorFilter(v);
+        fill.setColor(0xFF000000);
+        auraPaint.setColorFilter(v);
+
+        if (night < 0.999f) {
+            fill.setShader(lightGradient);
+            fill.setAlpha(Math.round(255 * (1 - night)));
+            c.drawRect(screen, fill);
+
+            auraPaint.setShader(lightAura1);
+            auraPaint.setAlpha(Math.round(255 * (1 - night)));
+            c.drawRect(screen, auraPaint);
+
+            auraPaint.setShader(lightAura2);
+            auraPaint.setAlpha(Math.round(255 * (1 - night)));
+            c.drawRect(screen, auraPaint);
+        }
+        if (night > 0.001f) {
+            fill.setShader(nightGradient);
+            fill.setAlpha(Math.round(255 * night));
+            c.drawRect(screen, fill);
+
+            auraPaint.setShader(nightAura1);
+            auraPaint.setAlpha(Math.round(255 * night));
+            c.drawRect(screen, auraPaint);
+
+            auraPaint.setShader(nightAura2);
+            auraPaint.setAlpha(Math.round(255 * night));
+            c.drawRect(screen, auraPaint);
+        }
+        fill.setShader(null);
+        fill.setColorFilter(null);
+        fill.setAlpha(255);
+        auraPaint.setShader(null);
+        auraPaint.setColorFilter(null);
+        auraPaint.setAlpha(255);
+    }
+
+    private void drawCustomWallpaper(Canvas c, android.graphics.ColorFilter v) {
+        if (customWallpaper == null || customWallpaper.isRecycled()) return;
+        imagePaint.setColorFilter(v);
+        imagePaint.setAlpha(255);
+        int bw = customWallpaper.getWidth(), bh = customWallpaper.getHeight();
+        float scale = Math.max((float) w / bw, (float) h / bh);
+        float dw = bw * scale, dh = bh * scale;
+        float dx = (w - dw) / 2f, dy = (h - dh) / 2f;
+        RectF dst = new RectF(dx, dy, dx + dw, dy + dh);
+        c.drawBitmap(customWallpaper, null, dst, imagePaint);
+        imagePaint.setColorFilter(null);
+
+        if (nightScrim == null || w <= 0 || h <= 0) {
+            float fh = Math.max(1, h);
+            nightScrim = new LinearGradient(0, 0, 0, fh,
+                    new int[] {0x44000000, 0x18000000, 0x55000000},
+                    new float[] {0f, 0.4f, 1f}, Shader.TileMode.CLAMP);
+            lightScrim = new LinearGradient(0, 0, 0, fh,
+                    new int[] {0x25FFFFFF, 0x08FFFFFF, 0x35FFFFFF},
+                    new float[] {0f, 0.4f, 1f}, Shader.TileMode.CLAMP);
+        }
+        fill.setColorFilter(v);
+        if (night < 0.999f) {
+            fill.setShader(lightScrim);
+            fill.setAlpha(Math.round(255 * (1 - night)));
+            c.drawRect(screen, fill);
+        }
+        if (night > 0.001f) {
+            fill.setShader(nightScrim);
+            fill.setAlpha(Math.round(255 * night));
+            c.drawRect(screen, fill);
+        }
+        fill.setShader(null);
+        fill.setColorFilter(null);
+        fill.setAlpha(255);
+    }
+
+    private void checkCustomWallpaper() {
+        java.io.File[] candidates = new java.io.File[] {
+            new java.io.File(activity.getExternalFilesDir(null), "wallpaper.jpg"),
+            new java.io.File(activity.getExternalFilesDir(null), "wallpaper.png"),
+            new java.io.File(activity.getExternalFilesDir(null), "wallpaper.webp"),
+            new java.io.File(activity.getFilesDir(), "wallpaper.jpg"),
+            new java.io.File(activity.getFilesDir(), "wallpaper.png"),
+            new java.io.File("/sdcard/wallpaper.jpg"),
+            new java.io.File("/sdcard/wallpaper.png")
+        };
+        java.io.File target = null;
+        for (java.io.File f : candidates) {
+            if (f != null && f.exists() && f.isFile() && f.length() > 0) {
+                target = f;
+                break;
+            }
+        }
+        if (target == null) {
+            if (customWallpaper != null) {
+                customWallpaper.recycle();
+                customWallpaper = null;
+                customWallpaperStamp = 0;
+                customWallpaperPath = null;
+                customWallpaperDark = false;
+                applyTone();
+                sky.invalidate();
+                heroLayer.invalidate();
+                status.invalidate();
+            }
+            return;
+        }
+        long stamp = target.lastModified();
+        String path = target.getAbsolutePath();
+        if (customWallpaper != null && stamp == customWallpaperStamp && path.equals(customWallpaperPath)) {
+            return;
+        }
+        try {
+            android.graphics.BitmapFactory.Options opts = new android.graphics.BitmapFactory.Options();
+            opts.inJustDecodeBounds = true;
+            android.graphics.BitmapFactory.decodeFile(path, opts);
+            int sample = 1;
+            int tw = Math.max(1, w > 0 ? w : 1920), th = Math.max(1, h > 0 ? h : 1080);
+            while (opts.outWidth / (sample * 2) >= tw && opts.outHeight / (sample * 2) >= th) {
+                sample *= 2;
+            }
+            opts.inSampleSize = Math.max(1, sample);
+            opts.inJustDecodeBounds = false;
+            if (android.os.Build.VERSION.SDK_INT >= 26) {
+                opts.inPreferredConfig = Bitmap.Config.HARDWARE;
+            } else {
+                opts.inPreferredConfig = Bitmap.Config.RGB_565;
+            }
+            Bitmap bm = android.graphics.BitmapFactory.decodeFile(path, opts);
+            if (bm != null) {
+                if (customWallpaper != null) customWallpaper.recycle();
+                customWallpaper = bm;
+                customWallpaperStamp = stamp;
+                customWallpaperPath = path;
+                try {
+                    Bitmap tiny = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+                    Canvas sc = new Canvas(tiny);
+                    sc.drawBitmap(bm, null, new Rect(0, 0, 1, 1), null);
+                    int p = tiny.getPixel(0, 0);
+                    tiny.recycle();
+                    float cr = ((p >> 16) & 255) / 255f, cg = ((p >> 8) & 255) / 255f, cb = (p & 255) / 255f;
+                    customWallpaperDark = (0.2126f * cr + 0.7152f * cg + 0.0722f * cb) < 0.55f;
+                } catch (Throwable ignore) {
+                    customWallpaperDark = true;
+                }
+                applyTone();
+                sky.invalidate();
+                heroLayer.invalidate();
+                status.invalidate();
+            }
+        } catch (Throwable t) {
+            AppLog.w("Failed to load wallpaper: " + t.getMessage());
+        }
     }
 
     private void drawLightImage(Canvas c, Backdrop b, float alpha) {
