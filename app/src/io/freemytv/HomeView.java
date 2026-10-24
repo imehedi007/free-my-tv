@@ -97,7 +97,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
     private static final float L_TITLE_BASE = 130, L_TABBAR_TOP = 158, L_TABBAR_H = 68, L_CARDS_TOP = 262, L_CARD_H = 442;
     private static final float L_TALL_W = 320, L_CARD_GAP = 40, L_BUTTON = 68, L_BUTTON_GAP = 20, L_BUTTON_CY = 103;
     private static final float L_PLATTER_TOP = 814, L_TILE_H = 126;
-    private static final float L_DATE_BASE = 330, L_CLOCK_BASE = 540, L_WEATHER_BASE = 626, L_QUOTES_BASE = 694;
+    private static final float L_DATE_BASE = 310, L_CLOCK_BASE = 505, L_WEATHER_BASE = 585, L_QUOTES_BASE = 655;
     private static final int L_INK = 0xFF1D1D1F, L_DIM = 0xFF6E6E73, L_FAINT = 0xFF8E8E93;
     private static final String[] TABS = {"Explorar", "Filmes", "Séries"};
     private static final String[] TABS_RU = {"Обзор", "Фильмы", "Сериалы"};
@@ -590,11 +590,16 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         lQuote = Ui.numbers(Ui.regular, 21 * k, L_FAINT);
         lTip = Ui.text(Ui.semibold, 25 * k, L_INK);
         lTip.setTextAlign(Paint.Align.CENTER);
-        lDate = Ui.text(Ui.semibold, 34 * k, L_DIM);
-        lClock = Ui.numbers(Ui.light, 200 * k, L_INK);
-        lClock.setLetterSpacing(-0.01f);
-        lWeather = Ui.text(Ui.medium, 34 * k, L_DIM);
-        lClockQuote = Ui.numbers(Ui.medium, 28 * k, L_DIM);
+        lDate = Ui.text(Ui.medium, 36 * k, 0xFFF1F5F9);
+        lDate.setLetterSpacing(0.015f);
+        lDate.setShadowLayer(18 * k, 0, 2 * k, 0xCC000000);
+        lClock = Ui.numbers(Ui.medium, 204 * k, 0xFFFFFFFF);
+        lClock.setLetterSpacing(-0.02f);
+        lClock.setShadowLayer(28 * k, 0, 4 * k, 0x99000000);
+        lWeather = Ui.text(Ui.semibold, 32 * k, 0xFFFFFFFF);
+        lWeather.setShadowLayer(16 * k, 0, 2 * k, 0xCC000000);
+        lClockQuote = Ui.numbers(Ui.semibold, 27 * k, 0xFFFFFFFF);
+        lClockQuote.setShadowLayer(16 * k, 0, 2 * k, 0xCC000000);
         lightGradient = null;
         lightAura1 = lightAura2 = null;
         nightGradient = nightAura1 = nightAura2 = null;
@@ -970,10 +975,10 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         lCardMeta.setColor(tone(L_DIM, 0xFF98989D));
         lQuote.setColor(tone(L_FAINT, 0xB8FFFFFF));
         lTip.setColor(tone(L_INK, WHITE));
-        lDate.setColor(tone(L_DIM, 0xFF98989D));
-        lClock.setColor(tone(L_INK, WHITE));
-        lWeather.setColor(tone(L_DIM, 0xFF98989D));
-        lClockQuote.setColor(tone(L_DIM, 0xFF98989D));
+        lDate.setColor(0xFFF1F5F9);
+        lClock.setColor(0xFFFFFFFF);
+        lWeather.setColor(0xFFFFFFFF);
+        lClockQuote.setColor(0xFFFFFFFF);
         staleQuote.setColor(tone(L_FAINT, 0x99FFFFFF));
     }
 
@@ -1243,10 +1248,19 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         float cap = q.cap, gap = (clock ? 8 : 6) * k, spacing = (clock ? 32 : 24) * k;
         float total = spacing * (n - 1);
         for (int i = 0; i < n; i++) total += q.glyphs[i] + gap + q.widths[i];
-        float x = clock ? MARGIN * k : right - total;
+        float cx = getWidth() / 2f;
+        float x = clock ? (cx - total / 2f) : (right - total);
         int coinColor = clock ? text.getColor() : Ui.alpha(tone(0xB38E8E93, 0x8CFFFFFF), fade);
         for (int i = 0; i < n; i++) {
-            Glyphs.coin(getContext(), c, HomeData.COINS[coins[i]], x + q.glyphs[i] / 2, base - cap / 2, cap, coinColor);
+            int cColor = coinColor;
+            if (clock) {
+                String sym = HomeData.COINS[coins[i]];
+                if ("BTC".equals(sym)) cColor = 0xFFF59E0B;
+                else if ("ETH".equals(sym)) cColor = 0xFF818CF8;
+                else if ("SOL".equals(sym)) cColor = 0xFF10B981;
+                else if ("USDT".equals(sym)) cColor = 0xFF26A17B;
+            }
+            Glyphs.coin(getContext(), c, HomeData.COINS[coins[i]], x + q.glyphs[i] / 2, base - cap / 2, cap, cColor);
             x += q.glyphs[i] + gap;
             c.drawText(q.values[i], x, base, text);
             x += q.widths[i] + spacing;
@@ -1254,8 +1268,13 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         text.setColor(textColor);
         String stale = HomeData.staleness(data.pricesAt, 5 * 60_000L);
         if (stale.isEmpty()) return;
-        if (clock) c.drawText(stale, x - spacing + 24 * k + staleQuote.measureText(stale), base, staleQuote);
-        else c.drawText(stale, right - total - 24 * k, base, staleQuote);
+        if (clock) {
+            staleQuote.setTextAlign(Paint.Align.LEFT);
+            c.drawText(stale, x - spacing + 24 * k, base, staleQuote);
+        } else {
+            staleQuote.setTextAlign(Paint.Align.RIGHT);
+            c.drawText(stale, right - total - 24 * k, base, staleQuote);
+        }
     }
 
     private void drawTiles(Canvas c) {
@@ -2933,10 +2952,31 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         return Recs.hasKey(getContext());
     }
 
+    private static int weatherColor(int code, boolean isDay) {
+        if (!isDay) return 0xFFFCD34D;
+        switch (code) {
+            case 0: case 1: return 0xFFF59E0B;
+            case 2: case 3: return 0xFF38BDF8;
+            case 45: case 48: return 0xFFCBD5E1;
+            case 51: case 53: case 55: case 61: case 63: case 65: case 80: case 81: case 82:
+                return 0xFF0284C7;
+            case 71: case 73: case 75: case 77: case 85: case 86:
+                return 0xFFBAE6FD;
+            case 95: case 96: case 99:
+                return 0xFFFBBF24;
+            default:
+                return 0xFFF59E0B;
+        }
+    }
+
     private void drawClock(Canvas c) {
-        float x = MARGIN * k;
-        c.drawText(dateText, x - Ui.leftBearing(lDate, dateText), L_DATE_BASE * k, lDate);
-        c.drawText(clockText, x - Ui.leftBearing(lClock, clockText), L_CLOCK_BASE * k, lClock);
+        float cx = getWidth() / 2f;
+        lDate.setTextAlign(Paint.Align.CENTER);
+        c.drawText(dateText, cx, L_DATE_BASE * k, lDate);
+
+        lClock.setTextAlign(Paint.Align.CENTER);
+        c.drawText(clockText, cx, L_CLOCK_BASE * k, lClock);
+
         HomeData.Weather wx = data.weather;
         if (!Prefs.weather() || Double.isNaN(wx.temp)) return;
         if (data.weatherAt != weatherLineAt || Prefs.version != weatherLinePrefs || !Ui.language.equals(weatherLineLanguage)) {
@@ -2949,11 +2989,19 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
                     : Ui.de ? "H:" + HomeData.degrees(wx.max) + "  T:" + HomeData.degrees(wx.min)
                     : "Máx. " + HomeData.degrees(wx.max) + "  Mín. " + HomeData.degrees(wx.min));
         }
-        float size = 40 * k, base = L_WEATHER_BASE * k;
+        float size = 38 * k, base = L_WEATHER_BASE * k;
         String symbol = Symbols.weather(wx.code, wx.isDay);
         float sw = Symbols.width(getContext(), symbol, size);
-        Symbols.draw(getContext(), c, symbol, x + sw / 2, base - Ui.halfCap(lWeather), size, lWeather.getColor());
-        c.drawText(weatherLine, x + sw + 16 * k, base, lWeather);
+        float gap = 14 * k;
+        float tw = lWeather.measureText(weatherLine);
+        float totalW = sw + gap + tw;
+        float startX = cx - totalW / 2f;
+
+        int wColor = weatherColor(wx.code, wx.isDay);
+        Symbols.draw(getContext(), c, symbol, startX + sw / 2f, base - Ui.halfCap(lWeather), size, wColor);
+
+        lWeather.setTextAlign(Paint.Align.LEFT);
+        c.drawText(weatherLine, startX + sw + gap, base, lWeather);
     }
 
     /**

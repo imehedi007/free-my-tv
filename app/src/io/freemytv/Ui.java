@@ -44,18 +44,26 @@ final class Ui {
         AssetManager a = c.getAssets();
         thin = font(a, 32, 200);
         light = font(a, 32, 300);
-        displayMedium = font(a, 32, 500);
-        displaySemibold = font(a, 32, 600);
         regular = font(a, 14, 400);
         medium = font(a, 14, 500);
         semibold = font(a, 14, 600);
+        displayMedium = font(a, 32, 500);
+        displaySemibold = font(a, 32, 700);
     }
 
-    /** Inter at an optical size (14 = text, 32 = display) and weight; the system font if the file is missing. */
+    /** Outfit / Inter variable font at the given weight; the system font if missing. */
     private static Typeface font(AssetManager a, int opticalSize, int weight) {
         if (has(a, FONT)) {
             try {
                 Typeface t = new Typeface.Builder(a, FONT)
+                        .setFontVariationSettings("'wght' " + weight).build();
+                if (t != null) return t;
+            } catch (RuntimeException ignored) {
+            }
+        }
+        if (has(a, FALLBACK_FONT)) {
+            try {
+                Typeface t = new Typeface.Builder(a, FALLBACK_FONT)
                         .setFontVariationSettings("'opsz' " + opticalSize + ", 'wght' " + weight).build();
                 if (t != null) return t;
             } catch (RuntimeException ignored) {
@@ -64,7 +72,8 @@ final class Ui {
         return Typeface.create(Typeface.DEFAULT, weight, false);
     }
 
-    private static final String FONT = "fonts/InterVariable.ttf";
+    private static final String FONT = "fonts/OutfitVariable.ttf";
+    private static final String FALLBACK_FONT = "fonts/InterVariable.ttf";
 
     /** "pt", "es", "de", "ru" or "en": the one picked (TV settings or config.properties), or with "auto" the TV's own, else English. */
     private static String language() {
