@@ -943,12 +943,12 @@ final class HomeApps {
         }
         if (icon == null) return b;
         int size = Math.round(TILE_H * 0.48f);
-        float left = (TILE_W - size) / 2f, top = (TILE_H - size) / 2f - 16;
+        float left = (TILE_W - size) / 2f, top = (TILE_H - size) / 2f;
         if (icon instanceof AdaptiveIconDrawable) {
             AdaptiveIconDrawable a = (AdaptiveIconDrawable) icon;
             if (pkg != null && pkg.contains("localsend") && a.getForeground() != null) {
                 int s = Math.round(TILE_H * 0.48f);
-                float sTop = (TILE_H - s) / 2f - 16;
+                float sTop = (TILE_H - s) / 2f;
                 a.getForeground().setBounds(Math.round((TILE_W - s) / 2f), Math.round(sTop), Math.round((TILE_W + s) / 2f), Math.round(sTop + s));
                 a.getForeground().draw(canvas);
             } else {
@@ -968,7 +968,7 @@ final class HomeApps {
         } else {
             // Legacy icon (a free-form drawing with transparency): smaller, no frame.
             int s = Math.round(TILE_H * 0.44f);
-            float sTop = (TILE_H - s) / 2f - 16;
+            float sTop = (TILE_H - s) / 2f;
             icon.setBounds(Math.round((TILE_W - s) / 2f), Math.round(sTop), Math.round((TILE_W + s) / 2f), Math.round(sTop + s));
             icon.draw(canvas);
         }
@@ -1007,7 +1007,7 @@ final class HomeApps {
         canvas.drawRect(0, 0, TILE_W, TILE_H, bg);
 
         float cx = TILE_W / 2f;
-        float cy = TILE_H * 0.44f;
+        float cy = TILE_H * 0.52f;
 
         // Subtle electric blue ambient glow in the center
         Paint glow = new Paint(Paint.ANTI_ALIAS_FLAG);

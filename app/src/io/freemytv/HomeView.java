@@ -594,26 +594,26 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         lQuote = Ui.numbers(Ui.regular, 21 * k, L_FAINT);
         lTip = Ui.text(Ui.semibold, 25 * k, L_INK);
         lTip.setTextAlign(Paint.Align.CENTER);
-        lDate = Ui.text(Ui.medium, 28 * k, 0xFFE2E8F0);
+        lDate = Ui.text(Ui.medium, 33 * k, 0xFFF1F5F9);
         lDate.setLetterSpacing(0.015f);
         lDate.setShadowLayer(16 * k, 0, 2 * k, 0x99000000);
-        lClock = Ui.numbers(Ui.displaySemibold != null ? Ui.displaySemibold : Ui.semibold, 134 * k, 0xFFFFFFFF);
+        lClock = Ui.numbers(Ui.displaySemibold != null ? Ui.displaySemibold : Ui.semibold, 152 * k, 0xFFFFFFFF);
         lClock.setLetterSpacing(-0.02f);
         lClock.setShadowLayer(26 * k, 0, 4 * k, 0x88000000);
-        lPeriod = Ui.text(Ui.semibold, 36 * k, 0xFFCBD5E1);
+        lPeriod = Ui.text(Ui.semibold, 42 * k, 0xFFE2E8F0);
         lPeriod.setShadowLayer(14 * k, 0, 2 * k, 0x88000000);
-        lWeather = Ui.text(Ui.semibold, 22 * k, 0xFFFFFFFF);
+        lWeather = Ui.text(Ui.semibold, 26 * k, 0xFFFFFFFF);
         lWeather.setShadowLayer(14 * k, 0, 2 * k, 0x88000000);
-        lWeatherSub = Ui.text(Ui.medium, 18 * k, 0xFF94A3B8);
-        lWeatherSub.setShadowLayer(12 * k, 0, 1 * k, 0x88000000);
-        lCryptoLabel = Ui.text(Ui.medium, 17 * k, 0xFF94A3B8);
-        lCryptoPrice = Ui.numbers(Ui.semibold, 18 * k, 0xFFFFFFFF);
+        lWeatherSub = Ui.text(Ui.medium, 21 * k, 0xFFE2E8F0);
+        lWeatherSub.setShadowLayer(12 * k, 0, 1 * k, 0x99000000);
+        lCryptoLabel = Ui.text(Ui.medium, 19.5f * k, 0xFFCBD5E1);
+        lCryptoPrice = Ui.numbers(Ui.semibold, 21 * k, 0xFFFFFFFF);
         lSectionTitle = Ui.text(Ui.semibold, 32 * k, 0xFFFFFFFF);
         lSectionTitle.setShadowLayer(18 * k, 0, 2 * k, 0x99000000);
         lShelfLabel = Ui.text(Ui.semibold, 18 * k, 0xFFFFFFFF);
         lShelfLabel.setTextAlign(Paint.Align.CENTER);
         lShelfLabel.setShadowLayer(14 * k, 0, 2 * k, 0xCC000000);
-        lPillText = Ui.text(Ui.medium, 20 * k, 0xFFFFFFFF);
+        lPillText = Ui.text(Ui.medium, 23 * k, 0xFFFFFFFF);
         lBadge = Ui.text(Ui.semibold, 13 * k, 0xFFFFFFFF);
         lBadgeText = Ui.text(Ui.medium, 17 * k, 0xFFE2E8F0);
         lClockQuote = Ui.numbers(Ui.semibold, 27 * k, 0xFFFFFFFF);
@@ -993,12 +993,12 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         lCardMeta.setColor(tone(L_DIM, 0xFF98989D));
         lQuote.setColor(tone(L_FAINT, 0xB8FFFFFF));
         lTip.setColor(tone(L_INK, WHITE));
-        if (lDate != null) lDate.setColor(0xFFE2E8F0);
+        if (lDate != null) lDate.setColor(0xFFF1F5F9);
         if (lClock != null) lClock.setColor(0xFFFFFFFF);
-        if (lPeriod != null) lPeriod.setColor(0xFFCBD5E1);
+        if (lPeriod != null) lPeriod.setColor(0xFFE2E8F0);
         if (lWeather != null) lWeather.setColor(0xFFFFFFFF);
-        if (lWeatherSub != null) lWeatherSub.setColor(0xFF94A3B8);
-        if (lCryptoLabel != null) lCryptoLabel.setColor(0xFF94A3B8);
+        if (lWeatherSub != null) lWeatherSub.setColor(0xFFE2E8F0);
+        if (lCryptoLabel != null) lCryptoLabel.setColor(0xFFCBD5E1);
         if (lCryptoPrice != null) lCryptoPrice.setColor(0xFFFFFFFF);
         if (lSectionTitle != null) lSectionTitle.setColor(0xFFFFFFFF);
         if (lShelfLabel != null) lShelfLabel.setColor(0xFFFFFFFF);
@@ -1412,11 +1412,6 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
             if (it.tile != null) roundImage(c, it.tile, cell, r);
         }
 
-        // App label centered at bottom inside the card
-        if (it.label != null && !it.label.isEmpty()) {
-            c.drawText(it.label, cell.centerX(), cell.bottom - 16 * k * s, lShelfLabel);
-        }
-
         // Neon purple glowing border outline when focused
         if (fc > 0.01f) {
             focusGlow.setStyle(Paint.Style.STROKE);
@@ -1470,7 +1465,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         if (logo == null) return;
         float scale = rest ? s : s / (1 + FOCUS_GROW);
         float dw = logo.getWidth() * scale, dh = logo.getHeight() * scale;
-        float left = box.centerX() - dw / 2, top = box.centerY() - dh / 2 - 12 * k * s;
+        float left = box.centerX() - dw / 2, top = box.centerY() - dh / 2;
         if (rest ? Math.abs(scale - 1) < 0.002f : scale > 0.998f) {
             left = Math.round(left);
             top = Math.round(top);
@@ -2750,31 +2745,31 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
 
     private void layoutLight() {
         if (lPillText == null) return;
-        float cy = 72 * k, h = 48 * k;
-        float pad = 20 * k;
+        float cy = 76 * k, h = 54 * k;
+        float pad = 22 * k;
 
         // Top Left: Home and Apps
         float x = MARGIN * k;
 
         // 0: Home
-        float homeW = 22 * k + 8 * k + lPillText.measureText("Home") + pad * 2;
+        float homeW = 25 * k + 10 * k + lPillText.measureText("Home") + pad * 2;
         topRects[0].set(x, cy - h / 2, x + homeW, cy + h / 2);
-        x = topRects[0].right + 14 * k;
+        x = topRects[0].right + 16 * k;
 
         // 1: Apps
-        float appsW = 22 * k + 8 * k + lPillText.measureText("Apps") + pad * 2;
+        float appsW = 25 * k + 10 * k + lPillText.measureText("Apps") + pad * 2;
         topRects[1].set(x, cy - h / 2, x + appsW, cy + h / 2);
 
         // Top Right: Inputs and Settings
         float right = CONTENT_R * k;
 
         // 3: Settings
-        float setW = 22 * k + 8 * k + lPillText.measureText("Settings") + pad * 2;
+        float setW = 25 * k + 10 * k + lPillText.measureText("Settings") + pad * 2;
         topRects[3].set(right - setW, cy - h / 2, right, cy + h / 2);
-        right = topRects[3].left - 14 * k;
+        right = topRects[3].left - 16 * k;
 
         // 2: Inputs
-        float inW = 22 * k + 8 * k + lPillText.measureText("Inputs") + pad * 2;
+        float inW = 25 * k + 10 * k + lPillText.measureText("Inputs") + pad * 2;
         topRects[2].set(right - inW, cy - h / 2, right, cy + h / 2);
 
         heroDirty = statusDirty = true;
@@ -3014,25 +3009,25 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
 
         // 1. Date Text (e.g. "Saturday, October 24")
         lDate.setTextAlign(Paint.Align.LEFT);
-        c.drawText(dateText, x, 240 * k, lDate);
+        c.drawText(dateText, x, 228 * k, lDate);
 
         // 2. Large Time Digits (e.g. "1:28") + smaller period ("PM")
         long now = System.currentTimeMillis();
         String timeDigits = new java.text.SimpleDateFormat("h:mm", java.util.Locale.US).format(new java.util.Date(now));
         lClock.setTextAlign(Paint.Align.LEFT);
-        c.drawText(timeDigits, x, 380 * k, lClock);
+        c.drawText(timeDigits, x, 376 * k, lClock);
 
         float tw = lClock.measureText(timeDigits);
         boolean isPm = java.util.Calendar.getInstance().get(java.util.Calendar.AM_PM) == java.util.Calendar.PM;
         String period = isPm ? "PM" : "AM";
         lPeriod.setTextAlign(Paint.Align.LEFT);
-        c.drawText(period, x + tw + 14 * k, 380 * k, lPeriod);
+        c.drawText(period, x + tw + 16 * k, 376 * k, lPeriod);
 
         // 3. Crypto pill capsule below time: [ ₿ BTC 80.8k  |  ♦ ETH 2.38k  |  ≡ SOL 102 ]
         drawCryptoPill(c, x, 418 * k);
 
         // 4. Weather widget on the right side: ☀ 33° Mostly sunny / H:33° L:25°
-        drawWeatherWidget(c, 330 * k);
+        drawWeatherWidget(c, 324 * k);
 
         // 5. "Your apps" section title above shelf
         lSectionTitle.setTextAlign(Paint.Align.LEFT);
@@ -3040,7 +3035,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
     }
 
     private void drawCryptoPill(Canvas c, float left, float top) {
-        float h = 46 * k, rad = h / 2f;
+        float h = 52 * k, rad = h / 2f;
         String[] tickers = {"BTC", "ETH", "SOL"};
         int[] coinColors = {0xFFF59E0B, 0xFF818CF8, 0xFF10B981};
         String[] prices = {"80.8k", "2.38k", "102"};
@@ -3052,10 +3047,10 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
             prices[2] = HomeData.compact(data.prices[active[2]]);
         }
 
-        float padH = 18 * k;
-        float itemGap = 6 * k;
-        float divGap = 14 * k;
-        float glyphSize = 17 * k;
+        float padH = 20 * k;
+        float itemGap = 7 * k;
+        float divGap = 16 * k;
+        float glyphSize = 20 * k;
 
         // Measure total width
         float contentW = padH * 2;
@@ -3101,7 +3096,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
                 curX += divGap;
                 pillStroke.setColor(0x28FFFFFF);
                 pillStroke.setStrokeWidth(1.2f * k);
-                c.drawLine(curX, midY - 9 * k, curX, midY + 9 * k, pillStroke);
+                c.drawLine(curX, midY - 10 * k, curX, midY + 10 * k, pillStroke);
                 curX += divGap + 1 * k;
             }
         }
@@ -3118,14 +3113,14 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         int wColor = (wx != null && !Double.isNaN(wx.temp)) ? weatherColor(wx.code, wx.isDay) : 0xFFF59E0B;
         String symbol = (wx != null && !Double.isNaN(wx.temp)) ? Symbols.weather(wx.code, wx.isDay) : "sunny";
 
-        float sunSize = 44 * k;
-        Paint wxTempPaint = Ui.numbers(Ui.displaySemibold != null ? Ui.displaySemibold : Ui.semibold, 62 * k, 0xFFFFFFFF);
+        float sunSize = 50 * k;
+        Paint wxTempPaint = Ui.numbers(Ui.displaySemibold != null ? Ui.displaySemibold : Ui.semibold, 72 * k, 0xFFFFFFFF);
         wxTempPaint.setShadowLayer(18 * k, 0, 2 * k, 0x88000000);
 
         float tempW = wxTempPaint.measureText(tempStr);
         float subW = Math.max(lWeather.measureText(condStr), lWeatherSub.measureText(hlStr));
 
-        float totalW = sunSize + 14 * k + tempW + 18 * k + subW;
+        float totalW = sunSize + 16 * k + tempW + 20 * k + subW;
         float right = CONTENT_R * k - 20 * k;
         float startX = right - totalW;
 
@@ -3134,15 +3129,15 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
 
         // Temperature
         wxTempPaint.setTextAlign(Paint.Align.LEFT);
-        c.drawText(tempStr, startX + sunSize + 14 * k, cy + Ui.halfCap(wxTempPaint), wxTempPaint);
+        c.drawText(tempStr, startX + sunSize + 16 * k, cy + Ui.halfCap(wxTempPaint), wxTempPaint);
 
         // Stacked texts
-        float textX = startX + sunSize + 14 * k + tempW + 18 * k;
+        float textX = startX + sunSize + 16 * k + tempW + 20 * k;
         lWeather.setTextAlign(Paint.Align.LEFT);
-        c.drawText(condStr, textX, cy - 3 * k, lWeather);
+        c.drawText(condStr, textX, cy - 5 * k, lWeather);
 
         lWeatherSub.setTextAlign(Paint.Align.LEFT);
-        c.drawText(hlStr, textX, cy + 24 * k, lWeatherSub);
+        c.drawText(hlStr, textX, cy + 26 * k, lWeatherSub);
     }
 
     private static int weatherColor(int code, boolean isDay) {
@@ -3167,9 +3162,9 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         if (lightButtons.size() < 4) return;
 
         // Draw Wi-Fi icon right before Inputs
-        float wifiX = topRects[2].left - 36 * k;
+        float wifiX = topRects[2].left - 42 * k;
         float wifiY = topRects[2].centerY();
-        drawWifiIcon(c, wifiX, wifiY, 20 * k);
+        drawWifiIcon(c, wifiX, wifiY, 24 * k);
 
         // Draw the 4 pills
         for (int i = 0; i < 4; i++) {
@@ -3233,9 +3228,9 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
 
             // Draw Icon and Text inside Pill
             HomeApps.Item it = lightButtons.get(i);
-            float iconSize = 22 * k * s;
+            float iconSize = 25 * k * s;
             float textW = lPillText.measureText(it.label);
-            float totalContentW = iconSize + 8 * k + textW;
+            float totalContentW = iconSize + 10 * k + textW;
             float startX = cell.centerX() - totalContentW / 2f;
 
             if ("inputs".equals(it.key)) {
@@ -3244,18 +3239,18 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
                 Symbols.draw(getContext(), c, it.symbol, startX + iconSize / 2f, cell.centerY(), iconSize, 0xFFFFFFFF);
             }
 
-            c.drawText(it.label, startX + iconSize + 8 * k, cell.centerY() + Ui.halfCap(lPillText), lPillText);
+            c.drawText(it.label, startX + iconSize + 10 * k, cell.centerY() + Ui.halfCap(lPillText), lPillText);
         }
     }
 
     private void drawWifiIcon(Canvas c, float cx, float cy, float size) {
         Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
-        p.setColor(0xDDFFFFFF);
+        p.setColor(0xEEFFFFFF);
         p.setStyle(Paint.Style.FILL);
-        c.drawCircle(cx, cy + size * 0.35f, 2.2f * k, p);
+        c.drawCircle(cx, cy + size * 0.35f, 2.6f * k, p);
 
         p.setStyle(Paint.Style.STROKE);
-        p.setStrokeWidth(2.0f * k);
+        p.setStrokeWidth(2.3f * k);
         p.setStrokeCap(Paint.Cap.ROUND);
         RectF arc = new RectF();
 
