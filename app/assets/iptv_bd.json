@@ -1,0 +1,3785 @@
+[
+  {
+    "id": "Channel24.bd",
+    "name": "Channel 24",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/channel-24.png",
+    "group": "News",
+    "url": "https://drk6xq0vhn.gpcdn.net/live/channel_24_abr/index.m3u8",
+    "backups": [
+      "https://drk6xq0vhn.gpcdn.net/live/channel_24_abr/live/channel_24_720/chunks.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/channel-24-hd-1/index.m3u8",
+      "https://stream.ottplus.live/live/channel_24_abr/index.m3u8",
+      "https://tvsen6.aynaott.com/YrVDF8gujkdh/index.m3u8",
+      "http://103.135.253.32:8080/Channel-24/index.m3u8",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-CHANNEL-24-HD.ts",
+      "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-CHANNEL-24.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "News24.bd",
+    "name": "News 24",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/news-24.png",
+    "group": "News",
+    "url": "https://tvsen6.aynaott.com/cdgr3tw6WoG7JyRnLbi0/index.m3u8",
+    "backups": [
+      "https://amg13643-amg13643c1-amgplt0016.playout.now3.amagi.tv/ts-eu-w1-n2/playlist/amg13643-amg13643c1-amgplt0016/playlist.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/news-24-1/index.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/news-24-hd-1/index.m3u8",
+      "https://tvsen6.aynaott.com/cdgr3tw6WoG7JyRnLbi0/tracks-v1a1/mono.ts.m3u8",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-NEWS-24-HD.ts",
+      "https://tv.kbhub.online/Ayna-OTT/News24-BD.m3u8",
+      "https://tv.kbhub.online/Bangladesh/News-24.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SomoyNewsTV.bd",
+    "name": "Somoy TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/somoy-tv.png",
+    "group": "News",
+    "url": "https://drk6xq0vhn.gpcdn.net/live/somoy_tv_abr/index.m3u8",
+    "backups": [
+      "https://drk6xq0vhn.gpcdn.net/live/somoy_tv_abr/live/somoy_tv_720/chunks.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/somoy-tv-2/index.m3u8",
+      "https://tvsen5.aynaott.com/somoytv/tracks-v1a1/mono.m3u8",
+      "https://tvsen5.aynascope.net/somoytv/mono.m3u8",
+      "https://tvsen6.aynaott.com/4XcqdovJzbbC9WdJA9gk/index.m3u8",
+      "http://103.135.253.32:8080/SOMOY-TV/index.m3u8",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-SOMOY-NEWS-TV-HD.ts",
+      "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-SOMOY-NEWS-TV-HD.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "JamunaTV.bd",
+    "name": "Jamuna TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/jamuna-tv.png",
+    "group": "News",
+    "url": "https://tvsen6.aynaott.com/KGdZEdA7qQ43dmPkgk1j/index.m3u8",
+    "backups": [
+      "https://iptv-proxy.ahmed-bd-org.workers.dev/jamuna-tv/index.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/jamuna-tv-1/index.m3u8",
+      "https://stream.ottplus.live/live/jamuna_tv_abr/index.m3u8",
+      "http://103.135.253.32:8080/Jamuna-TV/index.m3u8",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-JAMUNA-TV-HD.ts",
+      "https://tv.kbhub.online/Ayna-OTT/Jamuna.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Jamuna-TV.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "IndependentTV.bd",
+    "name": "Independent TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/independent-tv.png",
+    "group": "News",
+    "url": "https://drk6xq0vhn.gpcdn.net/live/independent_tv_abr/index.m3u8",
+    "backups": [
+      "https://drk6xq0vhn.gpcdn.net/live/independent_tv_abr/live/independent_tv_720/chunks.m3u8",
+      "http://103.135.253.32:8080/Indipendent/index.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Independent-TV.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "EkattorTV.bd",
+    "name": "Ekattor TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ekattor-tv.png",
+    "group": "News",
+    "url": "https://tvsen6.aynaott.com/EWDrV5QskgarZEUBb3pU/index.m3u8",
+    "backups": [
+      "https://stream.ottplus.live/live/ekattor_tv_abr/index.m3u8",
+      "https://tvsen6.aynaott.com/EWDrV5QskgarZEUBb3pU/tracks-v1a1/mono.ts.m3u8",
+      "http://103.135.253.32:8080/Ekattor-TV/index.m3u8",
+      "https://tv.kbhub.online/Ayna-OTT/Ekattor.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Ekattor-TV-HD.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "NTV.bd",
+    "name": "NTV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ntv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen5.aynaott.com/xV4jEKf3D9zc/index.m3u8",
+    "backups": [
+      "https://2-fss-1.streamhoster.com/pl_122/201748-1431018-1/chunklist.m3u8",
+      "https://iptv-proxy.ahmed-bd-org.workers.dev/ntv/index.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/ntv-1/index.m3u8",
+      "https://stream.logichost.in/NTV/live/chunklist_w1420234415.m3u8",
+      "https://tvsen5.aynaott.com/JHPxHAWonztVucyc4GzF/index.m3u8",
+      "https://tvsen5.aynaott.com/xV4jEKf3D9zc/tracks-v1a1/mono.ts.m3u8",
+      "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/ntvuk00332211.stream/live-orgin/ntvuk00332211.stream/chunks.m3u8",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-NTV-HD.ts",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-NTV-UK-HD.ts",
+      "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-NTV-HD.ts",
+      "https://tv.kbhub.online/Bangladesh/NTV.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "RTV.bd",
+    "name": "RTV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/rtv.png",
+    "group": "Entertainment",
+    "url": "https://j6nfugukcl.gpcdn.net/tile_6/master.m3u8",
+    "backups": [
+      "http://116.204.149.16/rtvhd/index.m3u8",
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/rtv-sg.stream/index.m3u8",
+      "http://tvsen5.aynascope.net/RtvHD/index.m3u8",
+      "https://tvsen5.aynaott.com/RtvHD/index.m3u8",
+      "https://tvsen5.aynaott.com/ba47dHpDk3Se/index.m3u8",
+      "https://tvsen5.aynaott.com/ba47dHpDk3Se/tracks-v1a1/mono.ts.m3u8",
+      "https://tvsen6.aynaott.com/rtv/tracks-v1a1/mono.ts.m3u8",
+      "https://tv.kbhub.online/Bangladesh/RTV-Live.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BanglaVision.bd",
+    "name": "Bangla Vision",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/banglavision.png",
+    "group": "Entertainment",
+    "url": "https://tvsen5.aynaott.com/banglavision/index.m3u8",
+    "backups": [
+      "https://iptvlive.ahmed-bd-org.workers.dev/banglavision-1/index.m3u8",
+      "https://tvsen5.aynaott.com/banglavision/tracks-v1a1/mono.ts.m3u8",
+      "https://tvsen5.aynaott.com/tgUzpPc9r6xw/index.m3u8",
+      "https://tvsen5.aynaott.com/tgUzpPc9r6xw/tracks-v1a1/mono.ts.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Bangla-Vision.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MaasrangaTV.bd",
+    "name": "Maasranga TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/maasranga-tv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen5.aynaott.com/maasrangatv/index.m3u8",
+    "backups": [
+      "http://116.204.149.16/maasranga/index.m3u8",
+      "http://116.204.149.16/maasranga/tracks-v1a1/mono.m3u8",
+      "http://tvsen5.aynascope.net/maasrangatv/index.m3u8",
+      "https://mtv.sunplex.live/MAASRANGA/tracks-v1a1/mono.m3u8",
+      "https://mtv.sunplex.live/MAASRANGA/index.m3u8",
+      "https://tvsen5.aynascope.net/maasrangatv/index.m3u8",
+      "https://tvsen6.aynaott.com/maasrangatv/index.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Maasranga-TV.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ATNBangla.bd",
+    "name": "ATN Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/atn-bangla.png",
+    "group": "Entertainment",
+    "url": "https://tvsen5.aynaott.com/atnbangla/index.m3u8",
+    "backups": [
+      "http://tvsen5.aynascope.net/atnbangla/index.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/atn-bangla-1/index.m3u8",
+      "https://tvsen5.aynaott.com/P3y2URgG7LDe/index.m3u8",
+      "https://tvsen5.aynaott.com/P3y2URgG7LDe/tracks-v1a1/mono.ts.m3u8",
+      "http://103.135.253.32:8080/ATN-Bangla/index.m3u8",
+      "https://app.ncare.live/live-orgin/atnbanglauk-off.stream/playlist.m3u8",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-ATN-BANGLA-FHD.ts",
+      "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-ATN-BANGLA-SD.ts",
+      "https://tv.kbhub.online/Bangladesh/ATN-Bangla-HD.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ATNNews.bd",
+    "name": "ATN News",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/atn-news-e0442addb4.png",
+    "group": "News",
+    "url": "https://tvsen6.aynaott.com/da6WMXAk/index.m3u8",
+    "backups": [
+      "https://iptv-proxy.ahmed-bd-org.workers.dev/atn-news/index.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/atn-news-1/index.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/atn-news-2/index.m3u8",
+      "https://tvsen6.aynaott.com/da6WMXAk/tracks-v1a1/mono.ts.m3u8",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-ATN-NEWS-HD.ts",
+      "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-ATN-NEWS-HD.ts",
+      "https://tv.kbhub.online/Ayna-OTT/ATN-News.m3u8",
+      "https://tv.kbhub.online/Bangladesh/ATN-News-HD.m3u8",
+      "https://tvsen5.aynaott.com/P3y2URgG7LDe/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BoishakhiTV.bd",
+    "name": "Boishakhi TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/boishakhi-tv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/1d3uG9VCgrR9DRtWZM57/index.m3u8",
+    "backups": [
+      "https://iptvlive.ahmed-bd-org.workers.dev/boishakhi-tv-1/index.m3u8",
+      "https://tvsen6.aynaott.com/1d3uG9VCgrR9DRtWZM57/tracks-v1a1/mono.ts.m3u8",
+      "https://tv.kbhub.online/Ayna-OTT/Boishakhi.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BTVNational.bd",
+    "name": "BTV National",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/btv-national-2db28e10.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/TjGR1GcxKetHNVcMVxbq/index.m3u8",
+    "backups": [
+      "https://btv.hridoytv-channel.workers.dev/btv.m3u8",
+      "http://103.135.253.32:8080/BTV/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BTVNews.bd",
+    "name": "BTV News",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/repaired-btv-news-0646349a43.png",
+    "group": "News",
+    "url": "https://btv.hridoytv-channel.workers.dev/news.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BTVChattogram.bd",
+    "name": "BTV Chattogram",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/btv-chattogram.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/TjGR1GcxKetHNVcMVxbq/index.m3u8",
+    "backups": [
+      "https://tvsen6.aynaott.com/TjGR1GcxKetHNVcMVxbq/tracks-v1a1/mono.ts.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BTVWORLD.bd",
+    "name": "BTV World",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/btv-world.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-BTV-WORLD-HD.ts",
+    "backups": [
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-BTV-WORLD-HD.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TSports.bd",
+    "name": "T Sports",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/t-sports.png",
+    "group": "Sports",
+    "url": "https://mycoffeetime.net/play/tSDRdsaoGGQ2qYgRPDEe9q-qMIzoahbJArH3W3vOiEaB97nXMpWmLb0Ts759Tjsp/m3u8",
+    "backups": [
+      "http://103.135.253.32:8080/T-SPORTS-FULL-HD/tracks-v1a1/mono.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "GaziTV.bd",
+    "name": "Gazi TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/gazi-tv.png",
+    "group": "Sports",
+    "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/gazibdz.stream/live-orgin/gazibdz.stream/playlist.m3u8",
+    "backups": [
+      "http://103.135.253.32:8080/Gazi-TV/index.m3u8",
+      "https://tv.kbhub.online/Bangladesh/GTV.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DurontoTV.bd",
+    "name": "Duronto TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/duronto-tv-2b3c7dd202.png",
+    "group": "Kids",
+    "url": "https://tvsen5.aynaott.com/6xyZ3N4oHv2KBJdB6W4p/index.fmp4.m3u8",
+    "backups": [
+      "http://103.135.253.32:8080/DORONTU-TV/index.m3u8",
+      "https://tvsen6.aynaott.com/6xyZ3N4oHv2KBJdB6W4p/index.m3u8",
+      "https://tvsen6.aynaott.com/6xyZ3N4oHv2KBJdB6W4p/tracks-v1a1/mono.ts.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DeshTV.bd",
+    "name": "Desh TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/desh-tv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/ryFkXfd1a4CQ7mMdc820/index.m3u8",
+    "backups": [
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/deshtv.stream/index.m3u8",
+      "https://stream.ottplus.live/live/desh_tv_abr/index.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Desh-TV.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "EkusheyTV.bd",
+    "name": "Ekushey TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ekushey-tv-d9479035b4.png",
+    "group": "Entertainment",
+    "url": "https://tvsen5.aynaott.com/SyQuXz8sC3TB/index.m3u8",
+    "backups": [
+      "http://210.4.72.204/hls-live/livepkgr/_definst_/liveevent/livestream3.m3u8",
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/ekusheytv-8-org.stream/index.m3u8",
+      "https://ekusheyserver.com/etvlivesn.m3u8",
+      "https://ekusheyserver.com/hls-live/livepkgr/_definst_/liveevent/livestream2.m3u8",
+      "https://ekusheyserver.com/hls-live/livepkgr/_definst_/liveevent/livestream3.m3u8",
+      "https://tvsen6.aynaott.com/y4mEVZNAbeNWTbd6Z2Pw/index.m3u8",
+      "http://103.135.253.32:8080/ETV/index.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Ekushe-TV.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "NagorikTV.bd",
+    "name": "Nagorik TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/nagorik-tv-90b5d16aaf.png",
+    "group": "Entertainment",
+    "url": "https://box.bbaria.net/Nagorik_TV/tracks-v1a1/mono.m3u8",
+    "backups": [
+      "https://box.bbaria.net:8083/Nagorik_TV/video.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ChannelI.bd",
+    "name": "Channel I",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/channel-i.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/index.m3u8",
+    "backups": [
+      "https://iptv-proxy.ahmed-bd-org.workers.dev/channel-i/index.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/channel-i-1/index.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/channel-i-hd-1/index.m3u8",
+      "https://tvsen3.b-cdn.net/qUud8Nxs/index.m3u8",
+      "https://tvsen6.aynaott.com/FNHpYvGZ7FkCE10PwTHm/tracks-v1a1/mono.ts.m3u8",
+      "https://tv.kbhub.online/Ayna-OTT/Channel-I.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Channel-I.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AsianTV.bd",
+    "name": "Asian TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/asian-tv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/pKb5k6NnzxsKpWUs6E8M/tracks-v1a1/mono.ts.m3u8",
+    "backups": [
+      "https://stream.ottplus.live/live/asian_tv_abr/index.m3u8",
+      "https://tvsen6.aynaott.com/pKb5k6NnzxsKpWUs6E8M/index.m3u8",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-ASIAN-TV-HD.ts",
+      "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-ASIAN-TV.ts",
+      "https://tv.kbhub.online/Ayna-OTT/Asian-Tv.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Asian-TV-NF.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AnandaTV.bd",
+    "name": "Ananda TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ananda-tv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/LeUAm4F1iixYns3s3Non/index.m3u8",
+    "backups": [
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/anandatv.stream/tracks-v1a1/mono.m3u8",
+      "http://live-stream.amarbanglatv.in:8080/hls/sanandatv/index.m3u8",
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/anandatv.stream/index.m3u8",
+      "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/anandatv.stream/live-orgin/anandatv.stream/playlist.m3u8",
+      "https://tvsen6.aynaott.com/LeUAm4F1iixYns3s3Non/tracks-v1a1/mono.ts.m3u8",
+      "http://103.135.253.32:8080/Anando-TV/index.m3u8",
+      "https://tv.kbhub.online/Ayna-OTT/Ananda-Tv.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Ananda-TV.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BijoyTV.bd",
+    "name": "Bijoy TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bijoy-tv.png",
+    "group": "Entertainment",
+    "url": "https://drk6xq0vhn.gpcdn.net/live/bijoy_tv_abr/index.m3u8",
+    "backups": [
+      "https://stream.ottplus.live/live/bijoy_tv_abr/index.m3u8",
+      "https://stream.ottplus.live/live/bijoy_tv_abr/live/bijoy_tv_720/chunks.m3u8",
+      "https://tvsen6.aynaott.com/N8Xbo5vdwVU6sF43RsW0/index.m3u8",
+      "https://tvsen6.aynaott.com/N8Xbo5vdwVU6sF43RsW0/tracks-v1a1/mono.ts.m3u8",
+      "https://tv.kbhub.online/Ayna-OTT/Bijoy-Tv.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "NexusTV.bd",
+    "name": "Nexus TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/nexus-tv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/Epm7WrFa/index.m3u8",
+    "backups": [
+      "https://stream.ottplus.live/live/nexus_tv_abr/index.m3u8",
+      "https://tv.kbhub.online/Ayna-OTT/Nexus-Tv.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Nexus-TV.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "EkhonTV.bd",
+    "name": "Ekhon TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ekhon-tv.png",
+    "group": "Entertainment",
+    "url": "https://drk6xq0vhn.gpcdn.net/live/ekhon_tv_abr/index.m3u8",
+    "backups": [
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/globaltv.stream/index.m3u8",
+      "https://stream.ottplus.live/live/ekhon_tv_abr/index.m3u8",
+      "https://tvsen6.aynaott.com/fbgZV3X17hwWcyfZ4pdb/index.m3u8",
+      "http://103.135.253.32:8080/Ekhon-TV/index.m3u8",
+      "https://tv.kbhub.online/Ayna-OTT/Ekhon-Tv.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "GlobalTV.bd",
+    "name": "Global TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/global-tv-1080p-5ffc043912.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/y0q9eFAuquAtvTxRzUHq/index.m3u8",
+    "backups": [
+      "http://116.204.149.16/globaltv/tracks-v1a1/mono.m3u8",
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/Global-tv.stream/playlist.m3u8",
+      "https://stream.ottplus.live/live/global_tv_abr/index.m3u8",
+      "http://116.204.149.16/globaltv/index.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Global-TV.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MyTV.bd",
+    "name": "My TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/my-tv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/XMpHaEf0ANBhv8w6NWR7/index.m3u8",
+    "backups": [
+      "http://116.204.149.16/mytv/index.m3u8",
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/mytv-up-off.stream/index.m3u8",
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/mytv-up-off.stream/tracks-v1a1/mono.m3u8",
+      "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/mytv-up-off.stream/live-orgin/mytv-up-off.stream/playlist.m3u8",
+      "https://tvsen6.aynaott.com/XMpHaEf0ANBhv8w6NWR7/tracks-v1a1/mono.ts.m3u8",
+      "https://tv.kbhub.online/Ayna-OTT/My-Tv.m3u8",
+      "https://tv.kbhub.online/Bangladesh/My-Tv-B.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MohonaTV.bd",
+    "name": "Mohona TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/mohona-tv-a1da8879e5.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/AkyX5dunzju4cpo26dr7/tracks-v1a1/mono.ts.m3u8",
+    "backups": [
+      "https://stream.ottplus.live/live/mohona_tv_abr/index.m3u8",
+      "https://tvsen6.aynaott.com/AkyX5dunzju4cpo26dr7/index.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Mohona-TV.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SATV.bd",
+    "name": "SA TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/sa-tv.png",
+    "group": "Entertainment",
+    "url": "https://j6nfugukcl.gpcdn.net/tile_5/master.m3u8",
+    "backups": [
+      "http://116.204.149.16/satv/index.m3u8",
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/satvoff5666.stream/playlist.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/sa-tv-2/index.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/sa-tv-1/index.m3u8",
+      "https://tvsen6.aynaott.com/rELXiuUXqbgzPb06Npom/index.m3u8",
+      "https://tv.kbhub.online/Bangladesh/SA-Tv.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "Channel9.bd",
+    "name": "Channel 9",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/channel-9.png",
+    "group": "Entertainment",
+    "url": "https://box.bbaria.net/Channel9/tracks-v1a1/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "Channel16.bd",
+    "name": "Channel 16",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/channel-16.png",
+    "group": "Entertainment",
+    "url": "https://iptvlive.ahmed-bd-org.workers.dev/channel-16-1/index.m3u8",
+    "backups": [
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/channel16bd.stream/tracks-v1a1/mono.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "Channel1.bd",
+    "name": "Channel 1",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/channel-1.png",
+    "group": "Entertainment",
+    "url": "https://drk6xq0vhn.gpcdn.net/live/channel_1_hd_abr/index.m3u8",
+    "backups": [
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/channel1bd.stream/playlist.m3u8",
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/channel1bd.stream/tracks-v1a1/mono.m3u8",
+      "https://stream.ottplus.live/live/channel_1_hd_abr/index.m3u8",
+      "https://stream.ottplus.live/live/channel_1_hd_abr/live/channel_1_hd_720/chunks.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Channel-1-TV.m3u8",
+      "http://103.135.253.32:8080/Channel-1/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "JagoNews24.bd",
+    "name": "Jago News 24",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/jago-news-24.png",
+    "group": "News",
+    "url": "https://iptvlive.ahmed-bd-org.workers.dev/jago-news-24-1/index.m3u8",
+    "backups": [
+      "https://app.ncare.live/live-orgin/jagonews24.stream/live-orgin/jagonews24.stream/chunks.m3u8",
+      "https://app.ncare.live/live-orgin/jagonews24.stream/playlist.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Jago-News-24.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BengaliBeats.bd",
+    "name": "Bengali Beats",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bengali-beats.png",
+    "group": "Music",
+    "url": "https://live20.bozztv.com/giatvplayout7/giatv-209587/tracks-v1a1/mono.ts.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MovieBangla.bd",
+    "name": "Movie Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/movie-bangla.png",
+    "group": "Movies",
+    "url": "https://stream.ottplus.live/live/movie_bangla_abr/index.m3u8",
+    "backups": [
+      "http://alvetv.com/moviebanglatv/8080/index.m3u8",
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/moviebanglalink2.stream/tracks-v1a1/mono.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/movie-bangla-1/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "StarSports1.in",
+    "name": "Star Sports 1",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/star-sports-1.png",
+    "group": "Sports",
+    "url": "https://flussonic.defineatoz.com/Starsports1/tracks-v1a1/mono.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "StarSports2.in",
+    "name": "Star Sports 2",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/star-sports-2.png",
+    "group": "Sports",
+    "url": "https://tvsen7.aynaott.com/ssport2hd/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PTVSports.pk",
+    "name": "PTV Sports",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ptv-sports.png",
+    "group": "Sports",
+    "url": "https://tvsen5.aynaott.com/kP9vX2mZ7qL5wN3t/index.m3u8",
+    "backups": [
+      "http://103.135.253.32:8080/PTV-SPORTS/tracks-v1a1/mono.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TenSports",
+    "name": "Ten Sports",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ten-sports-hd-d3126ed9.png",
+    "group": "Sports",
+    "url": "http://103.135.253.32:8080/Ten-Sports/tracks-v1a1/mono.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "WillowSports",
+    "name": "Willow Sports",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/us-willow-sports-hd.png",
+    "group": "Sports",
+    "url": "http://103.135.253.32:8080/WILLOW-SPORTS/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AndTV.in@SD",
+    "name": "&TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/tv.png",
+    "group": "Entertainment",
+    "url": "https://drk6xq0vhn.gpcdn.net/live/and_tv_hd_abr/index.m3u8",
+    "backups": [
+      "https://3f56f997.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZy1nYl9BbmRUVl9ITFM/playlist.m3u8",
+      "https://stream.ottplus.live/live/and_tv_hd_abr/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "4SiDESTV.in@SD",
+    "name": "4 SiDES TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/4-sides-tv-6a436fa007.png",
+    "group": "Entertainment",
+    "url": "https://stream.ottlive.co.in/4sidestv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ASports.pk",
+    "name": "A Sports",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/a-sports-65a3e1d8fd.png",
+    "group": "Sports",
+    "url": "https://tvsen6.aynaott.com/zv68oqPDu7MZZwmHhRxt/tracks-v1a1/mono.ts.m3u8",
+    "backups": [
+      "https://playztv-apps.pages.dev/a-sports/index.m3u8",
+      "https://tvsen6.aynaott.com/zv68oqPDu7MZZwmHhRxt/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ADNTVPlus.fr",
+    "name": "ADN TV+",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/adn-tv.png",
+    "group": "Entertainment",
+    "url": "https://d3b73b34o7cvkq.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-gz2sgqzp076kf/adn.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AMCTV.us",
+    "name": "AMC TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/amc.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/amc/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AMGTVClassic.us",
+    "name": "AMG TV Classic",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/amg-tv-classic.png",
+    "group": "Entertainment",
+    "url": "https://2-fss-2.streamhoster.com/pl_138/201660-1270634-1/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ARYQTV.pk",
+    "name": "ARY Q TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ary-q-tv.png",
+    "group": "Entertainment",
+    "url": "https://aryqtvm.aryzap.com/v1/0183ea2a0eec0b8ed5941a38bc76/0183ea2a4e470b8ed5aa4d793457/ARYQTVH264_1080p.m3u8",
+    "backups": [
+      "https://aryqtvm.aryzap.com/v1/0183ea2a0eec0b8ed5941a38bc76/0183ea2a4e470b8ed5aa4d793457/ARYQTVH264_720p.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ATNBanglaUK.uk",
+    "name": "ATN Bangla UK",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/atn-bangla-uk.png",
+    "group": "Entertainment",
+    "url": "https://app.ncare.live/live-orgin/atnbanglauk-off.stream/playlist.m3u8",
+    "backups": [
+      "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/atnbanglauk-off.stream/playlist.m3u8",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-ATN-BANGLA-UK-HD.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AZANTV",
+    "name": "AZAN TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/azan-tv-15e8ac79.png",
+    "group": "Religious",
+    "url": "https://dbcanada.sonarbanglatv.com/azantv/atv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AAKAASHBANGLA",
+    "name": "Aakaash Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/aakaash-bangla-f052338626.webp",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-AAKAASH-BANGLA.ts",
+    "backups": [
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-AAKAASH-BANGLA-HD.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AaryaaTV.in",
+    "name": "Aaryaa TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/aaryaa-tv.png",
+    "group": "Entertainment",
+    "url": "https://stream.ottlive.co.in/aryatvtamil/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AfarinTV.iq",
+    "name": "Afarin TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/afarin-tv.png",
+    "group": "Entertainment",
+    "url": "https://65f16f0fdfc51.streamlock.net/afarinTV/livestream/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AlQuranAlKareemTV.sa",
+    "name": "Al Quran Al Kareem TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/al-quran-al-kareem-tv.png",
+    "group": "Religious",
+    "url": "https://cdn-globecast.akamaized.net/live/eds/saudi_quran/hls_roku/index.m3u8",
+    "backups": [
+      "http://m.live.net.sa:1935/live/quran/playlist.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AlZahraTVTurkic.sa",
+    "name": "Al-Zahra TV Turkic",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/al-zahra-tv-turkic.png",
+    "group": "Entertainment",
+    "url": "https://live.al-zahratv.com/live/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AlankarTV.in@SD",
+    "name": "Alankar TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/alankar-tv.png",
+    "group": "Entertainment",
+    "url": "https://livetv.tarangplus.in/alankar-origin/live/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AlrightTV.in@SD",
+    "name": "Alright! TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/alright-tv.png",
+    "group": "Entertainment",
+    "url": "https://d3c7vdfq3tyeyw.cloudfront.net/v1/master/071c0467fcd02420cdf0d8a1ca3524b96c27a151/rusk_media/v1/channel/ruskmedia/germane.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AamarBangla.in",
+    "name": "Amar Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/amar-bangla.png",
+    "group": "Entertainment",
+    "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/amarbanglatv.stream/playlist.m3u8",
+    "backups": [
+      "http://115.187.41.216:8080/hls/amarbangla/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AmarBanglaDigital.in",
+    "name": "Amar Bangla Digital",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/amar-bangla-digital.png",
+    "group": "Entertainment",
+    "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/amardigital.stream/playlist.m3u8",
+    "backups": [
+      "http://115.187.41.216:8080/hls/amardigital/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AmarDigitalTV",
+    "name": "Amar Digital TV",
+    "logoUrl": "",
+    "group": "Entertainment",
+    "url": "http://115.187.41.216:8080/hls/amardigital/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AmazingDiscoveriesTV.in",
+    "name": "Amazing Discoveries TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/amazing-discoveries-tv.png",
+    "group": "Entertainment",
+    "url": "https://uni01rtmp.tulix.tv/amazingdtv/amazingdtv/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AmritaTV.in@SD",
+    "name": "Amrita TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/amrita-tv.png",
+    "group": "Entertainment",
+    "url": "https://ddash74r36xqp.cloudfront.net/master.m3u8",
+    "backups": [
+      "https://ddash74r36xqp.cloudfront.net/master_2000.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AnandTV.in@SD",
+    "name": "Anand TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/anand-tv.png",
+    "group": "Entertainment",
+    "url": "https://live.legitpro.co.in/anandtv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AnjanTV.in@SD",
+    "name": "Anjan TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/anjan-tv.png",
+    "group": "Entertainment",
+    "url": "https://cdn.pishow.tv/ott/live/993/master.m3u8",
+    "backups": [
+      "https://anjan.vstream.online/anjanorg/ngrp:anjan_hdall/playlist.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AnmolTV.in@SD",
+    "name": "Anmol TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/international/anmol-tv-720p.png",
+    "group": "Entertainment",
+    "url": "https://drk6xq0vhn.gpcdn.net/live/zee_anmol_abr/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ArabicaTV.us",
+    "name": "Arabica TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/arabica-tv.png",
+    "group": "Entertainment",
+    "url": "http://istream.binarywaves.com:8081/hls/arabica/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "AyushTV.in@SD",
+    "name": "Ayush TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ayush-tv.png",
+    "group": "Entertainment",
+    "url": "http://d1msejlow1t3l4.cloudfront.net/fta/ayushtv/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BBCNews.uk",
+    "name": "BBC News",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bbc-news.png",
+    "group": "News",
+    "url": "https://tvsen1.aynaott.com/shn6jGTk/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BHI.Channel.in",
+    "name": "BHI Channel",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bhi-channel.png",
+    "group": "Entertainment",
+    "url": "https://server.livelegitpro.in/bhichannel/bhichannel/index.m3u8",
+    "backups": [
+      "https://server.livelegitpro.in/bhichannel/bhichannel/tracks-v1a1/mono.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BSTV.pk@SD",
+    "name": "BSTV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bstv.png",
+    "group": "Entertainment",
+    "url": "https://lbgo.bozztv.com/ssh101/ssh101/bstv/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BabySharkTV.us",
+    "name": "Baby Shark TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/baby-shark-tv.png",
+    "group": "Entertainment",
+    "url": "https://newidco-babysharktv-1-eu.rakuten.wurl.tv/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BahrainSports1.bh",
+    "name": "Bahrain Sports 1",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/unused/bahrain-sports-1.png",
+    "group": "Sports",
+    "url": "https://5c7b683162943.streamlock.net/live/ngrp:sportsone_all/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BahrainSports2.bh@SD",
+    "name": "Bahrain Sports 2",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bahrain-sports-2.png",
+    "group": "Sports",
+    "url": "https://tvsen6.aynaott.com/BahrainSports2/index.m3u8",
+    "backups": [
+      "https://5c7b683162943.streamlock.net/live/ngrp:bahrainsportstwo_all/playlist.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BaiscopeTV.in",
+    "name": "Baiscope TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/baiscope-tv.png",
+    "group": "Entertainment",
+    "url": "https://live.ekamraott.com/baiscope/baiscope/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BangBangTV",
+    "name": "Bang Bang TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bang-bang-tv.png",
+    "group": "Entertainment",
+    "url": "https://streams.sofast.tv/ptnr-yupptv/title-BANG-BANG-TV-ENG_yupptv/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/6a98fce2-bf4c-4bfb-91f4-c43851bb3801/manifest.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BanglaCinema.in",
+    "name": "Bangla Cinema",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bangla-cinema.png",
+    "group": "Movies",
+    "url": "http://103.151.60.162:2122/play/a02m/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BanglaJagoTV.in",
+    "name": "Bangla Jago TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bangla-jago.png",
+    "group": "Entertainment",
+    "url": "http://banglajagotv.livebox.co.in/banglajagohls/24x7.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BanglaPlus.in",
+    "name": "Bangla Plus",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bangla-plus.png",
+    "group": "Entertainment",
+    "url": "https://live-stream.utkalbongo.com/hls/livebanglatvstream.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BanglaTV.bd",
+    "name": "Bangla TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bangla-tv-9e5f3366c8.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/39ee93nUbCCmm5LsyD4t/index.m3u8",
+    "backups": [
+      "https://cdn.ghuddi.live/Bangla_TV/Bangla_TV_BD/playlist.m3u8",
+      "http://116.204.149.16/banglatv/index.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/bangla-tv-2/index.m3u8",
+      "https://tvsen6.aynaott.com/39ee93nUbCCmm5LsyD4t/tracks-v1a1/mono.ts.m3u8",
+      "https://tv.kbhub.online/Ayna-OTT/Bangla-Tv.m3u8",
+      "https://tv.kbhub.online/Bangladesh/Bangla-Tv-NF.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BloombergTV.us",
+    "name": "Bloomberg TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/local-logo-bloomberg-tv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/bloombergtv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "CMalayalamTV.ca@SD",
+    "name": "C Malayalam TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/c-malayalam-tv-1080p-3b1c6293f5.png",
+    "group": "Entertainment",
+    "url": "https://2-fss-2.streamhoster.com/pl_120/206508-3261972-1/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "CBSTV.us",
+    "name": "CBS TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/local-logo-cbs.png",
+    "group": "Entertainment",
+    "url": "https://tvsen3.aynaott.com/34fJSjZP/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "CNBCTV.us",
+    "name": "CNBC TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/local-logo-cnbc.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/cnbc/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "COOKINGTV",
+    "name": "COOKING TV",
+    "logoUrl": "",
+    "group": "Entertainment",
+    "url": "https://tvsen3.aynaott.com/s2FwmdbM/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "Channel52.bd",
+    "name": "Channel 52",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/channel-52.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/channel52/index.m3u8",
+    "backups": [
+      "http://str24.l9574.com/503.stream/tracks-v1a1/mono.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ChannelEurope",
+    "name": "Channel Europe",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/channel-europe-c8db0338dc.png",
+    "group": "Entertainment",
+    "url": "https://stream.channeleuropetvboxlondon.co.uk/live/channeleurope/chunklist_w572284654.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ChannelS.uk",
+    "name": "Channel S",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/channel-s.png",
+    "group": "Entertainment",
+    "url": "https://iptvlive.ahmed-bd-org.workers.dev/channel-s-1/index.m3u8",
+    "backups": [
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/channels.stream/index.m3u8",
+      "https://app.ncare.live/live-orgin/channels.stream/live-orgin/channels.stream/chunks.m3u8",
+      "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/channels.stream/live-orgin/channels.stream/playlist.m3u8",
+      "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/chsukoff.stream/playlist.m3u8",
+      "http://103.135.253.32:8080/Channel-S/index.m3u8",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-CHANNEL-S-HD.ts",
+      "https://tv.kbhub.online/Bangladesh/Channel-S-TV.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ChannelS.uk@679aa9",
+    "name": "Channel S UK",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/channel-s-uk.png",
+    "group": "Entertainment",
+    "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI/chsukoff.stream/playlist.m3u8",
+    "backups": [
+      "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/chsukoff.stream/live-orgin/chsukoff.stream/chunks.m3u8",
+      "https://box.bbaria.net:8083/ChannelS/video.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "Colors.Bangla.in",
+    "name": "Colors Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/colors-bangla.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-BANGLADESH/BD-COLORS-BANGLA-FHD.ts",
+    "backups": [
+      "http://103.114.11.37:8081/Colors-bangla/index.m3u8",
+      "http://103.172.29.30:9991/stream/channelid/1759751142",
+      "https://catchup.yuppcdn.net/amazonv2/36/preview/colorsbanglahd/master/chunklist.m3u8",
+      "https://yupptvcatchupire.yuppcdn.net/preview/colorsbanglahd/800.m3u8",
+      "http://103.135.253.32:8080/COLORS-BANGLA-HD/index.m3u8",
+      "https://yupptvcatchupire.yuppcdn.net/preview/colorsbanglahd/2500.m3u8",
+      "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-COLORS-BANGLA-FHD.ts",
+      "https://tv.kbhub.online/Entertainment/Colors-Bangla-2.ts",
+      "https://tv.kbhub.online/Entertainment/Colors-Bangla-3.ts",
+      "https://tv.kbhub.online/Entertainment/Colors-Bangla.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ColorsBanglaCinema.in@SD",
+    "name": "Colors Bangla Cinema",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/colors-bangla-cinema.png",
+    "group": "Movies",
+    "url": "http://103.114.11.37:8081/Colors-bangla-cinema/index.m3u8",
+    "backups": [
+      "http://103.151.60.162:2122/play/a02m/index.m3u8?hls",
+      "http://103.172.29.30:9991/stream/channelid/14180834"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "CookingChannel.us",
+    "name": "Cooking Channel",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/local-logo-cooking-channel.png",
+    "group": "Entertainment",
+    "url": "http://23.237.104.106:8080/USA_COOKING/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "CrimeSceneTV.us",
+    "name": "Crime Scene TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/crime-scene-tv.png",
+    "group": "Entertainment",
+    "url": "https://d1si3n1st4nkgb.cloudfront.net/10502/89001003/hls/master.m3u8?ads.xumo_channelId=89001003&ads.xumo_streamId=89001003&ads.caid=Indigenius&ads.csid=samsungtvplus_in_indigeniuscrimescenetv_ssai&ads.sfid=&ads.afid=Indigenius&ads.xumo_platform=samsung&ads._fw_is_lat=%7BTARGETOPT%7D&ads._fw_us_privacy=1---&ads._fw_coppa=0&ads._fw_did=%7BPSID%7D&ads._fw_content_category=IAB1-7&ads._fw_content_genre=television&ads._fw_content_language=en&ads._fw_content_rating=tv-14&ads._fw_deviceMake=samsung&ads._fw_gdpr=1&ads._fw_gdpr_consent=%7BTC_STRING%7D&ads._fw_h_x_country=IN&ads.appVersion=&ads.appName=%7BAPP_NAME%7D&ads.xumo_contentId=1101&ads.xumo_contentName=Indigenius&ads.xumo_providerId=1101&ads.xumo_providerName=Indigenius&ads.xumo_adsystem=mediatailor&ads.xumo_channelName=indigeniuscrimescenetv_in&ads.tpcl=MIDROLL&ads._fw_app_store_url=%7BAPP_DOMAIN%7D",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DBCNews.bd",
+    "name": "DBC News",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/dbc-news.png",
+    "group": "News",
+    "url": "https://tvsen6.aynaott.com/pF66Tkz0qFwP2aMMqHyt/index.m3u8",
+    "backups": [
+      "https://iptv-proxy.ahmed-bd-org.workers.dev/dbc-news/index.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/dbc-news-1/index.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/dbc-news-hd-1/index.m3u8",
+      "https://tvsen6.aynaott.com/pF66Tkz0qFwP2aMMqHyt/tracks-v1a1/mono.ts.m3u8",
+      "https://tv.kbhub.online/Ayna-OTT/DBC-News.m3u8",
+      "https://tv.kbhub.online/Bangladesh/DBC-News.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DDBangla.in@SD",
+    "name": "DD Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/dd-bangla.png",
+    "group": "Entertainment",
+    "url": "https://iptvlive.ahmed-bd-org.workers.dev/dd-bangla-1/index.m3u8",
+    "backups": [
+      "https://cdn.pishow.tv/ott/live/37/master.m3u8",
+      "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/7ff57cc9046b4c188b51a0d506f36e7f/index_3.m3u8",
+      "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/7ff57cc9046b4c188b51a0d506f36e7f/index.m3u8",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-DD-BANGLA-HD.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DDSports.in@SD",
+    "name": "DD Sports",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/dd-sports-fb997548.png",
+    "group": "Sports",
+    "url": "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/b17adfe543354fdd8d189b110617cddd/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DEENTVUK",
+    "name": "DEEN TV UK",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/deen-tv-576p.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-BANGLADESH/BD-DEEN-TV-UK-SD.ts",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DTV",
+    "name": "DTV",
+    "logoUrl": "",
+    "group": "Entertainment",
+    "url": "https://cdn.dtvusa.com/dtv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DWNews.de",
+    "name": "DW News",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/dw-news.png",
+    "group": "News",
+    "url": "https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream02/streamPlaylist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DanceTV.us",
+    "name": "Dance TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/dance-tv.png",
+    "group": "Entertainment",
+    "url": "https://m1b2.worldcast.tv/dancetelevisionone/2/dancetelevisionone.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DangalTV.in",
+    "name": "Dangal TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/dangal.png",
+    "group": "Entertainment",
+    "url": "https://live-dangal.akamaized.net/liveabr/pub-iodang10p4al/live_720p/chunks.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DarshanaTV.in@SD",
+    "name": "Darshana TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/darshana-tv.png",
+    "group": "Entertainment",
+    "url": "https://yuppparoriglin.akamaized.net/181224/smil:darshanatv.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DeenTV.uk",
+    "name": "Deen TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/deen-tv-576p.png",
+    "group": "Entertainment",
+    "url": "https://tvsen3.aynaott.com/TJcnZW3U/index.m3u8",
+    "backups": [
+      "https://cd198.anystream.uk:9092/iqapp/d33ntv/playlist.m3u8",
+      "https://app.ncare.live/live-orgin/deentv.stream/playlist.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DeeptoTV.bd",
+    "name": "Deepto TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/deepto-tv.png",
+    "group": "Entertainment",
+    "url": "https://byphdgllyk.gpcdn.net/hls/deeptotv/index.m3u8",
+    "backups": [
+      "http://103.135.253.32:8080/Deepto-TV/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DesheBideshe.ca",
+    "name": "Deshe Bideshe",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/deshe-bideshe.png",
+    "group": "Entertainment",
+    "url": "https://dbcanada.sonarbanglatv.com/deshebideshe/dbtv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DeshiTV.ca@SD",
+    "name": "Deshi TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/deshi-tv.png",
+    "group": "Entertainment",
+    "url": "https://deshitv.deshitv24.net/live/myStream/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DesiChannel.in",
+    "name": "Desi Channel",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/desi-channel.png",
+    "group": "Entertainment",
+    "url": "https://livestream.unlimitedcdn.com/agm-dc/desi-channel/index.m3u8",
+    "backups": [
+      "https://livestream.unlimitedcdn.com/agm-dc/desi-channel/tracks-v1a1/mono.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DhoolTV.in@SD",
+    "name": "Dhool TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/dhool-tv.png",
+    "group": "Entertainment",
+    "url": "https://d1msejlow1t3l4.cloudfront.net/fta/subhartitv/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DhoomMusic.in@SD",
+    "name": "Dhoom Music Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/dhoom-music-bangla.png",
+    "group": "Music",
+    "url": "https://tv.kbhub.online/AS-BANGLADESH/BD-DHOOM-MUSIC-HD.ts",
+    "backups": [
+      "https://cdn.pishow.tv/ott/live/1456/master.m3u8",
+      "https://cdn.devm3u.top/server5/dhoom.m3u8",
+      "https://mumt06.tangotv.in/qYyB8fXVDHOOMMUSIC/index.m3u8",
+      "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-DHOOM-MUSIC-HD.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DiscoveryBangla.in",
+    "name": "Discovery Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/discovery-bangla.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-DISCOVERY-FHD-BANGLA.ts",
+    "backups": [
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-DISCOVERY-BANGLA-HD.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DisneyChannel.in@HD",
+    "name": "Disney Channel",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/disney-channel-india.png",
+    "group": "Kids",
+    "url": "https://tvsen7.aynaott.com/disney/index.m3u8",
+    "backups": [
+      "http://2756d46c.akciatv.ru/iptv/7FRNF6CY9A9TG3/6965/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DisneyChannel.in@HD",
+    "name": "Disney Channel India",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/disney-channel-india.png",
+    "group": "Kids",
+    "url": "https://tvsen7.aynaott.com/disney/index.m3u8",
+    "backups": [
+      "http://181.119.215.61:8000/play/a0g1/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DocuBayTV.in",
+    "name": "DocuBay TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/docubay-tv.png",
+    "group": "Entertainment",
+    "url": "https://cc-mgr91yrk4pehy.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-mgr91yrk4pehy/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DoraemonTV.us",
+    "name": "Doraemon TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/doraemon-tv.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/Cartoon/Doraemon-TV.m3u8",
+    "backups": [
+      "https://live20.bozztv.com/giatvplayout7/giatv-209902/tracks-v1a1/mono.ts.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DoyelTV.ca@SD",
+    "name": "Doyel TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/doyel-tv.png",
+    "group": "Entertainment",
+    "url": "https://3d46w.doyeltv.com/memfs/aa3aa6f7-ec12-41a2-8183-a891e157bbf8.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DuaChannel.sa",
+    "name": "Dua Channel",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/dua-channel.png",
+    "group": "Entertainment",
+    "url": "https://newyork.zeuscdn724.com/H9/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "DuckTV.us",
+    "name": "Duck TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/duck-tv.png",
+    "group": "Entertainment",
+    "url": "https://d6lk10bkdgfae.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-n0stmvwxmsf5c/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "EmanTv.iq",
+    "name": "EMAN TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/unused/emantv-1080p-b465ae9d98.png",
+    "group": "Entertainment",
+    "url": "https://avr.host247.net/live/emantv/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "EPIXTV",
+    "name": "EPIX TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/epix-tv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen3.aynaott.com/Ah3tLAfA/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ETVBangla.in",
+    "name": "ETV Bangla",
+    "logoUrl": "",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-ETV-BANGAL-HD.ts",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ETVBeats.in@HD",
+    "name": "ETV Beats",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/etv-beats-1080p-aa1d38c3fd.png",
+    "group": "Entertainment",
+    "url": "https://jmp2.uk/stvp-IN4900002RV",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ETVCinema.in",
+    "name": "ETV Cinema",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/etv-cinema-360p-14e6148301.png",
+    "group": "Entertainment",
+    "url": "https://yupplivegcpusa.yuppcdn.net/100823/smil:etvcinema.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ETVComedy.in",
+    "name": "ETV Comedy",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/etv-comedy.png",
+    "group": "Entertainment",
+    "url": "https://cc-wie8j8y69d2uy.akamaized.net/WWBI/Amagi/ETV_Comedy_IN/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ETVJosh.in",
+    "name": "ETV Josh",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/etv-josh.png",
+    "group": "Entertainment",
+    "url": "https://cc-uyh1ow5zouoio.akamaized.net/WWBI/Amagi/ETV_Josh_IN/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ETVMusic.in",
+    "name": "ETV Music",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/etv-music.png",
+    "group": "Music",
+    "url": "https://cc-szivnms4rlah6.akamaized.net/WWBI/Amagi/ETV_Music_IN/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ETVTelugu.in@HD",
+    "name": "ETV Telugu",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/etv-telugu.png",
+    "group": "Entertainment",
+    "url": "https://d27zlkxhgwrfgo.cloudfront.net/v1/master/9d43eacaed199f8d5883927e7aef514a8a08e108/ETV_HD_H264_cloud_in/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "EnterTV.bd",
+    "name": "Enter TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/enter-tv.png",
+    "group": "Entertainment",
+    "url": "https://iptvlive.ahmed-bd-org.workers.dev/enter-tv-1/index.m3u8",
+    "backups": [
+      "https://live1.entertv.com.bd/entertv/tracks-v1a1/mono.m3u8",
+      "https://live1.entertv.com.bd/entertv/index.fmp4.m3u8",
+      "https://live1.entertv.com.bd/entertv/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "Enter10Bangla.in",
+    "name": "Enter10 Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/enter10-bangla.png",
+    "group": "Entertainment",
+    "url": "https://iptvlive.ahmed-bd-org.workers.dev/enter-10-bangla-1/index.m3u8",
+    "backups": [
+      "https://amg01448-samsungin-enterr10bangla-samsungin-ad-gg.amagi.tv/playlist/amg01448-samsungin-enterr10bangla-samsungin/playlist.m3u8",
+      "https://live-bangla.akamaized.net/liveabr/pub-iobanglakp3sff/live_360p/chunks.m3u8",
+      "https://live-bangla.akamaized.net/liveabr/playlist.m3u8",
+      "https://live-bangla.akamaized.net/liveabr/pub-iobanglakp3sff/live_240p/chunks.m3u8",
+      "https://live-bangla.akamaized.net/liveabr/pub-iobanglakp3sff/live_720p/chunks.m3u8",
+      "https://mumt07.tangotv.in/zHjX9OFlENTERR10BANGLA/index.m3u8",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-ENTER-10-BANGLA-HD.ts",
+      "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-ENTER-10-BANGLA-HD.ts",
+      "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-KHUSBOO-BANGLA.ts",
+      "https://tv.kbhub.online/Ayna-OTT/Entertain-Bangla.m3u8",
+      "https://tv.kbhub.online/Entertainment/Enter10-Bangla.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "EscapeTV.us",
+    "name": "Escape TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/escape-tv.png",
+    "group": "Entertainment",
+    "url": "https://amg00585-amg00585c13-sportstribal-emea-5522.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00585-sportstribaltvfast-escapetv-sportstribalemea/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "Eurosport.bd",
+    "name": "Eurosport",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/eurosport.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-BANGLADESH/BD-ABP-ANANDA-HD.ts",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "FXTV",
+    "name": "FX TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/local-logo-fx.svg",
+    "group": "Entertainment",
+    "url": "https://tvsen3.aynaott.com/jTqkTE8W/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "FalakTV.pk@SD",
+    "name": "Falak TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/falak-tv.png",
+    "group": "Entertainment",
+    "url": "https://falak.rst.ae/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "FashionTV.us",
+    "name": "Fashion TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/unused/fashiontv-1080p-37cc035c2c.png",
+    "group": "Entertainment",
+    "url": "https://ftv1.b-cdn.net/bfdbb576-83f7-11f0-9f89-0200170e3e04_1000028043_HLS/manifest.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "FoxNews.us",
+    "name": "Fox News",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/local-logo-fox-news.png",
+    "group": "News",
+    "url": "https://tvsen6.aynaott.com/foxnews/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "FoxSports1.us",
+    "name": "Fox Sports 1",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/fox-sports-1.png",
+    "group": "Sports",
+    "url": "http://85.237.89.160:9590/usa-s/FOX-SPORTS-1/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "GSeriesDrama.bd",
+    "name": "G Series Drama",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/g-series-drama.png",
+    "group": "Music",
+    "url": "https://vods2.aynaott.com/gseriesDrama/tracks-v1a1/mono.ts.m3u8",
+    "backups": [
+      "https://vods2.aynaott.com/gseriesDrama/index.m3u8",
+      "https://tv.kbhub.online/Entertainment/G-Series-Drama.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "GaziTV.bd",
+    "name": "G TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/g-tv.png",
+    "group": "Entertainment",
+    "url": "https://iptvlive.ahmed-bd-org.workers.dev/g-tv-1/index.m3u8",
+    "backups": [
+      "http://103.135.253.32:8080/Gazi-TV/index.m3u8",
+      "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/gazibdz.stream/tracks-v1a1/mono.m3u8",
+      "https://app.ncare.live/live-orgin/gazibdz.stream/live-orgin/gazibdz.stream/chunks.m3u8",
+      "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/gazibdz.stream/playlist.m3u8",
+      "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/gazibdz.stream/live-orgin/gazibdz.stream/playlist.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "GangaurTV.in@SD",
+    "name": "Gangaur TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/gangaur-tv.png",
+    "group": "Entertainment",
+    "url": "https://pbgangaur.wiseplayout.com/Gangaur/master.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "GoalTV.in",
+    "name": "Goal TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/goal-tv-237cfbed.png",
+    "group": "Entertainment",
+    "url": "https://streams2.sofast.tv/sofastplayout/WiseM3U8_1/master.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "GopalBharTV.in",
+    "name": "Gopal Bhar TV",
+    "logoUrl": "",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/Cartoon/Gopal-Bhar-TV.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "GreenTV.bd",
+    "name": "Green TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/repaired-green-tv-d4fdf1175a.png",
+    "group": "Entertainment",
+    "url": "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/greentv.stream/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "HGTV.us",
+    "name": "HGTV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/hgtv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen3.aynaott.com/Ge23xfY5/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "HISTORYTV.us",
+    "name": "HISTORY TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/history.png",
+    "group": "Entertainment",
+    "url": "https://tvsen3.aynaott.com/np3JstRE/index.m3u8",
+    "backups": [
+      "https://n18syndication.akamaized.net/bpk-tv/History_TV18_Hindi_NW18_MOB/output01/master.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "HKMusicTV",
+    "name": "HK Music TV",
+    "logoUrl": "",
+    "group": "Music",
+    "url": "https://ranacable.duckdns.org/RanaMovie/tracks-v1a1/mono.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "HistoryTV18.in@SD",
+    "name": "History TV18",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/history-tv18.png",
+    "group": "Entertainment",
+    "url": "https://n18syndication.akamaized.net/bpk-tv/History_HD_NW18_MOB/output01/master.m3u8",
+    "backups": [
+      "http://103.151.60.162:2122/play/a00y/index.m3u8?hls",
+      "https://n18syndication.akamaized.net/bpk-tv/History_TV18_Hindi_NW18_MOB/output01/master.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "HosannaTV.in@Tamil",
+    "name": "Hosanna TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/hosanna-tv-016e291e22.png",
+    "group": "Entertainment",
+    "url": "https://asia.mslivestream.net/mslive/bfba54c5c96a6359e2da0ca35f4998af.sdp/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "HumTV.pk",
+    "name": "Hum TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/hum-tv.png",
+    "group": "Entertainment",
+    "url": "https://drk6xq0vhn.gpcdn.net/live/hum_tv_abr/index.m3u8",
+    "backups": [
+      "https://cdn4.mjunoon.tv:8087/streamtest/82M/chunks.m3u8",
+      "https://drk6xq0vhn.gpcdn.net/live/hum_tv_abr/live/hum_tv_720/chunks.m3u8",
+      "https://g4wlkwx8l23a-hls-live.5centscdn.com/HUM/271ddf829afeece44d8732757fba1a66.sdp/playlist_dvr.m3u8",
+      "https://stream.ottplus.live/live/hum_tv_abr/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "IBTVUSA.bd",
+    "name": "IBTV USA",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ibtv-usa-38e82ba90e.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-BANGLADESH/BD-IBTV-USA.ts",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ISLAMCHANNEL",
+    "name": "ISLAM CHANNEL",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/islam-tv.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-BANGLADESH/BD-ISLAM-CHANNEL.ts",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ITVBangla.in",
+    "name": "ITV Bangla",
+    "logoUrl": "",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-ITV-BANGLA-HD.ts",
+    "backups": [
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-ITV-BANGLA-HD.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "IndywoodTV.in@SD",
+    "name": "Indywood TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/indywood-tv.png",
+    "group": "Entertainment",
+    "url": "https://43wrzjnpqoxe-hls-live.wmncdn.net/indywood/indywoodtv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "IqraBangla.uk",
+    "name": "Iqra Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/iqra-bangla.png",
+    "group": "Entertainment",
+    "url": "https://tvsen3.aynaott.com/EuEy5mBW/index.m3u8",
+    "backups": [
+      "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/iqrabanglatvoffice.stream/live-orgin/iqrabanglatvoffice.stream/chunks.m3u8",
+      "https://tvsen5.aynaott.com/iqrabangla/index.m3u8",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-IQRA-BANGLA-SD.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "IqraaTV",
+    "name": "Iqraa TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/iqraa-tv.png",
+    "group": "Entertainment",
+    "url": "https://playlist.fasttvcdn.com/pl/dlkqw1ftuvuuzkcb4pxdcg/Iqraafasttv1/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "IslamTV.sa",
+    "name": "Islam TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/islam-tv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen1.aynaott.com/bB3A5dyq/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "IslamicTV.sa",
+    "name": "Islamic TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/islamic-tv.png",
+    "group": "Entertainment",
+    "url": "https://drk6xq0vhn.gpcdn.net/live/islamic_tv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "JTVBangla.in@SD",
+    "name": "JTV Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/jtv-bangla.png",
+    "group": "Entertainment",
+    "url": "http://103.67.97.45:81/0.ts",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "JTVClassic.in",
+    "name": "JTV Classic",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/jtv-classic.png",
+    "group": "Entertainment",
+    "url": "http://103.67.97.46/0.ts",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "JaihindTV.in@SD",
+    "name": "Jaihind TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/jaihind-tv.png",
+    "group": "Entertainment",
+    "url": "https://mumt03.tangotv.in/Dsly5z3HJAIHIND/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "JalshaBanglaBD.bd",
+    "name": "Jalsha Bangla BD",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/jalsha-bangla-bd.png",
+    "group": "Entertainment",
+    "url": "https://dish.porosh.com.bd/hls/jalshabangla.m3u8",
+    "backups": [
+      "http://103.151.60.162:2122/play/a02x/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "JalwaTV.pk@SD",
+    "name": "Jalwa TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/jalwa-tv.png",
+    "group": "Entertainment",
+    "url": "https://cdn4.mjunoon.tv:8087/streamtest/135M/chunks.m3u8",
+    "backups": [
+      "https://vodzong.mjunoon.tv:8087/streamtest/JalwaTV-135/live/135M/chunks.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "JeevanTV.in@SD",
+    "name": "Jeevan TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/jeevan-tv.png",
+    "group": "Entertainment",
+    "url": "https://cdn.pishow.tv/ott/live/1467/master.m3u8",
+    "backups": [
+      "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/JeevanTV.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "JhankarTV.ca",
+    "name": "Jhankar TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/jhankar-tv.png",
+    "group": "Entertainment",
+    "url": "https://dbcanada.sonarbanglatv.com/jhankartv/jtv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "JonmobhumiTV.bd",
+    "name": "Jonmobhumi TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/jonmobhumi-tv.png",
+    "group": "Entertainment",
+    "url": "https://jtvs.ncare.live/Gznr84Woj7UEye3OPVeWq2ForboWAgdV/jonmobhumitv.stream/tracks-v1a1/mono.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "KCLTV.in@SD",
+    "name": "KCL TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/kcl-tv.png",
+    "group": "Entertainment",
+    "url": "https://kcltv.livebox.co.in/kclhls/live.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "KTVBangla.in@SD",
+    "name": "KTV Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ktv-bangla.png",
+    "group": "Entertainment",
+    "url": "https://server.livelegitpro.in:9899/tribetv/tribetv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "KTVSportPlus",
+    "name": "KTV Sport Plus",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ktv-sport-plus.png",
+    "group": "Entertainment",
+    "url": "https://kwtsplta.cdn.mangomolo.com/spl/smil:spl.stream.smil/chunklist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "KTVBANGLA",
+    "name": "KTV Tamil",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ktv-bangla.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-KTV-BANGLA.ts",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "KairaliTV.in@SD",
+    "name": "Kairali TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/kairali-tv.png",
+    "group": "Entertainment",
+    "url": "https://streams.tangotv.in/KAIRALI/ORIGIN/index.m3u8",
+    "backups": [
+      "https://mumt01.tangotv.in/O5aw8Zn3KAIRALI/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "KalaignarTV.in@SD",
+    "name": "Kalaignar TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/kalaignar-tv-82de1b8f.png",
+    "group": "Entertainment",
+    "url": "https://segment.yuppcdn.net/240122/kalaignartv/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "KalikaTV.in@SD",
+    "name": "Kalika TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/kalika-tv.png",
+    "group": "Entertainment",
+    "url": "http://server.applelive.in/kalikatv/kalikatv.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "KappaTV.in@ALT1",
+    "name": "Kappa TV (Music)",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/kappa-tv.png",
+    "group": "Music",
+    "url": "https://mumt03.tangotv.in/Dsly5z3HKAPPATV/index.m3u8",
+    "backups": [
+      "https://cdn.pishow.tv/ott/live/1123/master.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "KartoonChannel.us",
+    "name": "Kartoon Channel!",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/kartoon-channel.png",
+    "group": "Entertainment",
+    "url": "https://d2z0ysa6dgxhlc.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-ajxyy4yaic6nq/kchan.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "KaumudyTV.in@SD",
+    "name": "Kaumudy TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/kaumudy-tv.png",
+    "group": "Entertainment",
+    "url": "https://oqgdrkxby4rm-hls-live.5centscdn.com/kaumudytv/live.stream/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "KhushbooBangla.in@SD",
+    "name": "Khushboo Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/khushboo-bangla.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/mzwbzfZ4/index.m3u8",
+    "backups": [
+      "https://cdn.pishow.tv/ott/live/1473/master.m3u8",
+      "https://mumt01.tangotv.in/O5aw8Zn3KHUSHBOOTVBANGLA/tracks-v1a1/mono.m3u8",
+      "https://mumt01.tangotv.in/O5aw8Zn3KHUSHBOOTVBANGLA/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "KolkataTV.in",
+    "name": "Kolkata TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/kolkata-tv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/kolkatatv/index.m3u8",
+    "backups": [
+      "https://cdn.ottlive.co.in/kolkatatv/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "KoreanTV.kr",
+    "name": "Korean TV",
+    "logoUrl": "",
+    "group": "Entertainment",
+    "url": "https://d2ta4bqxv3hgr7.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/pb-y5gitldbaizaw/e45a2de9-e522-4ba0-a0fc-34a998350d65/2.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "LAFFTV.us",
+    "name": "LAFF TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/laff-tv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen3.aynaott.com/UC6a8nsf/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "LegoChannel.us@SD",
+    "name": "Lego Channel",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/lego-channel-1080p.png",
+    "group": "Entertainment",
+    "url": "https://dltiqboxjw21d.cloudfront.net/index.m3u8",
+    "backups": [
+      "https://dltiqboxjw21d.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-evri8jwgwmxus/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "LoLTV.in",
+    "name": "LoL TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/lol-tv.png",
+    "group": "Entertainment",
+    "url": "https://streams2.sofast.tv/ptnr-yupptv/title-LOL-TV-ENG_yupptv/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/fc63d5fd-b50e-4d3e-abdf-697d9b6cbf70/manifest.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MADANITVBANGLA",
+    "name": "MADANI TV BANGLA",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/madani-tv.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-BANGLADESH/BD-MADANI-TV-BANGLA-HD.ts",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "METV.bd",
+    "name": "ME TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/me-tv.png",
+    "group": "Entertainment",
+    "url": "https://iptvlive.ahmed-bd-org.workers.dev/me-tv-1/index.m3u8",
+    "backups": [
+      "https://iptvbd.live/metv1080/1080.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/me-tv-2/index.m3u8",
+      "https://iptvlive.ahmed-bd-org.workers.dev/me-tv-3/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MarutamTV.in",
+    "name": "MNTV (Tamil)",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/mntv-tamil.png",
+    "group": "Entertainment",
+    "url": "https://mntv.livebox.co.in/mntvhls/live.m3u8",
+    "backups": [
+      "https://www.khuwemultimedia.com/hls/mntv/mntv.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MTV2.us",
+    "name": "MTV2",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/mtv2-720p-5734b74578.png",
+    "group": "Entertainment",
+    "url": "http://198.58.104.90:8989/mtv2/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MadaniTV.sa",
+    "name": "Madani TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/madani-tv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen3.aynaott.com/z24qLsqV/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MadhimugamTV.in",
+    "name": "Madhimugam TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/madhimugam-tv-576p-80c57e3e48.png",
+    "group": "Entertainment",
+    "url": "https://cdn.pishow.tv/ott/live/1476/master.m3u8",
+    "backups": [
+      "https://mumt01.tangotv.in/O5aw8Zn3MATHIMUGAMTV/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MakkahTV.sa",
+    "name": "Makkah TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/makkah-tv.png",
+    "group": "Entertainment",
+    "url": "https://media2.streambrothers.com:1936/8122/8122/playlist.m3u8",
+    "backups": [
+      "https://media2.streambrothers.com:1936/8122/8122/chunklist_w1247854077.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MakkalTV.in@SD",
+    "name": "Makkal TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/makkal-tv.png",
+    "group": "Entertainment",
+    "url": "https://5k8q87azdy4v-hls-live.wmncdn.net/MAKKAL/271ddf829afeece44d8732757fba1a66.sdp/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ManoranjanTV.in@SD",
+    "name": "Manoranjan TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/manoranjan-tv.png",
+    "group": "Entertainment",
+    "url": "https://cdn.pishow.tv/ott/live/1013/master.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MarqueeSportsNetwork.us",
+    "name": "Marquee Sports Network",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/marquee-sports-network.png",
+    "group": "Sports",
+    "url": "https://tvsen6.aynaott.com/MarqueeSportsNetwork/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MatribhumiTV.bd",
+    "name": "Matribhumi TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/matri-bhumi-tv.png",
+    "group": "Entertainment",
+    "url": "http://live.playmax.live/matribhumi/index.m3u8",
+    "backups": [
+      "http://27.124.71.27/T-Sports/index.m3u8",
+      "https://live.playmax.live/matribhumi/index.m3u8",
+      "https://live.playmax.live/matribhumi/tracks-v1a1/mono.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MedinaLive.bd",
+    "name": "Medina Live",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/medina-live.png",
+    "group": "Entertainment",
+    "url": "http://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/madina.stream/playlist.m3u8",
+    "backups": [
+      "https://cdn-globecast.akamaized.net/live/eds/saudi_sunnah/hls_roku/index.m3u8",
+      "http://m.live.net.sa:1935/live/sunnah/chunklist.m3u8",
+      "http://m.live.net.sa:1935/live/sunnah/playlist.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MeiAhMovieChannel.hk",
+    "name": "Mei Ah Movie Channel",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/mei-ah-movie-channel.png",
+    "group": "Movies",
+    "url": "http://103.172.187.30:12000/stream/mytv/null-2/master.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MeiAlaiTV.in",
+    "name": "Mei Alai TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/mei-alai-tv.png",
+    "group": "Entertainment",
+    "url": "https://meialai.iptelevishion.com/meialai/2/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MetroTV.in@SD",
+    "name": "Metro TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/metro-tv-1080p-ee3f23e15b.png",
+    "group": "Entertainment",
+    "url": "https://mercury.streambridge.link:8042/telugu/metrotv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MONTVBangla.in",
+    "name": "Mon Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/mon-bangla-4a53249503.png",
+    "group": "Entertainment",
+    "url": "http://115.187.41.216:8080/hls/montvbangla/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "MysteryTV.us",
+    "name": "Mystery TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/mystery-tv.png",
+    "group": "Entertainment",
+    "url": "https://aenetworks-mysterytv-rakuten.amagi.tv/playlist.m3u8",
+    "backups": [
+      "https://amg00841-aenetworksukane-mysterytv-samsunguk-mggb7.amagi.tv/ts-eu-w1-n2/playlist/amg00841-aenetworksukane-mysterytv-samsunguk/playlist.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "NKRTVKannada.in",
+    "name": "NKR TV Kannada",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/nkr-tv-kannada.png",
+    "group": "Entertainment",
+    "url": "https://stream.ottlive.co.in/nkrtv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "NRBTV.ca",
+    "name": "NRB TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/nrb-tv.png",
+    "group": "Entertainment",
+    "url": "https://app.ncare.live/live-orgin/nrb-eu.stream/playlist.m3u8",
+    "backups": [
+      "https://uni6rtmp.tulix.tv/nrbnetwork/myStream.sdp/playlist.m3u8",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-NRB-TV-HD.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "NTCTV.in@SD",
+    "name": "NTC TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ntc-tv.png",
+    "group": "Entertainment",
+    "url": "https://galaxyott.live/hls/ntv.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "NTVEurope.bd",
+    "name": "NTV Europe",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ntv-europe.png",
+    "group": "Entertainment",
+    "url": "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/ntvuk00332211.stream/playlist.m3u8",
+    "backups": [
+      "https://app.ncare.live/c3VydmVyX8RpbEU9Mi8xNy8yMDE0GIDU6RgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcGVMZEJCTEFWeVN3PTOmdFsaWRtaW51aiPhnPTI2/ntvuk00332211.stream/live-orgin/ntvuk00332211.stream/chunks.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "NatGeoBangla.in",
+    "name": "Nat Geo Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/national-geographic.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-NAT-GEO-HD-BANGLA.ts",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "NatGeoTV.us",
+    "name": "Nat Geo TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/national-geographic.png",
+    "group": "Entertainment",
+    "url": "https://tvsen3.aynaott.com/7mm4pwCy/index.m3u8",
+    "backups": [
+      "http://103.135.253.32:8080/NATGEO-HD/index.m3u8",
+      "http://iptv.prosto.tv:7000/ch83/video.m3u8",
+      "https://tvsen6.aynaott.com/natgeo/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "News21BanglaTV.bd@SD",
+    "name": "News 21",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/news-21-bangla-tv.png",
+    "group": "News",
+    "url": "http://103.190.133.68:1935/news21live/live/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "NickBangla.bd",
+    "name": "Nick Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/nick-bangla-26fef2ac19.png",
+    "group": "Entertainment",
+    "url": "http://103.135.253.32:8080/NICK/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "OdishaTV.in@SD",
+    "name": "Odisha TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/odisha-tv.png",
+    "group": "Entertainment",
+    "url": "https://livetv.tarangplus.in/otv-origin/live/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "OliTV.in@SD",
+    "name": "Oli TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/oli-tv.png",
+    "group": "Entertainment",
+    "url": "https://live.olidigital.in/olitv/olitv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "OrangeBanglaTV.in@SD",
+    "name": "Orange Bangla TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/orange-bangla-tv.png",
+    "group": "Entertainment",
+    "url": "https://cdn.pishow.tv/ott/live/1499/master.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "OutdoorChannel.us",
+    "name": "Outdoor Channel",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/outdoor-channel.png",
+    "group": "Entertainment",
+    "url": "https://cdn-apse1-prod.tsv2.amagi.tv/linear/amg00718-outdoorchannela-outdoortvnz-samsungnz/playlist.m3u8",
+    "backups": [
+      "https://amg00718-outdoorchannela-outdoortvnz-samsungnz-lylq4.amagi.tv/playlist/amg00718-outdoorchannela-outdoortvnz-samsungnz/playlist.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PKSports.pk@SD",
+    "name": "PK Sports",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/pk-sports.png",
+    "group": "Sports",
+    "url": "https://lbgo.bozztv.com/ssh101/ssh101/pksportshd/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "POPWorldTV.es",
+    "name": "POP World TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/pop-world-tv-720p-3faede8b6c.png",
+    "group": "Entertainment",
+    "url": "https://janus.xpbroadcasting.com:8443/hls/popworld.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PTV.pk",
+    "name": "PTV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ptv.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/Ayna-OTT/PTV.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PaighanTV.pk@SD",
+    "name": "Paighan TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/paighan-tv.png",
+    "group": "Entertainment",
+    "url": "https://cdn4.mjunoon.tv:8087/streamtest/107M/chunks.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PardesiTV.ca",
+    "name": "Pardesi TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/pardesi-tv.png",
+    "group": "Entertainment",
+    "url": "http://stream.pardesitv.online/pardesi/index.m3u8",
+    "backups": [
+      "http://stream.pardesitv.online/pardesi/tracks-v1a1/mono.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PasandTV.in@SD",
+    "name": "Pasand TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/pasand-tv.png",
+    "group": "Entertainment",
+    "url": "https://d1msejlow1t3l4.cloudfront.net/fta/pasand/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PeaceTVBangla.ae",
+    "name": "Peace TV Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/peace-tv-bangla.png",
+    "group": "Religious",
+    "url": "https://dzkyvlfyge.erbvr.com/PeaceTvBangla/tracks-v3a1/mono.m3u8",
+    "backups": [
+      "https://dzkyvlfyge.erbvr.com/PeaceTvBangla/tracks-v3a1/mono.m3u8?sid=JESiqIrRgUmdhUEQ60QHfg",
+      "http://103.135.253.32:8080/Pace-TV-Bangla/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PeaceTVEnglish.ae",
+    "name": "Peace TV English",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/peace-tv-english.png",
+    "group": "Religious",
+    "url": "https://dzkyvlfyge.erbvr.com/PeaceTvEnglish/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PeaceTVUrdu.pk",
+    "name": "Peace TV Urdu",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/peace-tv-urdu.png",
+    "group": "Religious",
+    "url": "https://dzkyvlfyge.erbvr.com/PeaceTvUrdu/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PearTV.in@SD",
+    "name": "Pear TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/pear-tv.png",
+    "group": "Entertainment",
+    "url": "https://mumt01.tangotv.in/O5aw8Zn3PEARTV/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PeppersTV.in@SD",
+    "name": "Peppers TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/peppers-tv.png",
+    "group": "Entertainment",
+    "url": "https://cdn.pishow.tv/ott/live/1383/master.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "Pitaara.in@SD",
+    "name": "Pitaara TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/pitaara-tv.png",
+    "group": "Entertainment",
+    "url": "https://d2lk5u59tns74c.cloudfront.net/out/v1/500a6b45f5ae41dda445d912b59eaa09/index.m3u8",
+    "backups": [
+      "https://d2lk5u59tns74c.cloudfront.net/out/v1/500a6b45f5ae41dda445d912b59eaa09/index_5.m3u8",
+      "https://streams.tangotv.in/PITAARA/ORIGIN/index.m3u8",
+      "https://vg-pitaaratvlive.akamaized.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/vglive-sk-583798/playlist.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PolimerTV.in@SD",
+    "name": "Polimer TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/polimer-tv.png",
+    "group": "Entertainment",
+    "url": "https://cdn.pishow.tv/ott/live/1241/master.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PowerTurkTV.tr",
+    "name": "PowerT\u00fcrk TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/powerturk-tv-1080p-7651888d90.png",
+    "group": "Entertainment",
+    "url": "https://live.artidijitalmedya.com/artidijital_powerturktv/powerturktv/playlist.m3u8",
+    "backups": [
+      "https://livetv.powerapp.com.tr/powerturkTV/powerturkhd.smil/playlist.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PowerkidsKartoonChannel.us",
+    "name": "Powerkids Kartoon Channel",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/powerkids-kartoon-channel.png",
+    "group": "Entertainment",
+    "url": "https://cc-j2qrmdlg5y7lg.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-j2qrmdlg5y7lg/powerkids.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PrarthanaTV.in@SD",
+    "name": "Prarthana TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/prarthana-tv.png",
+    "group": "Entertainment",
+    "url": "https://livetv.tarangplus.in/prarthana-origin/live/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PravasiChannel.in@SD",
+    "name": "Pravasi Channel",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/pravasi-channel.png",
+    "group": "Entertainment",
+    "url": "https://m6gdavepdn93-hls-live.5centscdn.com/pravasi/d0dbe915091d400bd8ee7f27f0791303.sdp/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PulariTV.in@SD",
+    "name": "Pulari TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/pulari-tv.png",
+    "group": "Entertainment",
+    "url": "https://mumbai-edge.smartplaytv.in/PulariTV/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PunjabiTV.in@SD",
+    "name": "Punjabi TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/punjabi-tv-9b4d7425b3.png",
+    "group": "Entertainment",
+    "url": "https://samitaorigin.tangotv.in/PUNJABITV/SAMITAORIGIN/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "PuthuyugamTV.in@SD",
+    "name": "Puthuyugam TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/puthuyugam-tv.png",
+    "group": "Entertainment",
+    "url": "https://mumt04.tangotv.in/m18aqlK4PUTHUYUGAMTV/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "QTV.in",
+    "name": "Q TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/q-tv.png",
+    "group": "Entertainment",
+    "url": "https://mumt05.tangotv.in/87NeALx2THEQ/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "QuranTV.iq",
+    "name": "Quran TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/quran-tv.png",
+    "group": "Religious",
+    "url": "https://live.kwikmotion.com/sharjahtvquranlive/shqurantv.smil/sharjahtvquranpublish/shqurantv_source/chunks.m3u8",
+    "backups": [
+      "https://live.kwikmotion.com/sharjahtvquranlive/shqurantv.smil/playlist.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "RADBULLTV",
+    "name": "RADBULL TV",
+    "logoUrl": "",
+    "group": "Entertainment",
+    "url": "https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master_6660.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "RDSSocialTV",
+    "name": "RDS Social TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/rds-social-tv.png",
+    "group": "Entertainment",
+    "url": "https://stream.rdstv.radio/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "RajTV.in@SD",
+    "name": "Raj TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/raj-tv-537c4d46.png",
+    "group": "Entertainment",
+    "url": "https://livestream.rajtv.tv/hlslive/Admin/px08241087/live/RAJTV/master_1.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "RajdhaniTV.bd",
+    "name": "Rajdhani TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/rajdhani-tv.png",
+    "group": "Entertainment",
+    "url": "https://drk6xq0vhn.gpcdn.net/live/rajdhani_tv/index.m3u8",
+    "backups": [
+      "http://stream.shariarsuvo.com/hls5/rajdhanicable.m3u8",
+      "https://stream.shariarsuvo.com/hls5/rajdhanicable.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "RakutenTVActionMovies.es@UK",
+    "name": "Rakuten TV Action Movies UK",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/rakuten-tv-action-movies-uk-1080p-75f2eea4ce.png",
+    "group": "Movies",
+    "url": "https://54045f0c40fd442c8b06df076aaf1e85.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6065/master.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "RakutenTVComedyMovies.es@UK",
+    "name": "Rakuten TV Comedy Movies UK",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/rakuten-tv-comedy-movies.png",
+    "group": "Movies",
+    "url": "https://9be783d652cd4b099cf63e1dc134c4a3.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6181/master.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "RakutenTVDramaMovies.es@UK",
+    "name": "Rakuten TV Drama Movies UK",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/rakuten-tv-drama-movies.png",
+    "group": "Movies",
+    "url": "https://fee09fd665814f51b939b6d106cf5f66.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6093/master.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "RakutenTVFamilyMovies.es@UK",
+    "name": "Rakuten TV Family Movies UK",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/rakuten-tv-family-movies.png",
+    "group": "Movies",
+    "url": "https://e3207568b726401995c25670faaf32e4.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6203/master.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "Rang.in",
+    "name": "Rang TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/rang.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-BANGLADESH/BD-RANG-TV-HD.ts",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "RedBullTV.at@EUMENA",
+    "name": "Red Bull TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/red-bull-tv.png",
+    "group": "Entertainment",
+    "url": "https://3ea22335.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWdiX1JlZEJ1bGxUVl9ITFM/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "RetroMusicTV.cz",
+    "name": "Retro Music TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/retro-music-tv-1080p-610715c3c9.png",
+    "group": "Music",
+    "url": "https://stream.mediawork.cz/retrotv/smil:retrotv2.smil/playlist.m3u8",
+    "backups": [
+      "http://stream.mediawork.cz/retrotv//retrotvHQ1/playlist.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "RojaTV.in",
+    "name": "Roja TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/roja-tv.png",
+    "group": "Entertainment",
+    "url": "https://live.rojatv.cloud/rojatv/rojatv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "RongeenTV.in@SD",
+    "name": "Rongeen TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/rongeen-tv.png",
+    "group": "Entertainment",
+    "url": "https://iptvlive.ahmed-bd-org.workers.dev/rongeen-tv-1/index.m3u8",
+    "backups": [
+      "https://server.thelegitpro.in/rongeentv/rongeentv/index.m3u8",
+      "https://mumbai-edge.smartplaytv.in/RongeenTV/index.m3u8",
+      "https://server.thelegitpro.in/rongeentv/rongeentv/tracks-v1a1/mono.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "RupashiBanglaTV.bd@SD",
+    "name": "Rupashi Bangla TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/rupashi-bangla-tv.png",
+    "group": "Entertainment",
+    "url": "https://app24.jagobd.com.bd/c3VydmVyX8RpbEU9Mi8xNy8yMFDEEHGcfRgzQ6NTAgdEoaeFzbF92YWxIZTO0U0ezN1IzMyfvcEdsEfeDeKiNkVN3PTOmdFseWRtaW51aiPhnPTI2/ruposhibangla.stream/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "RupasiBangla.in@SD",
+    "name": "Ruposhi Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ruposhi-bangla.png",
+    "group": "Entertainment",
+    "url": "https://mumt05.tangotv.in/87NeALx2RUPASIBANGLA/index.m3u8",
+    "backups": [
+      "http://103.151.60.162:2122/play/a02n/index.m3u8",
+      "https://cdn.pishow.tv/ott/live/1039/master.m3u8",
+      "https://da86m1sqpm3o0.cloudfront.net/28072023/smil:rupashibangla.smil/playlist.m3u8",
+      "https://mumt05.tangotv.in/87NeALx2RUPASIBANGLA/tracks-v1a1/mono.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SADATV.in",
+    "name": "SADA TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/sada-tv.png",
+    "group": "Entertainment",
+    "url": "http://cdn12.henico.net:8080/live/sadatv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SRK.bd",
+    "name": "SRK",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/srk.png",
+    "group": "Entertainment",
+    "url": "https://srknowapp.ncare.live/srktvhlswodrm/srktv.stream/playlist.m3u8",
+    "backups": [
+      "https://srktv.net/srktvhls/cdnlive_srktv.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SRKTv",
+    "name": "SRK Tv",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/srk.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/Entertainment/SRK-Tv.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SafariTV.in@SD",
+    "name": "Safari TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/safari-tv.png",
+    "group": "Entertainment",
+    "url": "https://mumt04.tangotv.in/m18aqlK4SAFARITV/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SanaTV.in@SD",
+    "name": "Sana TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/sana-tv.png",
+    "group": "Entertainment",
+    "url": "https://vglivessai.akamaized.net/us/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/b6d9e864-ec16-410a-804d-ccf8f720bfaa/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SangeetBangla.in@SD",
+    "name": "Sangeet Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/sangeet-bangla.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-BANGLADESH/BD-SANGEET-BANGLA-HD.ts",
+    "backups": [
+      "https://cdn.pishow.tv/ott/live/1143/master.m3u8",
+      "https://mumt05.tangotv.in/87NeALx2SANGEETBANGLA/tracks-v1a1/mono.m3u8",
+      "https://mumt05.tangotv.in/87NeALx2SANGEETBANGLA/index.m3u8",
+      "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-SANGEET-BANGLA-HD.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SaudiTV.sa",
+    "name": "Saudi TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/saudi-tv.png",
+    "group": "Entertainment",
+    "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-saudi-tv/2ad66056b51fd8c1b624854623112e43/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SeeTV.pk",
+    "name": "See TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/see-tv.png",
+    "group": "Entertainment",
+    "url": "https://vodzong.mjunoon.tv:8087/streamtest/SeeTV-156/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ShansonTV.ru",
+    "name": "Shanson TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/shanson-tv-576p-3c01614e19.png",
+    "group": "Entertainment",
+    "url": "http://catchup.videoline.ru/shanson/index.m3u8",
+    "backups": [
+      "http://hls-shansontv.cdnvideo.ru/shansontv/shansontv-sd.smil/playlist.m3u8",
+      "https://streaming.thestream.cyou/live/7009.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ShemarooTV.in@SD",
+    "name": "Shemaroo TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/shemaroo-tv.png",
+    "group": "Entertainment",
+    "url": "https://airtelapp.shemaroo.com/shemarootv/smil:shemarootvadp.smil/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ShubhCinemaTV.in",
+    "name": "Shubh Cinema TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/shubh-cinema-tv.png",
+    "group": "Entertainment",
+    "url": "https://d393sxaxig6bax.cloudfront.net/out/v1/589cf2cf44bf42bb941e817a2240d62e/index.m3u8",
+    "backups": [
+      "https://d393sxaxig6bax.cloudfront.net/out/v1/589cf2cf44bf42bb941e817a2240d62e/index_8.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SirippoliTV.in@SD",
+    "name": "Sirippoli TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/sirippoli-tv.png",
+    "group": "Entertainment",
+    "url": "https://segment.yuppcdn.net/240122/siripoli/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SkySportsFootball",
+    "name": "Sky Sports Football",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/sky-sports-football.png",
+    "group": "Sports",
+    "url": "http://2756d46c.akciatv.ru/iptv/7FRNF6CY9A9TG3/9289/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SmurfTV.us",
+    "name": "Smurf TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/smurf-tv.png",
+    "group": "Entertainment",
+    "url": "https://d144py1prrd7ns.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-affg2ev32s0dq/smrfe.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SonarBangla.in@SD",
+    "name": "Sonar Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/sonar-bangla.png",
+    "group": "Entertainment",
+    "url": "https://samitaorigin.tangotv.in/SONARBANGLA/SAMITAORIGIN/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SongdewTV.in@SD",
+    "name": "Songdew TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/songdew-tv.png",
+    "group": "Entertainment",
+    "url": "https://yuppnimrestreammum.akamaized.net/181224/smil:songdewtv.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SonyEntertainmentTelevision.in@SD",
+    "name": "Sony Entertainment TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/sony-entertainment-tv.png",
+    "group": "Entertainment",
+    "url": "https://drk6xq0vhn.gpcdn.net/live/sony_ent_hd_abr/index.m3u8",
+    "backups": [
+      "http://103.151.60.162:2122/play/a015/index.m3u8?hls",
+      "http://38.96.178.205/SONYHD/index.m3u8",
+      "https://drk6xq0vhn.gpcdn.net/live/sony_ent_sd_abr/index.m3u8",
+      "https://stream.ottplus.live/live/sony_ent_hd_abr/index.m3u8",
+      "https://stream.ottplus.live/live/sony_ent_sd_abr/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SooriyanTV.ca@SD",
+    "name": "Sooriyan TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/sooriyan-tv.png",
+    "group": "Entertainment",
+    "url": "https://live20.bozztv.com/giatv/giatv-Infinittyott/Infinittyott/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SportsFirstTV.us",
+    "name": "Sports First TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/sports-first-tv.png",
+    "group": "Sports",
+    "url": "https://d4ddgdmj1cvnm.cloudfront.net/scheduler/scheduleMaster/409.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SportsFishingTV",
+    "name": "Sports Fishing TV",
+    "logoUrl": "",
+    "group": "Sports",
+    "url": "https://streams2.sofast.tv/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/eea68b79-bfe2-451e-a227-d637a5b9548a/manifest.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "StarBangla.in",
+    "name": "Star Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/star-bangla.png",
+    "group": "Entertainment",
+    "url": "http://103.151.60.162:2122/play/a0f5/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "StarNews.bd",
+    "name": "Star News",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/star-news-722ad595.png",
+    "group": "News",
+    "url": "http://103.135.253.32:8080/Star-News/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "StarSports1Hindi.in@HD",
+    "name": "Star Sports 1 Hindi",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/star-sports-1-hindi.png",
+    "group": "Sports",
+    "url": "https://starsportshindiii.pages.dev/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "StarSportsSelect1.in@SD",
+    "name": "Star Sports Select 1",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/star-sports-select-1.png",
+    "group": "Sports",
+    "url": "http://103.135.253.32:8080/STAR-SPORTS-SELECT-1/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "StarSportsSelect2.in",
+    "name": "Star Sports Select 2",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/star-sports-select-2.png",
+    "group": "Sports",
+    "url": "https://flussonic.defineatoz.com/starsportsselect2sw/tracks-v1a1/mono.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SubinTV.in@SD",
+    "name": "Subin TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/subin-tv.png",
+    "group": "Entertainment",
+    "url": "https://stream.galaxyott.live/live/subintv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SunBangla.in",
+    "name": "Sun Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/sun-bangla.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-BANGLADESH/BD-SUN-BANGLA-HD.ts",
+    "backups": [
+      "http://27.124.71.27/Sun_Bangla/index.m3u8",
+      "http://103.135.253.32:8080/SUN-BANGLA/index.m3u8",
+      "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-SUN-BANGLA-SD.ts",
+      "https://tv.kbhub.online/Entertainment/Sun-Bangla.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SunTV.in@HD",
+    "name": "Sun TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/sun-tv.png",
+    "group": "Entertainment",
+    "url": "https://d2px1d6ssc60fw.cloudfront.net/SunTV/SunTV-HDR10-IN-index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SuriyaTV.in",
+    "name": "Suriya TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/suriya-tv.png",
+    "group": "Entertainment",
+    "url": "https://stream.ottlive.co.in/suryatvtamil/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "SuriyanTV.in@SD",
+    "name": "Suriyan TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/suriyan-tv.png",
+    "group": "Entertainment",
+    "url": "https://hlslive.olidigital.in/suriyantv/suriyantv/index.m3u8",
+    "backups": [
+      "https://stream.ottlive.co.in/suriyantvtamil/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TBN24.us",
+    "name": "TBN24",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/tbn-24.png",
+    "group": "Entertainment",
+    "url": "http://cdn01.palki.tv/live/TBN24-M/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TVBRICSEnglish.in@SD",
+    "name": "TV BRICS English",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/tv-brics-english.png",
+    "group": "Entertainment",
+    "url": "https://engbrics.mediacdn.ru/cdn/brics/english/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TV9Bangla.in",
+    "name": "TV9 Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/tv-9-bangla.png",
+    "group": "Entertainment",
+    "url": "https://amg01448-samsungin-tv9bangla-samsungin-9lgnh.amagi.tv/playlist/amg01448-samsungin-tv9bangla-samsungin/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TVCArabicKids",
+    "name": "TVC Arabic Kids",
+    "logoUrl": "",
+    "group": "Entertainment",
+    "url": "https://tvsen6.aynaott.com/TVCArabicKids/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TVCARiBKidsAndTeens",
+    "name": "TVCARiB Kids & Teens",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/tvcarib-kids-teens.png",
+    "group": "Entertainment",
+    "url": "https://cdn.mycloudstream.io/hls/live/broadcast/nro19k2h/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TagTV.pk",
+    "name": "Tag TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/tag-tv.png",
+    "group": "Entertainment",
+    "url": "http://cdn11.live247stream.com/tag/tv/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TamilanTV.in",
+    "name": "Tamilan TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/tamilan-tv.png",
+    "group": "Entertainment",
+    "url": "https://mumt04.tangotv.in/m18aqlK4TAMILANTELEVISION/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TaraTV.in",
+    "name": "Tara TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/tara-tv.png",
+    "group": "Entertainment",
+    "url": "https://legitpro.co.in/taratv/taratv/tracks-v1a1/mono.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TarangTV.in@SD",
+    "name": "Tarang TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/tarang-tv.png",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-TARANG-TV-HD.ts",
+    "backups": [
+      "https://livetv.tarangplus.in/tarangtv-origin/live/playlist.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TehzeebTV.in@SD",
+    "name": "Tehzeeb TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/normalized/tehzeeb-tv.png",
+    "group": "Entertainment",
+    "url": "https://cdn.pishow.tv/ott/live/239/master.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ThalaaTV.in",
+    "name": "Thalaa TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/thalaa-tv.png",
+    "group": "Entertainment",
+    "url": "https://streams2.sofast.tv/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/2069c593-3c07-4d62-9d44-746be5c3a5d6/manifest.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ThendralTV.in@SD",
+    "name": "Thendral TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/thendral-tv-ed9b933eb5.png",
+    "group": "Entertainment",
+    "url": "https://hls.thendraltv.in/thendraltv_1210b43d/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ThikanaTV.us",
+    "name": "Thikana",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/thikana.png",
+    "group": "Entertainment",
+    "url": "https://5dd3981940faa.streamlock.net/thikanatv/thikanatv/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TimeTelevision.us",
+    "name": "Time Television",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/time-television.png",
+    "group": "Entertainment",
+    "url": "https://app.ncare.live/live-orgin/timetvusa.stream/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TollyTV.in",
+    "name": "Tolly TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/tolly-tv.png",
+    "group": "Entertainment",
+    "url": "https://streams2.sofast.tv/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/13b5735d-52c3-4be0-853d-e0ec0127e708/manifest.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TomAndJerryTV",
+    "name": "Tom & Jerry TV",
+    "logoUrl": "",
+    "group": "Entertainment",
+    "url": "https://tv.kbhub.online/Cartoon/Tom-and-Jerry-TV.m3u8",
+    "backups": [
+      "https://live20.bozztv.com/giatvplayout7/giatv-208314/tracks-v1a1/mono.ts.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "TravelChannel.us",
+    "name": "Travel Channel",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/travel-channel.png",
+    "group": "Entertainment",
+    "url": "https://tvsen3.aynaott.com/sFwCR6Fu/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "UBangla.in",
+    "name": "U Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/u-bangla.png",
+    "group": "Entertainment",
+    "url": "https://stream.ottlive.co.in/ubangla/index.m3u8",
+    "backups": [
+      "https://stream.ottlive.co.in/ubangla/tracks-v1a1/mono.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "USATV.us",
+    "name": "USA TV",
+    "logoUrl": "",
+    "group": "Entertainment",
+    "url": "https://tvsen3.aynaott.com/dbbcY6NG/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "UTVPalakkad.in@SD",
+    "name": "UTV Palakkad",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/utv-palakkad.png",
+    "group": "Entertainment",
+    "url": "https://em4qj6nedyvg-hls-live.wmncdn.net/utv/ab2de115318ae40bdd434e193a2f2e7f.sdp/playlist.m3u8",
+    "backups": [
+      "https://em4qj6nedyvg-hls-live.wmncdn.net/liveunit/89b1e919eed04e59383cf820d644c20e.sdp/playlist.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "UltimateTV.in@SD",
+    "name": "Ultimate TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ultimate-tv.png",
+    "group": "Entertainment",
+    "url": "https://stream.ottlive.co.in/utvtamil/index.m3u8",
+    "backups": [
+      "https://mumbai-edge.smartplaytv.in/utv/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "UniqueTV.in@SD",
+    "name": "Unique TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/unique-tv-c64872bc2a.png",
+    "group": "Entertainment",
+    "url": "https://mumt05.tangotv.in/87NeALx2UNIQUETV/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "VaanavilTV.in@SD",
+    "name": "Vaanavil TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/vaanavil-tv.png",
+    "group": "Entertainment",
+    "url": "https://6n3yope4d9ok-hls-live.5centscdn.com/vaanavil/TV.stream/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "VanithaTV.in@SD",
+    "name": "Vanitha TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/vanitha-tv.png",
+    "group": "Entertainment",
+    "url": "https://mumt01.tangotv.in/O5aw8Zn3VANITHA/index.m3u8",
+    "backups": [
+      "https://cdn.pishow.tv/ott/live/393/master.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "VasanthTV.in@SD",
+    "name": "Vasanth TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/vasanth-tv.png",
+    "group": "Entertainment",
+    "url": "https://mumt04.tangotv.in/m18aqlK4VASANTHTV/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "VendharTV.in@SD",
+    "name": "Vendhar TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/vendhar-tv.png",
+    "group": "Entertainment",
+    "url": "https://mumt04.tangotv.in/m18aqlK4VENDHARTV/index.m3u8",
+    "backups": [
+      "https://cdn.pishow.tv/ott/live/1271/master.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "VissaTV.in@SD",
+    "name": "Vissa TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/vissa-tv.png",
+    "group": "Entertainment",
+    "url": "https://mumt07.tangotv.in/zHjX9OFlVISSATV/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "VyasChannel.in@SD",
+    "name": "Vyas Channel",
+    "logoUrl": "",
+    "group": "Entertainment",
+    "url": "https://playhls.media.nic.in/hls/live/vyas/vyas.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "WasebTV.pk",
+    "name": "Waseb TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/waseb-tv.png",
+    "group": "Entertainment",
+    "url": "https://vodzong.mjunoon.tv:8087/streamtest/WASEB-130/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "WildTV.ca@SD",
+    "name": "Wild TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/wild-tv.png",
+    "group": "Entertainment",
+    "url": "https://dfhsahpa45kk2.cloudfront.net/scheduler/scheduleMaster/476.m3u8",
+    "backups": [
+      "https://d1h8whhtg5u7om.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-3u3ceovu5thv6/WildPlanet_GB.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "WillowSports2",
+    "name": "Willow Sports 2",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/unused/willow-sports.png",
+    "group": "Sports",
+    "url": "https://tvsen7.aynaott.com/Sports1/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "WillowTV.us",
+    "name": "Willow TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/willow-tv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen7.aynaott.com/rEBp38Ax/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "WorldWarTV.us",
+    "name": "World War TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/world-war-tv.png",
+    "group": "Entertainment",
+    "url": "https://aenetworks-worldwartv-rakuten.amagi.tv/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "XtremSports",
+    "name": "Xtrem Sports",
+    "logoUrl": "",
+    "group": "Sports",
+    "url": "https://streams2.sofast.tv/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/e0b81a5c-6ab5-48cd-aaa9-f82de4ab5bf9/manifest.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "YTV.us",
+    "name": "YTV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ytv.png",
+    "group": "Entertainment",
+    "url": "https://tvsen3.aynaott.com/uYpFg3RV/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ZBCartoonTV.in",
+    "name": "ZB Cartoon TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/zb-cartoon.png",
+    "group": "Entertainment",
+    "url": "https://server.zillarbarta.com/zbcatun/video.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ZainabiaChannel.sa",
+    "name": "Zainabia Channel",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/zainabia-channel.png",
+    "group": "Entertainment",
+    "url": "https://zainabia.livebox.co.in/ZainabiaChannelhls/channel.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ZeeBangla.in@HD",
+    "name": "Zee Bangla",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/zee-bangla.png",
+    "group": "Entertainment",
+    "url": "https://drk6xq0vhn.gpcdn.net/live/zee_bangla_720/index.m3u8",
+    "backups": [
+      "http://103.151.60.162:2122/play/a011/index.m3u8",
+      "http://103.151.60.162:2122/play/a011/index.m3u8?hls",
+      "http://103.151.60.162:2122/play/a02p/index.m3u8?hls",
+      "https://iptvlive.ahmed-bd-org.workers.dev/zee-bangla-hd-2/index.m3u8",
+      "https://raw.githubusercontent.com/ahan443/vibe-tv/refs/heads/main/ZeeBanglaHD.m3u8",
+      "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/ZeeBanglaHD.m3u8",
+      "https://tvsen6.aynaott.com/ZeeBangla/index.m3u8",
+      "https://yupptvcatchupire.yuppcdn.net/preview/zeebangla/2500.m3u8",
+      "http://103.135.253.32:8080/ZEE-BANGLA-HD/tracks-v1a1/mono.m3u8",
+      "https://d1rc86nwwc9fag.cloudfront.net/260723/smil:zeebangla.smil/chunklist_b896000.m3u8",
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-ZEE-BANGLA-HD.ts",
+      "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-ZEE-BANGLA-FHD.ts",
+      "https://tv.kbhub.online/Entertainment/Zee-Bangla.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ZeeBanglaCinema.in",
+    "name": "Zee Bangla Cinema",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/zee-bangla-cinema.png",
+    "group": "Movies",
+    "url": "https://tv.kbhub.online/Entertainment/Zee-Bangla-Cinema.ts",
+    "backups": [
+      "https://tv.kbhub.online/AS-BANGLADESH/BD-ZEE-BANGLA-CINEMA-HD.ts",
+      "https://tv.kbhub.online/AS-INDIA-BANGLA/IN-ZEE-BANGLA-CINEMA-HD.ts"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ZeeBanglaSonar.in@SD",
+    "name": "Zee Bangla Sonar",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/zee-bangla-sonar.png",
+    "group": "Entertainment",
+    "url": "https://drk6xq0vhn.gpcdn.net/live/zee_bangla_cinema_abr/index.m3u8",
+    "backups": [
+      "http://103.135.253.32:8080/ZEE-BANGLA-CINEMA/index.m3u8",
+      "https://stream.ottplus.live/live/zee_bangla_cinema_abr/live/zee_bangla_cinema_720/chunks.m3u8",
+      "https://d1g8wgjurz8via.cloudfront.net/bpk-tv/ColorsHD/default/ColorsHD.m3u8",
+      "https://d1g8wgjurz8via.cloudfront.net/bpk-tv/ColorsHD/default/Zeebanglahd.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ZeeTV.in@SD",
+    "name": "Zee TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/repaired-zee-tv-b659c984ad.png",
+    "group": "Entertainment",
+    "url": "https://drk6xq0vhn.gpcdn.net/live/zee_tv_hd_abr/index.m3u8",
+    "backups": [
+      "http://103.151.60.162:2122/play/a01u/index.m3u8",
+      "http://103.151.60.162:2122/play/a01u/index.m3u8?hls",
+      "http://41.205.93.154/ZEE-TV/index.m3u8",
+      "https://d47ddb99.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZy1kZV9aZWVUVkhEVUtHZXJtYW55X0hMUw/playlist.m3u8",
+      "https://stream.ottplus.live/live/zee_tv_hd_abr/index.m3u8",
+      "http://103.135.253.32:8080/ZEE-TV/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "ZodiakTV.in@SD",
+    "name": "Zodiak TV",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/zodiak-tv.png",
+    "group": "Entertainment",
+    "url": "https://ranacable.duckdns.org/ZodiakTv/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BeINSPORTS1",
+    "name": "beIN SPORTS 1",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bein-sports-1.png",
+    "group": "Sports",
+    "url": "http://2756d46c.akciatv.ru/iptv/7FRNF6CY9A9TG3/6123/index.m3u8",
+    "backups": [
+      "http://27.124.71.27/beIN_Sports_1/index.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BeINSPORTS3",
+    "name": "beIN SPORTS 3",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bein-sports-3-517e8a74a2.png",
+    "group": "Sports",
+    "url": "http://2756d46c.akciatv.ru/iptv/7FRNF6CY9A9TG3/6124/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BeINSPORTS4",
+    "name": "beIN SPORTS 4",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bein-sports-4-int.png",
+    "group": "Sports",
+    "url": "http://2756d46c.akciatv.ru/iptv/7FRNF6CY9A9TG3/6125/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BeINSPORTS5",
+    "name": "beIN SPORTS 5",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bein-sports-5-int.png",
+    "group": "Sports",
+    "url": "http://2756d46c.akciatv.ru/iptv/7FRNF6CY9A9TG3/6126/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BeINSPORTS6",
+    "name": "beIN SPORTS 6",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bein-sports-6.png",
+    "group": "Sports",
+    "url": "http://2756d46c.akciatv.ru/iptv/7FRNF6CY9A9TG3/6127/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "BeINSPORTS7",
+    "name": "beIN SPORTS 7",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bein-sports-7.png",
+    "group": "Sports",
+    "url": "http://2756d46c.akciatv.ru/iptv/7FRNF6CY9A9TG3/6128/index.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "beINSPORTSXTRA.us",
+    "name": "beIN SPORTS XTRA",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/bein-sports-xtra.png",
+    "group": "Sports",
+    "url": "https://bein-esp-xumo.amagi.tv/playlistR1080p.m3u8",
+    "backups": [
+      "https://bein-esp-xumo.amagi.tv/playlistR720P.m3u8",
+      "https://bein-xtra-bein.amagi.tv/playlist.m3u8"
+    ],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "IONTV",
+    "name": "iON TV",
+    "logoUrl": "",
+    "group": "Entertainment",
+    "url": "https://app.ncare.live/live-orgin/iontvuk.stream/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  },
+  {
+    "id": "IONTV.us",
+    "name": "iON TV UK",
+    "logoUrl": "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/logos/ion-tv-uk.png",
+    "group": "Entertainment",
+    "url": "https://app.ncare.live/live-orgin/iontvuk.stream/playlist.m3u8",
+    "backups": [],
+    "countryCode": "BD",
+    "resolution": "HD"
+  }
+]

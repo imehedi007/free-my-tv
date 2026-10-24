@@ -135,6 +135,33 @@ public final class IptvManager {
         final String code = (countryCode != null ? countryCode.toLowerCase() : "bd");
         EXECUTOR.execute(() -> {
             try {
+                if ("bd".equals(code)) {
+                    // 1. Instant loading: Try cached super BD channels first, or bundled asset
+                    List<IptvChannel> bdChannels = null;
+                    File cacheDir = new File(context.getCacheDir(), "iptv");
+                    if (!cacheDir.exists()) cacheDir.mkdirs();
+                    File cacheJson = new File(cacheDir, "bd_super.json");
+                    if (cacheJson.exists()) {
+                        String json = readFile(cacheJson);
+                        if (json != null && !json.isEmpty()) bdChannels = parseChannelsJson(json);
+                    }
+                    if (bdChannels == null || bdChannels.isEmpty()) {
+                        try {
+                            InputStream is = context.getAssets().open("iptv_bd.json");
+                            byte[] b = readAllBytes(is);
+                            if (b != null) bdChannels = parseChannelsJson(new String(b, StandardCharsets.UTF_8));
+                        } catch (Exception ignored) {}
+                    }
+
+                    if (bdChannels != null && !bdChannels.isEmpty()) {
+                        markStarred(context, bdChannels);
+                        final List<IptvChannel> finalList = bdChannels;
+                        MAIN_HANDLER.post(() -> callback.onResult(finalList));
+                        fetchRemoteBdixChannels(context);
+                        return;
+                    }
+                }
+
                 File cacheDir = new File(context.getCacheDir(), "iptv");
                 if (!cacheDir.exists()) cacheDir.mkdirs();
                 File cacheFile = new File(cacheDir, code + ".m3u");
@@ -470,5 +497,51 @@ public final class IptvManager {
             }
         } catch (Exception ignored) {}
         return list;
+    }
+
+    public static List<IptvChannel> parseChannelsJson(String json) {
+        List<IptvChannel> list = new ArrayList<>();
+        try {
+            JSONArray arr = new JSONArray(json);
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject o = arr.getJSONObject(i);
+                List<String> backups = new ArrayList<>();
+                JSONArray bArr = o.optJSONArray("backups");
+                if (bArr != null) {
+                    for (int j = 0; j < bArr.length(); j++) {
+                        String bUrl = bArr.optString(j);
+                        if (bUrl != null && !bUrl.isEmpty()) backups.add(bUrl);
+                    }
+                }
+                list.add(new IptvChannel(
+                    o.optString("id"),
+                    o.optString("name"),
+                    o.optString("logoUrl"),
+                    o.optString("group", "General"),
+                    o.optString("url"),
+                    backups,
+                    o.optString("countryCode", "BD"),
+                    o.optString("resolution", "HD")
+                ));
+            }
+        } catch (Exception e) {
+            AppLog.w("parseChannelsJson error: " + e.getMessage());
+        }
+        return list;
+    }
+
+    private static void fetchRemoteBdixChannels(Context context) {
+        EXECUTOR.execute(() -> {
+            try {
+                String bdInUrl = "https://raw.githubusercontent.com/saeidrahmanbd/BDIX-IPTV/main/BD.IN-Playlist.m3u";
+                String content = fetchHttp(bdInUrl);
+                if (content != null && content.contains("#EXTM3U")) {
+                    File cacheDir = new File(context.getCacheDir(), "iptv");
+                    if (!cacheDir.exists()) cacheDir.mkdirs();
+                    File cacheM3u = new File(cacheDir, "bd_remote.m3u");
+                    writeFile(cacheM3u, content);
+                }
+            } catch (Exception ignored) {}
+        });
     }
 }

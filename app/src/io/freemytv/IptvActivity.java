@@ -66,7 +66,7 @@ public class IptvActivity extends Activity {
     private final int[] pinnedIds = new int[9];
 
     private static final String[] CATEGORIES = {
-        "All", "News", "Sports", "Entertainment", "Kids", "Movies", "Music", "General"
+        "All", "News", "Sports", "Entertainment", "Kids", "Movies", "Music", "Religious", "General"
     };
 
     @Override protected void onCreate(Bundle savedInstanceState) {

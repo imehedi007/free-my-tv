@@ -42,6 +42,7 @@ public class IptvPlayerActivity extends Activity {
 
     private List<IptvChannel> channelList = new ArrayList<>();
     private int currentIndex = 0;
+    private int currentBackupIndex = 0;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private boolean isBuffering = true;
 
@@ -182,6 +183,19 @@ public class IptvPlayerActivity extends Activity {
         videoView.setOnErrorListener((mp, what, extra) -> {
             isBuffering = false;
             bufferSpinner.setVisibility(View.GONE);
+            IptvChannel ch = (currentIndex >= 0 && currentIndex < channelList.size()) ? channelList.get(currentIndex) : null;
+            if (ch != null && ch.backupUrls != null && currentBackupIndex < ch.backupUrls.size()) {
+                String backupUrl = ch.backupUrls.get(currentBackupIndex++);
+                AppLog.i("Primary stream failed, attempting backup: " + backupUrl);
+                try {
+                    videoView.stopPlayback();
+                    videoView.setVideoURI(Uri.parse(backupUrl));
+                    bufferSpinner.setVisibility(View.VISIBLE);
+                    isBuffering = true;
+                    showOsd();
+                    return true;
+                } catch (Exception ignored) {}
+            }
             errorText.setText("Stream unavailable.\nPress ▲ / ▼ for next channel or OK to open in VLC.");
             errorText.setVisibility(View.VISIBLE);
             showOsd();
@@ -194,6 +208,7 @@ public class IptvPlayerActivity extends Activity {
         if (index < 0) index = channelList.size() - 1;
         if (index >= channelList.size()) index = 0;
         currentIndex = index;
+        currentBackupIndex = 0;
 
         IptvChannel ch = channelList.get(currentIndex);
         titleText.setText(ch.name);
