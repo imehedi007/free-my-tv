@@ -355,6 +355,28 @@ public final class IptvManager {
         }
     }
 
+    public static List<String> getPinnedCountryCodes(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("iptv_prefs", Context.MODE_PRIVATE);
+        String saved = sp.getString("pinned_countries", null);
+        if (saved != null && !saved.isEmpty()) {
+            List<String> list = new ArrayList<>(Arrays.asList(saved.split(",")));
+            if (!list.isEmpty()) return list;
+        }
+        return new ArrayList<>(Arrays.asList("BD", "IN", "PK", "NP", "LK", "BT", "MV"));
+    }
+
+    public static void savePinnedCountryCodes(Context context, List<String> codes) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < codes.size(); i++) {
+            if (i > 0) sb.append(",");
+            sb.append(codes.get(i));
+        }
+        context.getSharedPreferences("iptv_prefs", Context.MODE_PRIVATE)
+                .edit()
+                .putString("pinned_countries", sb.toString())
+                .apply();
+    }
+
     // Helper I/O
     private static String fetchHttp(String urlStr) {
         try {
@@ -412,10 +434,16 @@ public final class IptvManager {
 
     private static List<IptvCountry> loadCachedCountries(Context context) {
         File f = new File(context.getCacheDir(), "iptv_countries.json");
-        if (!f.exists()) return null;
-        String json = readFile(f);
-        if (json == null || json.isEmpty()) return null;
-        return parseCountriesJson(json);
+        if (f.exists()) {
+            String json = readFile(f);
+            if (json != null && !json.isEmpty()) return parseCountriesJson(json);
+        }
+        try {
+            InputStream is = context.getAssets().open("iptv_countries.json");
+            byte[] b = readAllBytes(is);
+            if (b != null) return parseCountriesJson(new String(b, StandardCharsets.UTF_8));
+        } catch (Exception ignored) {}
+        return null;
     }
 
     private static void fetchRemoteCountries(Context context) {
