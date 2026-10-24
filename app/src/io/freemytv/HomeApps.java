@@ -902,7 +902,6 @@ final class HomeApps {
 
     /** The app's official TV art (the Android TV banner), at the highest density the app has. */
     private static Bitmap bannerTile(Context c, String pkg) {
-        if (pkg != null && pkg.contains("localsend")) return null;
         PackageManager pm = c.getPackageManager();
         Drawable d = null;
         try {

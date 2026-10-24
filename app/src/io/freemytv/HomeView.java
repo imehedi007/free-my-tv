@@ -602,10 +602,10 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         lClock.setShadowLayer(26 * k, 0, 4 * k, 0x88000000);
         lPeriod = Ui.text(Ui.semibold, 42 * k, 0xFFE2E8F0);
         lPeriod.setShadowLayer(14 * k, 0, 2 * k, 0x88000000);
-        lWeather = Ui.text(Ui.semibold, 26 * k, 0xFFFFFFFF);
-        lWeather.setShadowLayer(14 * k, 0, 2 * k, 0x88000000);
-        lWeatherSub = Ui.text(Ui.medium, 21 * k, 0xFFE2E8F0);
-        lWeatherSub.setShadowLayer(12 * k, 0, 1 * k, 0x99000000);
+        lWeather = Ui.text(Ui.semibold, 32 * k, 0xFFFFFFFF);
+        lWeather.setShadowLayer(16 * k, 0, 2 * k, 0x88000000);
+        lWeatherSub = Ui.text(Ui.medium, 26 * k, 0xFFF1F5F9);
+        lWeatherSub.setShadowLayer(14 * k, 0, 2 * k, 0x99000000);
         lCryptoLabel = Ui.text(Ui.medium, 19.5f * k, 0xFFCBD5E1);
         lCryptoPrice = Ui.numbers(Ui.semibold, 21 * k, 0xFFFFFFFF);
         lSectionTitle = Ui.text(Ui.semibold, 32 * k, 0xFFFFFFFF);
@@ -997,7 +997,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         if (lClock != null) lClock.setColor(0xFFFFFFFF);
         if (lPeriod != null) lPeriod.setColor(0xFFE2E8F0);
         if (lWeather != null) lWeather.setColor(0xFFFFFFFF);
-        if (lWeatherSub != null) lWeatherSub.setColor(0xFFE2E8F0);
+        if (lWeatherSub != null) lWeatherSub.setColor(0xFFF1F5F9);
         if (lCryptoLabel != null) lCryptoLabel.setColor(0xFFCBD5E1);
         if (lCryptoPrice != null) lCryptoPrice.setColor(0xFFFFFFFF);
         if (lSectionTitle != null) lSectionTitle.setColor(0xFFFFFFFF);
@@ -3027,7 +3027,7 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         drawCryptoPill(c, x, 418 * k);
 
         // 4. Weather widget on the right side: ☀ 33° Mostly sunny / H:33° L:25°
-        drawWeatherWidget(c, 324 * k);
+        drawWeatherWidget(c, 320 * k);
 
         // 5. "Your apps" section title above shelf
         lSectionTitle.setTextAlign(Paint.Align.LEFT);
@@ -3113,15 +3113,15 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
         int wColor = (wx != null && !Double.isNaN(wx.temp)) ? weatherColor(wx.code, wx.isDay) : 0xFFF59E0B;
         String symbol = (wx != null && !Double.isNaN(wx.temp)) ? Symbols.weather(wx.code, wx.isDay) : "sunny";
 
-        float sunSize = 50 * k;
-        Paint wxTempPaint = Ui.numbers(Ui.displaySemibold != null ? Ui.displaySemibold : Ui.semibold, 72 * k, 0xFFFFFFFF);
-        wxTempPaint.setShadowLayer(18 * k, 0, 2 * k, 0x88000000);
+        float sunSize = 64 * k;
+        Paint wxTempPaint = Ui.numbers(Ui.displaySemibold != null ? Ui.displaySemibold : Ui.semibold, 90 * k, 0xFFFFFFFF);
+        wxTempPaint.setShadowLayer(20 * k, 0, 3 * k, 0x88000000);
 
         float tempW = wxTempPaint.measureText(tempStr);
         float subW = Math.max(lWeather.measureText(condStr), lWeatherSub.measureText(hlStr));
 
-        float totalW = sunSize + 16 * k + tempW + 20 * k + subW;
-        float right = CONTENT_R * k - 20 * k;
+        float totalW = sunSize + 18 * k + tempW + 24 * k + subW;
+        float right = CONTENT_R * k - 10 * k;
         float startX = right - totalW;
 
         // Glowing sun
@@ -3129,15 +3129,15 @@ final class HomeView extends ViewGroup implements Choreographer.FrameCallback, H
 
         // Temperature
         wxTempPaint.setTextAlign(Paint.Align.LEFT);
-        c.drawText(tempStr, startX + sunSize + 16 * k, cy + Ui.halfCap(wxTempPaint), wxTempPaint);
+        c.drawText(tempStr, startX + sunSize + 18 * k, cy + Ui.halfCap(wxTempPaint), wxTempPaint);
 
         // Stacked texts
-        float textX = startX + sunSize + 16 * k + tempW + 20 * k;
+        float textX = startX + sunSize + 18 * k + tempW + 24 * k;
         lWeather.setTextAlign(Paint.Align.LEFT);
-        c.drawText(condStr, textX, cy - 5 * k, lWeather);
+        c.drawText(condStr, textX, cy - 8 * k, lWeather);
 
         lWeatherSub.setTextAlign(Paint.Align.LEFT);
-        c.drawText(hlStr, textX, cy + 26 * k, lWeatherSub);
+        c.drawText(hlStr, textX, cy + 30 * k, lWeatherSub);
     }
 
     private static int weatherColor(int code, boolean isDay) {
