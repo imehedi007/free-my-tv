@@ -54,7 +54,7 @@ import java.util.regex.Pattern;
 final class HomeApps {
     private HomeApps() {}
 
-    static final int APP = 0, LIVE_TV = 1, INPUT = 2, ALL_APPS = 3, SETTINGS = 4, ANDROID_SETTINGS = 5;
+    static final int APP = 0, LIVE_TV = 1, INPUT = 2, ALL_APPS = 3, SETTINGS = 4, ANDROID_SETTINGS = 5, IPTV = 8;
     /** The "HDMI Inputs" button: opens the bottom drawer on the inputs (the home screen handles it). */
     static final int INPUTS = 7;
     /** Image size of each card (16:9; on screen it shows up to ~330 px wide). */
@@ -158,6 +158,7 @@ final class HomeApps {
     private static final String[][] SHELF = {
         {"netflix", "Netflix", "com.netflix.ninja", "E50914", "", "1"},
         {"youtube", "YouTube", "com.google.android.youtube.tv", "FF0033", "play", "1"},
+        {"iptv", "Live TV", "io.freemytv.iptv", "0284C7", "", "1"},
         {"prime", "Prime Video", "com.amazon.amazonvideo.livingroom", "1A98FF", "tint", "0.96"},
         {"disney", "Disney+", "com.disney.disneyplus", "1838C8", "", "1"},
         {"max", "Max", "com.wbd.stream", "6C3BE0", "", "1.32"},
@@ -170,7 +171,7 @@ final class HomeApps {
         {"globoplay", "Globoplay", "com.globo.globotv", "FF5A1F", "tint", "1"},
         {"spotify", "Spotify", "com.spotify.tv.android", "1DB954", "", "1"},
     };
-    static final int MAX_SHELF = 8;
+    static final int MAX_SHELF = 10;
     /** Live TV apps of some brands (the antenna's channels open through the standard Android request first). */
     static final String[] LIVE_TV_APPS = {"com.tcl.tv", "com.google.android.tv", "com.mediatek.wwtv.tvcenter", "com.sony.dtv.tvx",
             "com.smartdevice.livetv", "com.mediatek.tv.oneworld.tvcenter"};
@@ -204,6 +205,10 @@ final class HomeApps {
         PackageManager pm = c.getPackageManager();
         for (String pkg : shelfPackages(c)) {
             if (items.size() >= MAX_SHELF) break;
+            if ("io.freemytv.iptv".equals(pkg)) {
+                items.add(iptvItem(c));
+                continue;
+            }
             Intent launch = launchIntent(pm, pkg);
             if (launch == null) continue;
             ResolveInfo ri = pm.resolveActivity(launch, 0);
@@ -238,10 +243,24 @@ final class HomeApps {
     /** The shelf's packages in order: the user's list (Settings > Shelf), or the built-in one. */
     static List<String> shelfPackages(Context c) {
         List<String> custom = Prefs.shelf();
-        if (custom != null) return custom;
+        if (custom != null) {
+            if (!custom.contains("io.freemytv.iptv")) {
+                int ytIdx = custom.indexOf("com.google.android.youtube.tv");
+                if (ytIdx >= 0) {
+                    custom.add(ytIdx + 1, "io.freemytv.iptv");
+                } else {
+                    custom.add(Math.min(1, custom.size()), "io.freemytv.iptv");
+                }
+            }
+            return custom;
+        }
         List<String> out = new ArrayList<>();
         PackageManager pm = c.getPackageManager();
-        for (String[] d : SHELF) if (out.size() < MAX_SHELF && launchIntent(pm, d[2]) != null) out.add(d[2]);
+        for (String[] d : SHELF) {
+            if (out.size() < MAX_SHELF && ("io.freemytv.iptv".equals(d[2]) || launchIntent(pm, d[2]) != null)) {
+                out.add(d[2]);
+            }
+        }
         return out;
     }
 
@@ -250,7 +269,11 @@ final class HomeApps {
         PackageManager pm = c.getPackageManager();
         List<String[]> out = new ArrayList<>();
         Set<String> seen = new HashSet<>();
-        for (String[] d : SHELF) if (launchIntent(pm, d[2]) != null && seen.add(d[2])) out.add(new String[] {d[2], d[1]});
+        for (String[] d : SHELF) {
+            if (("io.freemytv.iptv".equals(d[2]) || launchIntent(pm, d[2]) != null) && seen.add(d[2])) {
+                out.add(new String[] {d[2], d[1]});
+            }
+        }
         List<String[]> more = new ArrayList<>();
         for (String[] app : launchable(c)) {
             if (app[0].equals(c.getPackageName()) || HIDDEN.contains(app[0]) || !seen.add(app[0])) continue;
@@ -446,7 +469,16 @@ final class HomeApps {
     static boolean open(Activity a, Item it, View from, int x, int y, int w, int h) {
         Intent intent, plain = null;   // plain: the app's own home, when it won't take the title's address
         switch (it.kind) {
+            case IPTV:
+                cleanHeavyBackgroundApps(a, a.getPackageName());
+                intent = new Intent(a, IptvActivity.class);
+                break;
             case APP:
+                if ("io.freemytv.iptv".equals(it.pkg)) {
+                    cleanHeavyBackgroundApps(a, a.getPackageName());
+                    intent = new Intent(a, IptvActivity.class);
+                    break;
+                }
                 intent = launchIntent(a.getPackageManager(), it.pkg);
                 plain = intent;
                 if (plain != null) plain.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
@@ -470,7 +502,7 @@ final class HomeApps {
                 return false;
         }
         if (intent == null) return false;
-        if (it.pkg != null && !it.pkg.isEmpty()) {
+        if (it.pkg != null && !it.pkg.isEmpty() && !"io.freemytv.iptv".equals(it.pkg)) {
             cleanHeavyBackgroundApps(a, it.pkg);
             lastLaunchedPackage = it.pkg;
         }
@@ -941,6 +973,69 @@ final class HomeApps {
         Symbols.draw(c, new Canvas(b), symbol, TILE_W / 2f, TILE_H / 2f, TILE_H * 0.36f, 0xF2FFFFFF);
         b.setHasMipMap(true);
         TILES.put(key, b);
+        return b;
+    }
+
+    static Item iptvItem(Context c) {
+        Item it = new Item();
+        it.kind = IPTV;
+        it.key = "iptv";
+        it.label = "Live TV";
+        it.pkg = "io.freemytv.iptv";
+        it.symbol = "live_tv";
+        it.tile = iptvTile(c);
+        return it;
+    }
+
+    private static synchronized Bitmap iptvTile(Context c) {
+        if (TILES.containsKey("iptv")) return TILES.get("iptv");
+        Bitmap b = Bitmap.createBitmap(TILE_W, TILE_H, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(b);
+
+        // Apple TV dark premium glass slate gradient background
+        Paint bg = new Paint(Paint.ANTI_ALIAS_FLAG);
+        bg.setShader(new LinearGradient(0, 0, 0, TILE_H, 0xFF1E2438, 0xFF0E111B, Shader.TileMode.CLAMP));
+        canvas.drawRect(0, 0, TILE_W, TILE_H, bg);
+
+        // Vibrant subtle electric blue / cyan ambient glow in the center
+        Paint glow = new Paint(Paint.ANTI_ALIAS_FLAG);
+        glow.setShader(new RadialGradient(TILE_W / 2f, TILE_H * 0.45f, TILE_W * 0.55f, 
+                0x330284C7, 0x00000000, Shader.TileMode.CLAMP));
+        canvas.drawRect(0, 0, TILE_W, TILE_H, glow);
+
+        // Crisp white Material Symbol for Live TV
+        Symbols.draw(c, canvas, "live_tv", TILE_W / 2f, TILE_H * 0.37f, TILE_H * 0.50f, 0xFFFFFFFF);
+
+        // Floating glass badge at bottom
+        Paint badgeBg = new Paint(Paint.ANTI_ALIAS_FLAG);
+        badgeBg.setColor(0x550284C7); // Translucent sky cyan glass
+        float badgeW = 126f, badgeH = 34f;
+        float bLeft = (TILE_W - badgeW) / 2f, bTop = TILE_H * 0.68f;
+        RectF badgeRect = new RectF(bLeft, bTop, bLeft + badgeW, bTop + badgeH);
+        canvas.drawRoundRect(badgeRect, 17f, 17f, badgeBg);
+
+        // Badge border stroke
+        Paint badgeStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
+        badgeStroke.setStyle(Paint.Style.STROKE);
+        badgeStroke.setStrokeWidth(2f);
+        badgeStroke.setColor(0x8838BDF8);
+        canvas.drawRoundRect(badgeRect, 17f, 17f, badgeStroke);
+
+        // Pulsing red LIVE dot
+        Paint dotPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        dotPaint.setColor(0xFFEF4444);
+        canvas.drawCircle(bLeft + 18f, bTop + badgeH / 2f, 5f, dotPaint);
+
+        // Badge label: "LIVE TV" in bold clean typeface
+        Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        textPaint.setColor(0xFFFFFFFF);
+        textPaint.setTextSize(15f);
+        textPaint.setTypeface(android.graphics.Typeface.DEFAULT_BOLD);
+        textPaint.setTextAlign(Paint.Align.LEFT);
+        canvas.drawText("LIVE TV", bLeft + 31f, bTop + badgeH / 2f + 5.5f, textPaint);
+
+        b.setHasMipMap(true);
+        TILES.put("iptv", b);
         return b;
     }
 

@@ -99,6 +99,26 @@
             </intent-filter>
         </activity>
 
+        <!-- IPTV & Live TV Activities -->
+        <activity
+            android:name=".IptvActivity"
+            android:process=":home"
+            android:exported="true"
+            android:label="Live TV"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout|smallestScreenSize|uiMode|density"
+            android:theme="@style/FreeMyTV.Home" />
+
+        <activity
+            android:name=".IptvPlayerActivity"
+            android:process=":home"
+            android:exported="false"
+            android:label="Live TV Player"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout|smallestScreenSize|uiMode|density"
+            android:theme="@style/FreeMyTV.Home" />
+
         <service
             android:name=".Screensaver"
             android:process=":home"
