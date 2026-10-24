@@ -902,6 +902,7 @@ final class HomeApps {
 
     /** The app's official TV art (the Android TV banner), at the highest density the app has. */
     private static Bitmap bannerTile(Context c, String pkg) {
+        if (pkg != null && pkg.contains("localsend")) return null;
         PackageManager pm = c.getPackageManager();
         Drawable d = null;
         try {
@@ -941,26 +942,34 @@ final class HomeApps {
         } catch (PackageManager.NameNotFoundException ignored) {
         }
         if (icon == null) return b;
-        int size = Math.round(TILE_H * 0.56f);
-        float left = (TILE_W - size) / 2f, top = (TILE_H - size) / 2f;
+        int size = Math.round(TILE_H * 0.48f);
+        float left = (TILE_W - size) / 2f, top = (TILE_H - size) / 2f - 16;
         if (icon instanceof AdaptiveIconDrawable) {
-            // Adaptive icon: the layers clipped to a squircle, like an Apple icon.
             AdaptiveIconDrawable a = (AdaptiveIconDrawable) icon;
-            Path clip = new Path();
-            clip.addRoundRect(new RectF(left, top, left + size, top + size), size * 0.2237f, size * 0.2237f, Path.Direction.CW);
-            canvas.save();
-            canvas.clipPath(clip);
-            int pad = size / 4;
-            for (Drawable layer : new Drawable[] {a.getBackground(), a.getForeground()}) {
-                if (layer == null) continue;
-                layer.setBounds(Math.round(left) - pad, Math.round(top) - pad, Math.round(left) + size + pad, Math.round(top) + size + pad);
-                layer.draw(canvas);
+            if (pkg != null && pkg.contains("localsend") && a.getForeground() != null) {
+                int s = Math.round(TILE_H * 0.48f);
+                float sTop = (TILE_H - s) / 2f - 16;
+                a.getForeground().setBounds(Math.round((TILE_W - s) / 2f), Math.round(sTop), Math.round((TILE_W + s) / 2f), Math.round(sTop + s));
+                a.getForeground().draw(canvas);
+            } else {
+                // Adaptive icon: the layers clipped to a squircle, like an Apple icon.
+                Path clip = new Path();
+                clip.addRoundRect(new RectF(left, top, left + size, top + size), size * 0.2237f, size * 0.2237f, Path.Direction.CW);
+                canvas.save();
+                canvas.clipPath(clip);
+                int pad = size / 4;
+                for (Drawable layer : new Drawable[] {a.getBackground(), a.getForeground()}) {
+                    if (layer == null) continue;
+                    layer.setBounds(Math.round(left) - pad, Math.round(top) - pad, Math.round(left) + size + pad, Math.round(top) + size + pad);
+                    layer.draw(canvas);
+                }
+                canvas.restore();
             }
-            canvas.restore();
         } else {
             // Legacy icon (a free-form drawing with transparency): smaller, no frame.
-            int s = Math.round(TILE_H * 0.46f);
-            icon.setBounds((TILE_W - s) / 2, (TILE_H - s) / 2, (TILE_W + s) / 2, (TILE_H + s) / 2);
+            int s = Math.round(TILE_H * 0.44f);
+            float sTop = (TILE_H - s) / 2f - 16;
+            icon.setBounds(Math.round((TILE_W - s) / 2f), Math.round(sTop), Math.round((TILE_W + s) / 2f), Math.round(sTop + s));
             icon.draw(canvas);
         }
         return b;
@@ -992,47 +1001,64 @@ final class HomeApps {
         Bitmap b = Bitmap.createBitmap(TILE_W, TILE_H, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(b);
 
-        // Apple TV dark premium glass slate gradient background
+        // Deep slate navy gradient background
         Paint bg = new Paint(Paint.ANTI_ALIAS_FLAG);
-        bg.setShader(new LinearGradient(0, 0, 0, TILE_H, 0xFF1E2438, 0xFF0E111B, Shader.TileMode.CLAMP));
+        bg.setShader(new LinearGradient(0, 0, 0, TILE_H, 0xFF0E1A2D, 0xFF070F1C, Shader.TileMode.CLAMP));
         canvas.drawRect(0, 0, TILE_W, TILE_H, bg);
 
-        // Vibrant subtle electric blue / cyan ambient glow in the center
+        float cx = TILE_W / 2f;
+        float cy = TILE_H * 0.44f;
+
+        // Subtle electric blue ambient glow in the center
         Paint glow = new Paint(Paint.ANTI_ALIAS_FLAG);
-        glow.setShader(new RadialGradient(TILE_W / 2f, TILE_H * 0.45f, TILE_W * 0.55f, 
-                0x330284C7, 0x00000000, Shader.TileMode.CLAMP));
+        glow.setShader(new RadialGradient(cx, cy, 110f, 0x301D4ED8, 0x00000000, Shader.TileMode.CLAMP));
         canvas.drawRect(0, 0, TILE_W, TILE_H, glow);
 
-        // Crisp white Material Symbol for Live TV
-        Symbols.draw(c, canvas, "live_tv", TILE_W / 2f, TILE_H * 0.37f, TILE_H * 0.50f, 0xFFFFFFFF);
+        // Retro-modern TV icon with dual angled antenna rods
+        Paint antPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        antPaint.setColor(0xFFFFFFFF);
+        antPaint.setStrokeWidth(4.2f);
+        antPaint.setStrokeCap(Paint.Cap.ROUND);
 
-        // Floating glass badge at bottom
-        Paint badgeBg = new Paint(Paint.ANTI_ALIAS_FLAG);
-        badgeBg.setColor(0x550284C7); // Translucent sky cyan glass
-        float badgeW = 126f, badgeH = 34f;
-        float bLeft = (TILE_W - badgeW) / 2f, bTop = TILE_H * 0.68f;
-        RectF badgeRect = new RectF(bLeft, bTop, bLeft + badgeW, bTop + badgeH);
-        canvas.drawRoundRect(badgeRect, 17f, 17f, badgeBg);
+        float tvTop = cy - 34f;
+        canvas.drawLine(cx - 12f, tvTop, cx - 36f, tvTop - 28f, antPaint);
+        canvas.drawLine(cx + 12f, tvTop, cx + 36f, tvTop - 28f, antPaint);
 
-        // Badge border stroke
-        Paint badgeStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
-        badgeStroke.setStyle(Paint.Style.STROKE);
-        badgeStroke.setStrokeWidth(2f);
-        badgeStroke.setColor(0x8838BDF8);
-        canvas.drawRoundRect(badgeRect, 17f, 17f, badgeStroke);
-
-        // Pulsing red LIVE dot
+        // Little antenna balls at tips
         Paint dotPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        dotPaint.setColor(0xFFEF4444);
-        canvas.drawCircle(bLeft + 18f, bTop + badgeH / 2f, 5f, dotPaint);
+        dotPaint.setColor(0xFFFFFFFF);
+        dotPaint.setStyle(Paint.Style.FILL);
+        canvas.drawCircle(cx - 36f, tvTop - 28f, 3.2f, dotPaint);
+        canvas.drawCircle(cx + 36f, tvTop - 28f, 3.2f, dotPaint);
 
-        // Badge label: "LIVE TV" in bold clean typeface
-        Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        textPaint.setColor(0xFFFFFFFF);
-        textPaint.setTextSize(15f);
-        textPaint.setTypeface(android.graphics.Typeface.DEFAULT_BOLD);
-        textPaint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText("LIVE TV", bLeft + 31f, bTop + badgeH / 2f + 5.5f, textPaint);
+        // TV outer body: rounded rectangle in crisp solid white
+        float tvW = 104f, tvH = 68f, tvRadius = 14f;
+        RectF tvBody = new RectF(cx - tvW / 2f, cy - tvH / 2f, cx + tvW / 2f, cy + tvH / 2f);
+        Paint tvPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        tvPaint.setColor(0xFFFFFFFF);
+        tvPaint.setStyle(Paint.Style.FILL);
+        canvas.drawRoundRect(tvBody, tvRadius, tvRadius, tvPaint);
+
+        // Screen cutout inside the TV body
+        float scrW = 86f, scrH = 50f, scrRadius = 7f;
+        RectF tvScreen = new RectF(cx - scrW / 2f, cy - scrH / 2f, cx + scrW / 2f, cy + scrH / 2f);
+        Paint scrPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        scrPaint.setColor(0xFF0A1322);
+        scrPaint.setStyle(Paint.Style.FILL);
+        canvas.drawRoundRect(tvScreen, scrRadius, scrRadius, scrPaint);
+
+        // Solid white play triangle inside the screen pointing right
+        Path playPath = new Path();
+        float playW = 19f, playH = 22f;
+        playPath.moveTo(cx - playW * 0.4f, cy - playH / 2f);
+        playPath.lineTo(cx - playW * 0.4f, cy + playH / 2f);
+        playPath.lineTo(cx + playW * 0.6f, cy);
+        playPath.close();
+
+        Paint playPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        playPaint.setColor(0xFFFFFFFF);
+        playPaint.setStyle(Paint.Style.FILL);
+        canvas.drawPath(playPath, playPaint);
 
         b.setHasMipMap(true);
         TILES.put("iptv", b);
