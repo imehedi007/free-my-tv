@@ -189,7 +189,7 @@ public class IptvPlayerActivity extends Activity {
                 AppLog.i("Primary stream failed, attempting backup: " + backupUrl);
                 try {
                     videoView.stopPlayback();
-                    videoView.setVideoURI(Uri.parse(backupUrl));
+                    videoView.setVideoURI(Uri.parse(backupUrl), getStreamHeaders());
                     bufferSpinner.setVisibility(View.VISIBLE);
                     isBuffering = true;
                     showOsd();
@@ -239,12 +239,20 @@ public class IptvPlayerActivity extends Activity {
 
         try {
             videoView.stopPlayback();
-            videoView.setVideoURI(Uri.parse(ch.url));
+            videoView.setVideoURI(Uri.parse(ch.url), getStreamHeaders());
         } catch (Exception e) {
             errorText.setText("Failed to connect: " + e.getMessage());
             errorText.setVisibility(View.VISIBLE);
             bufferSpinner.setVisibility(View.GONE);
         }
+    }
+
+    private static java.util.Map<String, String> getStreamHeaders() {
+        java.util.Map<String, String> map = new java.util.HashMap<>();
+        map.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 VLC/3.0.18");
+        map.put("Accept", "*/*");
+        map.put("Connection", "keep-alive");
+        return map;
     }
 
     private void showOsd() {
