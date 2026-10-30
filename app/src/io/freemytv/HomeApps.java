@@ -221,9 +221,9 @@ final class HomeApps {
      */
     private static final String[][] SHELF = {
         {"netflix", "Netflix", "com.netflix.ninja", "E50914", "", "1"},
-        {"youtube", "SmartTube", "org.smarttube.stable", "FF0033", "", "1"},
-        {"youtube", "SmartTube", "com.teamsmart.videomanager.tv", "FF0033", "", "1"},
-        {"youtube", "SmartTube", "com.liskovsoft.smarttubetv.beta", "FF0033", "", "1"},
+        {"youtube", "YouTube", "org.smarttube.stable", "FF0033", "", "1"},
+        {"youtube", "YouTube", "com.teamsmart.videomanager.tv", "FF0033", "", "1"},
+        {"youtube", "YouTube", "com.liskovsoft.smarttubetv.beta", "FF0033", "", "1"},
         {"youtube", "YouTube", "com.google.android.youtube.tv", "FF0033", "play", "1"},
         {"iptv", "Live TV", "io.freemytv.iptv", "0284C7", "", "1"},
         {"prime", "Prime Video", "com.amazon.amazonvideo.livingroom", "1A98FF", "tint", "0.96"},
