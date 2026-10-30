@@ -81,6 +81,10 @@ public class IptvActivity extends Activity {
 
         loadAllCountries();
         loadChannels(selectedCountry.code);
+
+        // Background prefetch all pinned countries for instant 0ms switching
+        List<String> pinned = IptvManager.getPinnedCountryCodes(this);
+        IptvManager.prefetchChannels(this, pinned);
     }
 
     private void buildUi() {
@@ -769,14 +773,27 @@ public class IptvActivity extends Activity {
     }
 
     private void loadChannels(String countryCode) {
-        loadingBar.setVisibility(View.VISIBLE);
         emptyText.setVisibility(View.GONE);
-        channelsGrid.removeAllViews();
-        rightChannelCount.setText("Loading playlist…");
+        boolean isCached = IptvManager.isChannelsCached(countryCode);
+
+        if (isCached) {
+            // Already in RAM: don't wipe grid, don't show spinner, instant smooth switch!
+            loadingBar.setVisibility(View.GONE);
+        } else {
+            // Not yet in RAM: keep current grid dimmed instead of wiping to a blank void
+            if (channelsGrid.getChildCount() > 0) {
+                channelsGrid.setAlpha(0.45f);
+                loadingBar.setVisibility(View.GONE); // No ugly spinner in center!
+            } else {
+                loadingBar.setVisibility(View.GONE);
+            }
+            rightChannelCount.setText("Loading playlist…");
+        }
 
         IptvManager.getChannels(this, countryCode, new IptvManager.Callback<List<IptvChannel>>() {
             @Override public void onResult(List<IptvChannel> channels) {
                 loadingBar.setVisibility(View.GONE);
+                channelsGrid.setAlpha(1.0f);
                 fullChannelList = channels != null ? channels : new ArrayList<>();
                 sortChannelsForCountry(fullChannelList, countryCode);
                 applyFilter();
@@ -784,6 +801,7 @@ public class IptvActivity extends Activity {
 
             @Override public void onError(Exception e) {
                 loadingBar.setVisibility(View.GONE);
+                channelsGrid.setAlpha(1.0f);
                 fullChannelList = new ArrayList<>();
                 applyFilter();
                 Toast.makeText(IptvActivity.this, "Network error loading channels", Toast.LENGTH_SHORT).show();

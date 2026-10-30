@@ -36,9 +36,11 @@ public class IptvPlayerActivity extends Activity {
     private VideoView videoView;
     private FrameLayout rootLayout;
     private View osdContainer;
-    private TextView titleText, metaText, zapText, errorText;
+    private TextView titleText, metaText, zapText, errorText, statusBadge;
     private ImageView logoView;
-    private ProgressBar bufferSpinner;
+    private LinearLayout channelSplash;
+    private ImageView splashLogo;
+    private TextView splashTitle, splashStatus;
 
     private List<IptvChannel> channelList = new ArrayList<>();
     private int currentIndex = 0;
@@ -86,11 +88,42 @@ public class IptvPlayerActivity extends Activity {
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER);
         rootLayout.addView(videoView, vLp);
 
-        // Loading spinner
-        bufferSpinner = new ProgressBar(this);
-        FrameLayout.LayoutParams spinLp = new FrameLayout.LayoutParams(
-                dp(64), dp(64), Gravity.CENTER);
-        rootLayout.addView(bufferSpinner, spinLp);
+        // Modern Broadcast Channel Splash Card (replaces the annoying circular loading spinner!)
+        channelSplash = new LinearLayout(this);
+        channelSplash.setOrientation(LinearLayout.VERTICAL);
+        channelSplash.setGravity(Gravity.CENTER);
+        channelSplash.setPadding(dp(32), dp(24), dp(32), dp(24));
+
+        GradientDrawable splashBg = new GradientDrawable();
+        splashBg.setColor(0xEE0D1322); // Frosted dark glass
+        splashBg.setCornerRadius(dp(20));
+        splashBg.setStroke(dp(1), 0x33FFFFFF);
+        channelSplash.setBackground(splashBg);
+
+        splashLogo = new ImageView(this);
+        splashLogo.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        LinearLayout.LayoutParams sLogoLp = new LinearLayout.LayoutParams(dp(80), dp(52));
+        sLogoLp.bottomMargin = dp(10);
+        channelSplash.addView(splashLogo, sLogoLp);
+
+        splashTitle = new TextView(this);
+        splashTitle.setTextColor(Color.WHITE);
+        splashTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
+        splashTitle.setTypeface(Ui.semibold != null ? Ui.semibold : android.graphics.Typeface.DEFAULT_BOLD);
+        splashTitle.setGravity(Gravity.CENTER);
+        channelSplash.addView(splashTitle);
+
+        splashStatus = new TextView(this);
+        splashStatus.setText("Connecting…");
+        splashStatus.setTextColor(0xFF38BDF8); // Cyan
+        splashStatus.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        splashStatus.setGravity(Gravity.CENTER);
+        splashStatus.setPadding(0, dp(4), 0, 0);
+        channelSplash.addView(splashStatus);
+
+        FrameLayout.LayoutParams splashLp = new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+        rootLayout.addView(channelSplash, splashLp);
 
         // Error notice
         errorText = new TextView(this);
@@ -156,6 +189,14 @@ public class IptvPlayerActivity extends Activity {
         metaText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         textCol.addView(metaText);
 
+        statusBadge = new TextView(this);
+        statusBadge.setText("● CONNECTING");
+        statusBadge.setTextColor(0xFF38BDF8);
+        statusBadge.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
+        statusBadge.setTypeface(Ui.semibold != null ? Ui.semibold : android.graphics.Typeface.DEFAULT_BOLD);
+        statusBadge.setPadding(0, dp(2), 0, 0);
+        textCol.addView(statusBadge);
+
         box.addView(textCol);
         return box;
     }
@@ -163,26 +204,44 @@ public class IptvPlayerActivity extends Activity {
     private void setupVideoListeners() {
         videoView.setOnPreparedListener(mp -> {
             isBuffering = false;
-            bufferSpinner.setVisibility(View.GONE);
             errorText.setVisibility(View.GONE);
             mp.start();
+
+            // Smoothly cross-fade splash card into the live video!
+            if (channelSplash != null) {
+                channelSplash.animate().alpha(0f).setDuration(220).withEndAction(() -> {
+                    if (channelSplash != null) channelSplash.setVisibility(View.GONE);
+                }).start();
+            }
+
+            if (statusBadge != null) {
+                statusBadge.setText("● LIVE");
+                statusBadge.setTextColor(0xFF34D399); // Emerald green
+            }
             showOsd();
         });
 
         videoView.setOnInfoListener((mp, what, extra) -> {
             if (what == MediaPlayer.MEDIA_INFO_BUFFERING_START) {
                 isBuffering = true;
-                bufferSpinner.setVisibility(View.VISIBLE);
+                if (statusBadge != null) {
+                    statusBadge.setText("● BUFFERING");
+                    statusBadge.setTextColor(0xFFFBBF24); // Amber
+                }
+                showOsd();
             } else if (what == MediaPlayer.MEDIA_INFO_BUFFERING_END) {
                 isBuffering = false;
-                bufferSpinner.setVisibility(View.GONE);
+                if (statusBadge != null) {
+                    statusBadge.setText("● LIVE");
+                    statusBadge.setTextColor(0xFF34D399);
+                }
             }
             return true;
         });
 
         videoView.setOnErrorListener((mp, what, extra) -> {
             isBuffering = false;
-            bufferSpinner.setVisibility(View.GONE);
+            if (channelSplash != null) channelSplash.setVisibility(View.GONE);
             IptvChannel ch = (currentIndex >= 0 && currentIndex < channelList.size()) ? channelList.get(currentIndex) : null;
             if (ch != null && ch.backupUrls != null && currentBackupIndex < ch.backupUrls.size()) {
                 String backupUrl = ch.backupUrls.get(currentBackupIndex++);
@@ -190,8 +249,12 @@ public class IptvPlayerActivity extends Activity {
                 try {
                     videoView.stopPlayback();
                     videoView.setVideoURI(Uri.parse(backupUrl), getStreamHeaders());
-                    bufferSpinner.setVisibility(View.VISIBLE);
                     isBuffering = true;
+                    if (channelSplash != null) {
+                        channelSplash.setVisibility(View.VISIBLE);
+                        channelSplash.setAlpha(1f);
+                        splashStatus.setText("Switching to backup…");
+                    }
                     showOsd();
                     return true;
                 } catch (Exception ignored) {}
@@ -218,6 +281,21 @@ public class IptvPlayerActivity extends Activity {
                 + "  •  #" + (currentIndex + 1) + "/" + channelList.size();
         metaText.setText(meta);
 
+        // Immediate Channel Splash setup:
+        if (channelSplash != null) {
+            channelSplash.setVisibility(View.VISIBLE);
+            channelSplash.setAlpha(1f);
+            splashTitle.setText(ch.name);
+            splashStatus.setText("Tuning in…");
+            splashLogo.setImageDrawable(null);
+            splashLogo.setVisibility(View.GONE);
+        }
+
+        if (statusBadge != null) {
+            statusBadge.setText("● CONNECTING");
+            statusBadge.setTextColor(0xFF38BDF8);
+        }
+
         logoView.setImageDrawable(null);
         if (ch.logoUrl != null && !ch.logoUrl.isEmpty()) {
             logoView.setVisibility(View.VISIBLE);
@@ -226,6 +304,10 @@ public class IptvPlayerActivity extends Activity {
             IptvManager.loadLogo(ch.logoUrl, bmp -> {
                 if (bmp != null && Integer.valueOf(zapSeq).equals(logoView.getTag())) {
                     logoView.setImageBitmap(bmp);
+                    if (splashLogo != null) {
+                        splashLogo.setImageBitmap(bmp);
+                        splashLogo.setVisibility(View.VISIBLE);
+                    }
                 }
             });
         } else {
@@ -233,7 +315,6 @@ public class IptvPlayerActivity extends Activity {
         }
 
         errorText.setVisibility(View.GONE);
-        bufferSpinner.setVisibility(View.VISIBLE);
         isBuffering = true;
         showOsd();
 
@@ -243,7 +324,7 @@ public class IptvPlayerActivity extends Activity {
         } catch (Exception e) {
             errorText.setText("Failed to connect: " + e.getMessage());
             errorText.setVisibility(View.VISIBLE);
-            bufferSpinner.setVisibility(View.GONE);
+            if (channelSplash != null) channelSplash.setVisibility(View.GONE);
         }
     }
 

@@ -85,6 +85,31 @@ public final class IptvManager {
         }
     };
 
+    // In-memory LRU cache for parsed country channels: instant 0ms switching!
+    private static final LruCache<String, List<IptvChannel>> CHANNELS_CACHE = new LruCache<>(25);
+
+    public static boolean isChannelsCached(String countryCode) {
+        if (countryCode == null) return false;
+        return CHANNELS_CACHE.get(countryCode.toUpperCase(Locale.US)) != null;
+    }
+
+    public static void prefetchChannels(Context context, List<String> countryCodes) {
+        if (countryCodes == null || countryCodes.isEmpty()) return;
+        EXECUTOR.execute(() -> {
+            for (String code : countryCodes) {
+                if (code == null) continue;
+                String upper = code.toUpperCase(Locale.US);
+                if (CHANNELS_CACHE.get(upper) == null) {
+                    getChannels(context, upper, new Callback<List<IptvChannel>>() {
+                        @Override public void onResult(List<IptvChannel> channels) {}
+                        @Override public void onError(Exception e) {}
+                    });
+                    try { Thread.sleep(250); } catch (InterruptedException ignored) {}
+                }
+            }
+        });
+    }
+
     private static List<IptvChannel> activePlaylist = new ArrayList<>();
 
     public static synchronized void setActivePlaylist(List<IptvChannel> list) {
@@ -133,7 +158,18 @@ public final class IptvManager {
 
     /** Loads and parses channels for a given country code (e.g. "BD") */
     public static void getChannels(Context context, String countryCode, Callback<List<IptvChannel>> callback) {
-        final String code = (countryCode != null ? countryCode.toLowerCase() : "bd");
+        final String code = (countryCode != null ? countryCode.toLowerCase(Locale.US) : "bd");
+        final String codeUpper = code.toUpperCase(Locale.US);
+
+        // 1. Instant in-memory cache return (0ms latency, zero spinner!)
+        List<IptvChannel> inMemory = CHANNELS_CACHE.get(codeUpper);
+        if (inMemory != null) {
+            List<IptvChannel> copy = new ArrayList<>(inMemory);
+            markStarred(context, copy);
+            MAIN_HANDLER.post(() -> callback.onResult(copy));
+            return;
+        }
+
         EXECUTOR.execute(() -> {
             try {
                 if ("bd".equals(code)) {
@@ -157,6 +193,7 @@ public final class IptvManager {
                     if (bdChannels != null && !bdChannels.isEmpty()) {
                         markStarred(context, bdChannels);
                         final List<IptvChannel> finalList = bdChannels;
+                        CHANNELS_CACHE.put("BD", finalList);
                         MAIN_HANDLER.post(() -> callback.onResult(finalList));
                         fetchRemoteBdixChannels(context);
                         return;
@@ -189,8 +226,9 @@ public final class IptvManager {
                     return;
                 }
 
-                List<IptvChannel> channels = parseM3u(content, code.toUpperCase());
+                List<IptvChannel> channels = parseM3u(content, codeUpper);
                 markStarred(context, channels);
+                CHANNELS_CACHE.put(codeUpper, channels);
 
                 MAIN_HANDLER.post(() -> callback.onResult(channels));
             } catch (Exception e) {
