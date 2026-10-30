@@ -64,6 +64,9 @@ final class HomeApps {
     private static final String[] HEAVY_APPS = {
         "com.google.android.youtube.tv",
         "com.google.android.youtube.tvmusic",
+        "org.smarttube.stable",
+        "com.teamsmart.videomanager.tv",
+        "com.liskovsoft.smarttubetv.beta",
         "com.netflix.ninja",
         "com.amazon.amazonvideo.livingroom",
         "app.blaze.spofficial",
@@ -218,6 +221,9 @@ final class HomeApps {
      */
     private static final String[][] SHELF = {
         {"netflix", "Netflix", "com.netflix.ninja", "E50914", "", "1"},
+        {"youtube", "SmartTube", "org.smarttube.stable", "FF0033", "", "1"},
+        {"youtube", "SmartTube", "com.teamsmart.videomanager.tv", "FF0033", "", "1"},
+        {"youtube", "SmartTube", "com.liskovsoft.smarttubetv.beta", "FF0033", "", "1"},
         {"youtube", "YouTube", "com.google.android.youtube.tv", "FF0033", "play", "1"},
         {"iptv", "Live TV", "io.freemytv.iptv", "0284C7", "", "1"},
         {"prime", "Prime Video", "com.amazon.amazonvideo.livingroom", "1A98FF", "tint", "0.96"},
@@ -301,12 +307,43 @@ final class HomeApps {
         return null;
     }
 
+    static boolean isYouTubePackage(String pkg) {
+        return "org.smarttube.stable".equals(pkg)
+                || "com.teamsmart.videomanager.tv".equals(pkg)
+                || "com.liskovsoft.smarttubetv.beta".equals(pkg)
+                || "com.google.android.youtube.tv".equals(pkg);
+    }
+
+    static String resolveAvailableYouTube(PackageManager pm) {
+        String[] pkgs = {"org.smarttube.stable", "com.teamsmart.videomanager.tv", "com.liskovsoft.smarttubetv.beta", "com.google.android.youtube.tv"};
+        for (String p : pkgs) {
+            if (launchIntent(pm, p) != null) return p;
+        }
+        return null;
+    }
+
+    private static boolean hasYouTube(List<String> list) {
+        for (String p : list) if (isYouTubePackage(p)) return true;
+        return false;
+    }
+
     /** The shelf's packages in order: the user's list (Settings > Shelf), or the built-in one. */
     static List<String> shelfPackages(Context c) {
+        PackageManager pm = c.getPackageManager();
         List<String> custom = Prefs.shelf();
         if (custom != null) {
+            for (int i = 0; i < custom.size(); i++) {
+                String pkg = custom.get(i);
+                if (isYouTubePackage(pkg) && launchIntent(pm, pkg) == null) {
+                    String alt = resolveAvailableYouTube(pm);
+                    if (alt != null) custom.set(i, alt);
+                }
+            }
             if (!custom.contains("io.freemytv.iptv")) {
-                int ytIdx = custom.indexOf("com.google.android.youtube.tv");
+                int ytIdx = -1;
+                for (int i = 0; i < custom.size(); i++) {
+                    if (isYouTubePackage(custom.get(i))) { ytIdx = i; break; }
+                }
                 if (ytIdx >= 0) {
                     custom.add(ytIdx + 1, "io.freemytv.iptv");
                 } else {
@@ -316,9 +353,9 @@ final class HomeApps {
             return custom;
         }
         List<String> out = new ArrayList<>();
-        PackageManager pm = c.getPackageManager();
         for (String[] d : SHELF) {
             if (out.size() < MAX_SHELF && ("io.freemytv.iptv".equals(d[2]) || launchIntent(pm, d[2]) != null)) {
+                if ("youtube".equals(d[0]) && hasYouTube(out)) continue;
                 out.add(d[2]);
             }
         }
@@ -540,11 +577,16 @@ final class HomeApps {
                     intent = new Intent(a, IptvActivity.class);
                     break;
                 }
-                intent = launchIntent(a.getPackageManager(), it.pkg);
+                String targetPkg = it.pkg;
+                if (isYouTubePackage(targetPkg) && launchIntent(a.getPackageManager(), targetPkg) == null) {
+                    String alt = resolveAvailableYouTube(a.getPackageManager());
+                    if (alt != null) targetPkg = alt;
+                }
+                intent = launchIntent(a.getPackageManager(), targetPkg);
                 plain = intent;
                 if (plain != null) plain.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
                 if (intent != null && it.uri != null) {
-                    intent = new Intent(Intent.ACTION_VIEW, android.net.Uri.parse(it.uri)).addCategory(Intent.CATEGORY_BROWSABLE).setPackage(it.pkg);
+                    intent = new Intent(Intent.ACTION_VIEW, android.net.Uri.parse(it.uri)).addCategory(Intent.CATEGORY_BROWSABLE).setPackage(targetPkg);
                 }
                 break;
             case LIVE_TV:

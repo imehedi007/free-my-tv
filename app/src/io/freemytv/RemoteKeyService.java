@@ -23,6 +23,9 @@ public class RemoteKeyService extends AccessibilityService {
                     NetOverlayService.hide(this);
                 } else if ("io.freemytv".equals(p)
                         || "com.google.android.youtube.tv".equals(p)
+                        || "org.smarttube.stable".equals(p)
+                        || "com.teamsmart.videomanager.tv".equals(p)
+                        || "com.liskovsoft.smarttubetv.beta".equals(p)
                         || "app.blaze.spofficial".equals(p)
                         || "org.videolan.vlc".equals(p)) {
                     NetOverlayService.show(this);

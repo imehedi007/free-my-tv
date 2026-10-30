@@ -2,6 +2,7 @@ package io.freemytv;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.view.KeyEvent;
 
 import java.io.BufferedReader;
@@ -141,11 +142,32 @@ final class Prefs {
     private static String defaultApp(int keyCode) {
         switch (keyCode) {
             case KEY_NETFLIX: case KEY_STEM_NETFLIX: return "com.netflix.ninja";
-            case KEY_YOUTUBE: return "com.google.android.youtube.tv";
+            case KEY_YOUTUBE: return resolveDefaultYouTube();
             case KEY_PRIME: return "com.amazon.amazonvideo.livingroom";
             case KEY_TCL_CHANNEL: return "";
             default: return "";
         }
+    }
+
+    private static String resolveDefaultYouTube() {
+        if (app != null) {
+            PackageManager pm = app.getPackageManager();
+            if (pm != null) {
+                if (pm.getLeanbackLaunchIntentForPackage("org.smarttube.stable") != null
+                        || pm.getLaunchIntentForPackage("org.smarttube.stable") != null) {
+                    return "org.smarttube.stable";
+                }
+                if (pm.getLeanbackLaunchIntentForPackage("com.teamsmart.videomanager.tv") != null
+                        || pm.getLaunchIntentForPackage("com.teamsmart.videomanager.tv") != null) {
+                    return "com.teamsmart.videomanager.tv";
+                }
+                if (pm.getLeanbackLaunchIntentForPackage("com.liskovsoft.smarttubetv.beta") != null
+                        || pm.getLaunchIntentForPackage("com.liskovsoft.smarttubetv.beta") != null) {
+                    return "com.liskovsoft.smarttubetv.beta";
+                }
+            }
+        }
+        return "com.google.android.youtube.tv";
     }
 
     // The key service runs in its own small process (:keys), so that a busy home screen can never delay the TV's keys.
