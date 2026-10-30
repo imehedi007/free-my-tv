@@ -34,7 +34,7 @@ import java.util.Map;
 
 /**
  * Modern Split-Screen Android TV Dashboard for Live TV / IPTV.
- * Left Panel: Pinned countries 3x3 grid & Edit Pinned Dialog.
+ * Left Panel: Pinned countries 4x3 grid (12 tiles total) & Edit Pinned Dialog.
  * Right Panel: Country header, category chips, and 3-column channel grid.
  */
 public class IptvActivity extends Activity {
@@ -56,8 +56,9 @@ public class IptvActivity extends Activity {
     private List<IptvChannel> filteredChannels = new ArrayList<>();
     private String selectedCategory = "All";
 
-    private final View[] pinnedViews = new View[9];
-    private final int[] pinnedIds = new int[9];
+    // 4 rows x 3 columns = 12 tiles in left panel
+    private final View[] pinnedViews = new View[12];
+    private final int[] pinnedIds = new int[12];
 
     private static final String[][] CATEGORY_GRID = {
         {"All", "News", "Sports", "Entertainment"},
@@ -69,7 +70,7 @@ public class IptvActivity extends Activity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Ui.init(this);
-        for (int i = 0; i < 9; i++) pinnedIds[i] = View.generateViewId();
+        for (int i = 0; i < 12; i++) pinnedIds[i] = View.generateViewId();
         for (int r = 0; r < 2; r++) {
             for (int c = 0; c < 4; c++) {
                 catIds[r][c] = View.generateViewId();
@@ -86,7 +87,7 @@ public class IptvActivity extends Activity {
         rootLayout = new LinearLayout(this);
         rootLayout.setOrientation(LinearLayout.VERTICAL);
         rootLayout.setBackgroundColor(0xFF080D1A); // Deep dark navy slate
-        rootLayout.setPadding(dp(20), dp(16), dp(20), dp(10));
+        rootLayout.setPadding(dp(26), dp(16), dp(26), dp(10));
 
         // 1. Top Bar: "Live TV" on left, followed by subtle full-width horizontal divider
         LinearLayout topBar = new LinearLayout(this);
@@ -150,10 +151,10 @@ public class IptvActivity extends Activity {
         pinnedHeader.addView(editBtn);
         leftPanel.addView(pinnedHeader);
 
-        // 3x3 Pinned Cards Grid
+        // 4x3 Pinned Cards Grid (12 tiles total)
         pinnedGrid = new GridLayout(this);
         pinnedGrid.setColumnCount(3);
-        pinnedGrid.setRowCount(3);
+        pinnedGrid.setRowCount(4);
         pinnedGrid.setAlignmentMode(GridLayout.ALIGN_BOUNDS);
         pinnedGrid.setUseDefaultMargins(false);
         leftPanel.addView(pinnedGrid);
@@ -163,7 +164,7 @@ public class IptvActivity extends Activity {
         hint.setText("Arrow keys to move • OK to select");
         hint.setTextColor(0x7794A3B8);
         hint.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10.5f);
-        hint.setPadding(0, dp(14), 0, 0);
+        hint.setPadding(0, dp(12), 0, 0);
         leftPanel.addView(hint);
 
         mainSplit.addView(leftPanel);
@@ -325,7 +326,7 @@ public class IptvActivity extends Activity {
 
         List<String> codes = IptvManager.getPinnedCountryCodes(this);
         if (codes == null || codes.isEmpty()) {
-            codes = new ArrayList<>(Arrays.asList("BD", "IN", "PK", "NP", "LK", "BT", "MV"));
+            codes = new ArrayList<>(Arrays.asList("BD", "IN", "PK", "NP", "LK", "BT", "MV", "US", "UK", "SA", "AE"));
         }
 
         for (String code : codes) {
@@ -356,62 +357,59 @@ public class IptvActivity extends Activity {
     }
 
     /**
-     * Builds the 3x3 Pinned Grid:
-     * Row 1: Bangladesh, India, Pakistan
-     * Row 2: Nepal, Sri Lanka, Bhutan
-     * Row 3: Maldives, All countries, (Spacer)
+     * Builds the 4x3 Pinned Grid (12 tiles total):
+     * Slots 0-(count-1): Up to 11 pinned countries
+     * Slot count: "All countries" Card immediately follows pinned countries
+     * Remaining slots (if < 11 countries): invisible end spacers (no holes!)
      */
     private void buildPinnedGrid() {
         pinnedGrid.removeAllViews();
         int cardW = dp(83);
-        int cardH = dp(84);
-        int margin = dp(4);
+        int cardH = dp(80);
+        int margin = dp(3);
 
-        int maxCountries = Math.min(7, pinnedCountries.size());
-        for (int i = 0; i < 7; i++) {
-            if (i < maxCountries) {
-                final IptvCountry c = pinnedCountries.get(i);
-                boolean isSelected = selectedCountry != null && selectedCountry.code.equalsIgnoreCase(c.code);
-                pinnedViews[i] = createPinnedCard(c.flag, c.name, isSelected, isSelected, i, v -> {
-                    selectedCountry = c;
-                    rightCountryTitle.setText(c.flag + "  " + c.name);
-                    selectedCategory = "All";
-                    updateCategoryPillsSelection();
-                    if (gridScroll != null) {
-                        gridScroll.scrollTo(0, 0);
-                    }
-                    loadChannels(c.code);
-                    updatePinnedCardsSelection();
-                });
-            } else {
-                View emptyCard = new View(this);
-                emptyCard.setVisibility(View.INVISIBLE);
-                pinnedViews[i] = emptyCard;
-            }
+        int maxCountries = Math.min(11, pinnedCountries.size());
+        for (int i = 0; i < maxCountries; i++) {
+            final IptvCountry c = pinnedCountries.get(i);
+            boolean isSelected = selectedCountry != null && selectedCountry.code.equalsIgnoreCase(c.code);
+            pinnedViews[i] = createPinnedCard(c.flag, c.name, isSelected, isSelected, i, v -> {
+                selectedCountry = c;
+                rightCountryTitle.setText(c.flag + "  " + c.name);
+                selectedCategory = "All";
+                updateCategoryPillsSelection();
+                if (gridScroll != null) {
+                    gridScroll.scrollTo(0, 0);
+                }
+                loadChannels(c.code);
+                updatePinnedCardsSelection();
+            });
             pinnedViews[i].setId(pinnedIds[i]);
             addGridCell(pinnedGrid, pinnedViews[i], cardW, cardH, margin);
         }
 
-        // Slot 7: "All countries" Card
-        pinnedViews[7] = createPinnedCard("🌐", "All countries", false, false, 7, v -> showAllCountriesModal());
-        pinnedViews[7].setId(pinnedIds[7]);
-        addGridCell(pinnedGrid, pinnedViews[7], cardW, cardH, margin);
+        // "All countries" Card immediately follows pinned countries:
+        int allIndex = maxCountries;
+        pinnedViews[allIndex] = createPinnedCard("🌐", "All countries", false, false, allIndex, v -> showAllCountriesModal());
+        pinnedViews[allIndex].setId(pinnedIds[allIndex]);
+        addGridCell(pinnedGrid, pinnedViews[allIndex], cardW, cardH, margin);
 
-        // Slot 8: Empty spacer to complete 3x3 layout
-        View emptySlot = new View(this);
-        emptySlot.setVisibility(View.INVISIBLE);
-        pinnedViews[8] = emptySlot;
-        pinnedViews[8].setId(pinnedIds[8]);
-        addGridCell(pinnedGrid, emptySlot, cardW, cardH, margin);
+        // Fill remaining end slots up to 12 with invisible spacers
+        for (int i = allIndex + 1; i < 12; i++) {
+            View emptyCard = new View(this);
+            emptyCard.setVisibility(View.INVISIBLE);
+            pinnedViews[i] = emptyCard;
+            pinnedViews[i].setId(pinnedIds[i]);
+            addGridCell(pinnedGrid, emptyCard, cardW, cardH, margin);
+        }
 
         wirePinnedFocus();
     }
 
     private void updatePinnedCardsSelection() {
-        int maxCountries = Math.min(7, pinnedCountries.size());
-        for (int i = 0; i < 7; i++) {
+        int maxCountries = Math.min(11, pinnedCountries.size());
+        for (int i = 0; i < maxCountries; i++) {
             View card = pinnedViews[i];
-            if (card instanceof FrameLayout && i < maxCountries) {
+            if (card instanceof FrameLayout) {
                 IptvCountry c = pinnedCountries.get(i);
                 boolean isSelected = selectedCountry != null && selectedCountry.code.equalsIgnoreCase(c.code);
                 updatePinnedCardStyle(card, isSelected, card.hasFocus());
@@ -430,11 +428,13 @@ public class IptvActivity extends Activity {
 
     private void wirePinnedFocus() {
         if (editBtn != null) {
-            editBtn.setNextFocusDownId(pinnedIds[0]); // Move down to Bangladesh
+            editBtn.setNextFocusDownId(pinnedIds[0]); // Move down to first pinned country
             if (catIds[0][0] != 0) editBtn.setNextFocusRightId(catIds[0][0]);
         }
 
-        for (int i = 0; i < 8; i++) {
+        int allIndex = Math.min(11, pinnedCountries.size());
+
+        for (int i = 0; i <= allIndex; i++) {
             View v = pinnedViews[i];
             if (v == null) continue;
 
@@ -443,16 +443,20 @@ public class IptvActivity extends Activity {
 
             // Up
             if (row > 0) {
-                v.setNextFocusUpId(pinnedIds[i - 3]);
+                int upIndex = i - 3;
+                if (upIndex >= 0 && upIndex <= allIndex) {
+                    v.setNextFocusUpId(pinnedIds[upIndex]);
+                }
             } else {
                 if (editBtn != null) v.setNextFocusUpId(editBtn.getId());
             }
 
             // Down
-            if (row == 0) {
-                v.setNextFocusDownId(pinnedIds[i + 3]);
-            } else if (row == 1) {
-                v.setNextFocusDownId(col < 2 ? pinnedIds[i + 3] : pinnedIds[7]);
+            if (row < 3) {
+                int downIndex = i + 3;
+                if (downIndex <= allIndex) {
+                    v.setNextFocusDownId(pinnedIds[downIndex]);
+                }
             }
 
             // Left
@@ -461,7 +465,7 @@ public class IptvActivity extends Activity {
             }
 
             // Right into categories / channels:
-            if (col < 2 && (i != 7)) {
+            if (col < 2 && (i + 1) <= allIndex) {
                 v.setNextFocusRightId(pinnedIds[i + 1]);
             } else {
                 if (row == 0) v.setNextFocusRightId(catIds[0][0]);
@@ -496,11 +500,11 @@ public class IptvActivity extends Activity {
         LinearLayout content = new LinearLayout(this);
         content.setOrientation(LinearLayout.VERTICAL);
         content.setGravity(Gravity.CENTER);
-        content.setPadding(dp(4), dp(6), dp(4), dp(6));
+        content.setPadding(dp(4), dp(5), dp(4), dp(5));
 
         TextView icon = new TextView(this);
         icon.setText(iconStr);
-        icon.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        icon.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
         icon.setGravity(Gravity.CENTER);
         content.addView(icon);
 
@@ -508,12 +512,12 @@ public class IptvActivity extends Activity {
         label.setTag("label");
         label.setText(labelStr);
         label.setTextColor(isSelected ? 0xFF00B4D8 : Color.WHITE);
-        label.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11f);
+        label.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10.5f);
         label.setTypeface(Ui.medium != null ? Ui.medium : android.graphics.Typeface.DEFAULT);
         label.setSingleLine(true);
         label.setEllipsize(TextUtils.TruncateAt.END);
         label.setGravity(Gravity.CENTER);
-        label.setPadding(0, dp(4), 0, 0);
+        label.setPadding(0, dp(3), 0, 0);
         content.addView(label);
 
         card.addView(content, new FrameLayout.LayoutParams(
@@ -533,7 +537,7 @@ public class IptvActivity extends Activity {
         checkBadge.setBackground(checkBg);
 
         FrameLayout.LayoutParams clp = new FrameLayout.LayoutParams(dp(16), dp(16), Gravity.TOP | Gravity.END);
-        clp.setMargins(0, dp(5), dp(5), 0);
+        clp.setMargins(0, dp(4), dp(4), 0);
         checkBadge.setVisibility(showCheck ? View.VISIBLE : View.GONE);
         card.addView(checkBadge, clp);
 
@@ -642,7 +646,7 @@ public class IptvActivity extends Activity {
                 if (c > 0) {
                     v.setNextFocusLeftId(catIds[r][c - 1]);
                 } else {
-                    int pinnedIndex = r == 0 ? 2 : 5; // Pakistan or Bhutan
+                    int pinnedIndex = r == 0 ? 2 : 5; // Row 0 or 1 right edge
                     v.setNextFocusLeftId(pinnedIds[pinnedIndex]);
                 }
 
@@ -817,9 +821,9 @@ public class IptvActivity extends Activity {
         emptyText.setVisibility(View.GONE);
 
         // Screen is 1280px wide on 720p TV
-        // Total non-grid width: dp(20) [left pad] + dp(275) [leftPanel] + dp(14) [sep margin] + dp(1) [sep] + dp(16) [sep margin] + dp(20) [right pad] = dp(346)
+        // Total non-grid width: dp(26) [left pad] + dp(275) [leftPanel] + dp(14) [sep margin] + dp(1) [sep] + dp(16) [sep margin] + dp(26) [right pad] = dp(358)
         int screenW = getResources().getDisplayMetrics().widthPixels;
-        int availRightPx = screenW - dp(346);
+        int availRightPx = screenW - dp(358);
         // 3 cards have 6 margins of dp(4) = dp(24). Reserve extra dp(8) safe padding from edge
         int cardW = (availRightPx - dp(32)) / 3;
 
@@ -835,6 +839,51 @@ public class IptvActivity extends Activity {
             int remaining = filteredChannels.size() - displayLimit;
             View loadMore = createLoadMoreCard(cardW, remaining);
             channelsGrid.addView(loadMore);
+        }
+    }
+
+    /**
+     * Appends the next batch of 45 channels without rebuilding the whole grid,
+     * maintaining the current scroll position and seamlessly moving focus to the
+     * first newly loaded channel card (prevents jumping back to Edit button!).
+     */
+    private void loadMoreChannels(int cardW) {
+        // 1. Remove the old load more card
+        int childCount = channelsGrid.getChildCount();
+        if (childCount > 0) {
+            View lastChild = channelsGrid.getChildAt(childCount - 1);
+            if ("loadMore".equals(lastChild.getTag())) {
+                channelsGrid.removeViewAt(childCount - 1);
+            }
+        }
+
+        // 2. Append new batch of channels
+        int previousCount = channelsGrid.getChildCount();
+        int newLimit = Math.min(filteredChannels.size(), previousCount + 45);
+        displayLimit = newLimit;
+
+        for (int i = previousCount; i < newLimit; i++) {
+            final int index = i;
+            final IptvChannel ch = filteredChannels.get(i);
+            View card = createChannelCard(ch, cardW, index);
+            channelsGrid.addView(card);
+        }
+
+        // 3. Add new load more card if channels remain
+        if (filteredChannels.size() > displayLimit) {
+            int remaining = filteredChannels.size() - displayLimit;
+            View nextLoadMore = createLoadMoreCard(cardW, remaining);
+            channelsGrid.addView(nextLoadMore);
+        }
+
+        // 4. Smoothly focus the first newly loaded channel
+        if (channelsGrid.getChildCount() > previousCount) {
+            channelsGrid.post(() -> {
+                View newTarget = channelsGrid.getChildAt(previousCount);
+                if (newTarget != null) {
+                    newTarget.requestFocus();
+                }
+            });
         }
     }
 
@@ -965,7 +1014,8 @@ public class IptvActivity extends Activity {
             int rowInGrid = index / 3;
             if (rowInGrid == 0) card.setNextFocusLeftId(pinnedIds[2]);
             else if (rowInGrid == 1) card.setNextFocusLeftId(pinnedIds[5]);
-            else card.setNextFocusLeftId(pinnedIds[7]);
+            else if (rowInGrid == 2) card.setNextFocusLeftId(pinnedIds[8]);
+            else card.setNextFocusLeftId(pinnedIds[11]);
         }
         // First row in channel grid: moving up focuses category row 2
         if (index < 3) {
@@ -1005,6 +1055,7 @@ public class IptvActivity extends Activity {
 
     private View createLoadMoreCard(int cardW, int remaining) {
         LinearLayout card = new LinearLayout(this);
+        card.setTag("loadMore");
         card.setOrientation(LinearLayout.VERTICAL);
         card.setGravity(Gravity.CENTER);
         card.setFocusable(true);
@@ -1047,8 +1098,7 @@ public class IptvActivity extends Activity {
         });
 
         card.setOnClickListener(v -> {
-            displayLimit += 45;
-            populateGrid();
+            loadMoreChannels(cardW);
         });
 
         GridLayout.LayoutParams glp = new GridLayout.LayoutParams();
@@ -1182,8 +1232,9 @@ public class IptvActivity extends Activity {
                 }
                 loadChannels(c.code);
                 updatePinnedCardsSelection();
-                if (pinnedViews[7] != null) {
-                    pinnedViews[7].requestFocus();
+                int allIndex = Math.min(11, pinnedCountries.size());
+                if (pinnedViews[allIndex] != null) {
+                    pinnedViews[allIndex].requestFocus();
                 }
             });
 
@@ -1215,8 +1266,7 @@ public class IptvActivity extends Activity {
     /**
      * Edit Pinned Countries Dialog:
      * - NO Save or Cancel buttons: clicking any country immediately toggles pinned status and saves instantly!
-     * - Pinned countries appear first for instant access, followed by all remaining countries.
-     * - Newly added countries show up immediately on the home screen pinned grid.
+     * - Up to 11 countries can be pinned to completely fill the 4x3 grid (no empty slots!).
      */
     private void showEditPinnedDialog() {
         if (allCountries.isEmpty()) return;
@@ -1258,7 +1308,7 @@ public class IptvActivity extends Activity {
 
         final TextView subTitle = new TextView(this);
         final List<String> currentCodes = new ArrayList<>(IptvManager.getPinnedCountryCodes(this));
-        subTitle.setText("Currently pinned: " + currentCodes.size() + "/7 • Click to pin/unpin • Instant save");
+        subTitle.setText("Currently pinned: " + currentCodes.size() + "/11 • Click to pin/unpin • Instant save");
         subTitle.setTextColor(0xFF38BDF8);
         subTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         subTitle.setTypeface(Ui.medium != null ? Ui.medium : android.graphics.Typeface.DEFAULT);
@@ -1383,19 +1433,19 @@ public class IptvActivity extends Activity {
                     rebuildPinnedList();
                     buildPinnedGrid();
                     refreshState.run();
-                    subTitle.setText("Currently pinned: " + currentCodes.size() + "/7 • Click to pin/unpin • Instant save");
+                    subTitle.setText("Currently pinned: " + currentCodes.size() + "/11 • Click to pin/unpin • Instant save");
                     Toast.makeText(IptvActivity.this, "Unpinned " + c.name, Toast.LENGTH_SHORT).show();
                 } else {
                     // Pin
-                    if (currentCodes.size() >= 7) {
-                        Toast.makeText(IptvActivity.this, "Maximum 7 countries pinned. Please unpin one first.", Toast.LENGTH_SHORT).show();
+                    if (currentCodes.size() >= 11) {
+                        Toast.makeText(IptvActivity.this, "Maximum 11 countries pinned. Please unpin one first.", Toast.LENGTH_SHORT).show();
                     } else {
                         currentCodes.add(upperCode);
                         IptvManager.savePinnedCountryCodes(IptvActivity.this, currentCodes);
                         rebuildPinnedList();
                         buildPinnedGrid();
                         refreshState.run();
-                        subTitle.setText("Currently pinned: " + currentCodes.size() + "/7 • Click to pin/unpin • Instant save");
+                        subTitle.setText("Currently pinned: " + currentCodes.size() + "/11 • Click to pin/unpin • Instant save");
                         Toast.makeText(IptvActivity.this, "Pinned " + c.name, Toast.LENGTH_SHORT).show();
                     }
                 }

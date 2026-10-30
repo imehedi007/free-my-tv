@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -384,12 +385,32 @@ public final class IptvManager {
 
     public static List<String> getPinnedCountryCodes(Context context) {
         SharedPreferences sp = context.getSharedPreferences("iptv_prefs", Context.MODE_PRIVATE);
+        int version = sp.getInt("pinned_version", 0);
+        List<String> defaults = Arrays.asList("BD", "IN", "PK", "NP", "LK", "BT", "MV", "US", "UK", "SA", "AE");
+        if (version < 2) {
+            String saved = sp.getString("pinned_countries", null);
+            List<String> list = new ArrayList<>();
+            if (saved != null && !saved.trim().isEmpty()) {
+                for (String s : saved.split(",")) {
+                    String c = s.trim().toUpperCase(Locale.US);
+                    if (!c.isEmpty() && !list.contains(c)) list.add(c);
+                }
+            }
+            for (String def : defaults) {
+                if (list.size() >= 11) break;
+                if (!list.contains(def)) list.add(def);
+            }
+            savePinnedCountryCodes(context, list);
+            sp.edit().putInt("pinned_version", 2).apply();
+            return list;
+        }
+
         String saved = sp.getString("pinned_countries", null);
         if (saved != null && !saved.isEmpty()) {
             List<String> list = new ArrayList<>(Arrays.asList(saved.split(",")));
             if (!list.isEmpty()) return list;
         }
-        return new ArrayList<>(Arrays.asList("BD", "IN", "PK", "NP", "LK", "BT", "MV"));
+        return new ArrayList<>(defaults);
     }
 
     public static void savePinnedCountryCodes(Context context, List<String> codes) {
@@ -401,6 +422,7 @@ public final class IptvManager {
         context.getSharedPreferences("iptv_prefs", Context.MODE_PRIVATE)
                 .edit()
                 .putString("pinned_countries", sb.toString())
+                .putInt("pinned_version", 2)
                 .apply();
     }
 
