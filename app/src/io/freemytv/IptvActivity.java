@@ -87,6 +87,29 @@ public class IptvActivity extends Activity {
         IptvManager.prefetchChannels(this, pinned);
     }
 
+    @Override protected void onResume() {
+        super.onResume();
+        // Restore channels grid seamlessly in 2ms if it was trimmed/cleared in background
+        if (channelsGrid != null && channelsGrid.getChildCount() == 0 && !filteredChannels.isEmpty()) {
+            populateGrid();
+        }
+    }
+
+    @Override protected void onStop() {
+        super.onStop();
+        // Free the channel card view tree while player is fullscreen or user is in other apps
+        if (channelsGrid != null) {
+            channelsGrid.removeAllViews();
+        }
+    }
+
+    @Override public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        if (level >= TRIM_MEMORY_UI_HIDDEN || level >= TRIM_MEMORY_RUNNING_CRITICAL) {
+            if (channelsGrid != null) channelsGrid.removeAllViews();
+        }
+    }
+
     private void buildUi() {
         rootLayout = new LinearLayout(this);
         rootLayout.setOrientation(LinearLayout.VERTICAL);

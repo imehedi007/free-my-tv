@@ -263,6 +263,14 @@ final class HomeApps {
     private static final Map<String, Bitmap> TILES = new HashMap<>();   // key → ready card
     private static final Map<String, Bitmap> LOGOS = new HashMap<>();   // key → colored logo with no background
 
+    public static synchronized void trimMemory(int level) {
+        if (level >= android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN ||
+            level >= android.content.ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW) {
+            TILES.clear();
+            LOGOS.clear();
+        }
+    }
+
     /**
      * Home screen apps. `extract`: also lifts the logos that are not on disk yet (slow: background only); without it,
      * those apps keep their TV art until the next load.
@@ -866,7 +874,7 @@ final class HomeApps {
                     android.content.res.Resources r = pm.getResourcesForApplication(ai.applicationInfo);
                     android.util.TypedValue value = new android.util.TypedValue();
                     r.getValue(res, value, true);
-                    Drawable d = r.getDrawableForDensity(res, DisplayMetrics.DENSITY_XXXHIGH, null);
+                    Drawable d = r.getDrawableForDensity(res, DisplayMetrics.DENSITY_XHIGH, null);
                     if (d != null) AppLog.w("TV banner for " + pkg + ": " + value.string + " (" + d.getIntrinsicWidth() + "×" + d.getIntrinsicHeight() + ")");
                     return d;
                 }
@@ -1012,7 +1020,7 @@ final class HomeApps {
             if (launch != null && launch.getComponent() != null) {
                 ActivityInfo ai = pm.getActivityInfo(launch.getComponent(), 0);
                 int res = ai.getBannerResource();
-                if (res != 0) d = pm.getResourcesForApplication(ai.applicationInfo).getDrawableForDensity(res, DisplayMetrics.DENSITY_XXXHIGH, null);
+                if (res != 0) d = pm.getResourcesForApplication(ai.applicationInfo).getDrawableForDensity(res, DisplayMetrics.DENSITY_XHIGH, null);
             }
             if (d == null) d = pm.getApplicationBanner(pkg);
         } catch (PackageManager.NameNotFoundException | RuntimeException ignored) {
@@ -1036,7 +1044,7 @@ final class HomeApps {
             ApplicationInfo ai = pm.getApplicationInfo(pkg, 0);
             if (ai.icon != 0) {
                 try {
-                    icon = pm.getResourcesForApplication(ai).getDrawableForDensity(ai.icon, DisplayMetrics.DENSITY_XXXHIGH, null);
+                    icon = pm.getResourcesForApplication(ai).getDrawableForDensity(ai.icon, DisplayMetrics.DENSITY_XHIGH, null);
                 } catch (PackageManager.NameNotFoundException | RuntimeException ignored) {
                 }
             }

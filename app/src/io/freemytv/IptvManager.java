@@ -88,6 +88,17 @@ public final class IptvManager {
     // In-memory LRU cache for parsed country channels: instant 0ms switching!
     private static final LruCache<String, List<IptvChannel>> CHANNELS_CACHE = new LruCache<>(25);
 
+    public static void trimMemory(int level) {
+        if (level >= android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN ||
+            level >= android.content.ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL) {
+            LOGO_CACHE.evictAll();
+            CHANNELS_CACHE.evictAll();
+        } else if (level >= android.content.ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW) {
+            LOGO_CACHE.trimToSize(LOGO_CACHE.size() / 2);
+            CHANNELS_CACHE.trimToSize(CHANNELS_CACHE.size() / 2);
+        }
+    }
+
     public static boolean isChannelsCached(String countryCode) {
         if (countryCode == null) return false;
         return CHANNELS_CACHE.get(countryCode.toUpperCase(Locale.US)) != null;

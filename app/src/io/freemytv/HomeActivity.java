@@ -73,9 +73,21 @@ public class HomeActivity extends Activity {
         super.onDestroy();
     }
 
+    @Override protected void onStop() {
+        super.onStop();
+        // Launcher is now in background (e.g. user watching SmartTube).
+        // Reclaim non-essential caches so foreground app gets full RAM!
+        HomeApps.trimMemory(TRIM_MEMORY_UI_HIDDEN);
+        IptvManager.trimMemory(TRIM_MEMORY_UI_HIDDEN);
+    }
+
     @Override public void onTrimMemory(int level) {
         super.onTrimMemory(level);
         if (level >= TRIM_MEMORY_COMPLETE) Recs.get(this).trim();
+        if (level >= TRIM_MEMORY_UI_HIDDEN || level >= TRIM_MEMORY_RUNNING_CRITICAL) {
+            HomeApps.trimMemory(level);
+            IptvManager.trimMemory(level);
+        }
     }
 
     @Override public boolean dispatchKeyEvent(KeyEvent event) {

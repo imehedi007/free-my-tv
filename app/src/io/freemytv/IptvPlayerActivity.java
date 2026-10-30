@@ -401,7 +401,18 @@ public class IptvPlayerActivity extends Activity {
         super.onPause();
         if (videoView != null) {
             videoView.stopPlayback();
+            videoView.suspend();
         }
+    }
+
+    @Override protected void onStop() {
+        super.onStop();
+        if (videoView != null) {
+            videoView.stopPlayback();
+            videoView.suspend();
+        }
+        if (splashLogo != null) splashLogo.setImageDrawable(null);
+        if (logoView != null) logoView.setImageDrawable(null);
     }
 
     @Override protected void onDestroy() {
