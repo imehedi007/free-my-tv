@@ -294,7 +294,7 @@ public final class IptvManager {
                         }
                         opt.inSampleSize = Math.max(1, sample);
                         opt.inJustDecodeBounds = false;
-                        opt.inPreferredConfig = Bitmap.Config.RGB_565; // Uses half the memory of ARGB_8888
+                        opt.inPreferredConfig = Bitmap.Config.ARGB_8888; // Preserve transparency for TV channel logos
 
                         bmp = BitmapFactory.decodeByteArray(data, 0, data.length, opt);
                         if (bmp != null) {
