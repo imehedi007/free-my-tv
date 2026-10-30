@@ -77,8 +77,61 @@ final class HomeApps {
         "com.google.android.videos"
     };
 
+    /** Background hogs that run on startup and cause severe sluggishness on 1GB TV */
+    private static final String[] STARTUP_HOGS = {
+        "com.android.vending",
+        "com.google.android.tungsten.setupwraith",
+        "com.google.android.syncadapters.calendar",
+        "com.google.android.partnersetup",
+        "com.haierubic.usmartdevice",
+        "com.haier.yudee.tv",
+        "com.android.settings.intelligence",
+        "com.google.android.gms.unstable"
+    };
+
     private static final java.util.concurrent.ExecutorService KILL_EXECUTOR =
             java.util.concurrent.Executors.newSingleThreadExecutor();
+
+    /** Aggressive startup boost: kills background hogs immediately on boot/launch */
+    static void fastStartupBoost(Context context) {
+        if (context == null) return;
+        try {
+            android.app.ActivityManager am = (android.app.ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            if (am != null) {
+                for (String pkg : STARTUP_HOGS) {
+                    try { am.killBackgroundProcesses(pkg); } catch (Throwable ignore) {}
+                }
+                for (String pkg : HEAVY_APPS) {
+                    try { am.killBackgroundProcesses(pkg); } catch (Throwable ignore) {}
+                }
+            }
+        } catch (Throwable ignore) {}
+
+        KILL_EXECUTOR.execute(() -> {
+            for (int attempt = 0; attempt < 4; attempt++) {
+                try (Adb adb = Adb.connect(context, 2000, null)) {
+                    StringBuilder sb = new StringBuilder();
+                    for (String pkg : STARTUP_HOGS) {
+                        sb.append("am force-stop ").append(pkg).append("; ");
+                    }
+                    for (String pkg : HEAVY_APPS) {
+                        sb.append("am force-stop ").append(pkg).append("; ");
+                    }
+                    sb.append("pm disable-user --user 0 com.google.android.tungsten.setupwraith; ");
+                    sb.append("pm disable-user --user 0 com.google.android.syncadapters.calendar; ");
+                    sb.append("pm disable-user --user 0 com.google.android.partnersetup; ");
+                    sb.append("pm disable-user --user 0 com.android.settings.intelligence; ");
+                    sb.append("pm disable-user --user 0 com.haierubic.usmartdevice; ");
+                    sb.append("pm disable-user --user 0 com.haier.yudee.tv; ");
+                    adb.shell(sb.toString());
+                    AppLog.i("fastStartupBoost: background hogs killed and disabled");
+                    break;
+                } catch (Throwable t) {
+                    try { Thread.sleep(1500); } catch (InterruptedException ignore) {}
+                }
+            }
+        });
+    }
 
     /** Called when returning to Home: terminates previous app and cleans background memory */
     static void onReturnToHome(Context context) {
@@ -101,12 +154,20 @@ final class HomeApps {
                     if (pkg.equals(pkgToKeep)) continue;
                     try { am.killBackgroundProcesses(pkg); } catch (Throwable ignore) {}
                 }
+                for (String pkg : STARTUP_HOGS) {
+                    if (pkg.equals(pkgToKeep)) continue;
+                    try { am.killBackgroundProcesses(pkg); } catch (Throwable ignore) {}
+                }
             }
         } catch (Throwable ignore) {}
         KILL_EXECUTOR.execute(() -> {
             try (Adb adb = Adb.connect(context, 3000, null)) {
                 StringBuilder sb = new StringBuilder();
                 for (String pkg : HEAVY_APPS) {
+                    if (pkg.equals(pkgToKeep)) continue;
+                    sb.append("am force-stop ").append(pkg).append("; ");
+                }
+                for (String pkg : STARTUP_HOGS) {
                     if (pkg.equals(pkgToKeep)) continue;
                     sb.append("am force-stop ").append(pkg).append("; ");
                 }

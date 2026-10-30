@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemClock;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -168,6 +169,8 @@ final class HomeData {
 
     /** Fetches whatever is stale. The screen calls this when it appears and every minute while it's visible. */
     void refreshIfStale() {
+        // When the TV just booted, defer network requests so system startup is silky smooth and unhindered
+        if (SystemClock.elapsedRealtime() < 12_000) return;
         long now = System.currentTimeMillis();
         // A negative age (the TV's clock went back) counts as stale: otherwise the data would freeze.
         if (!fetchingPrices && coinCount() > 0 && (now - pricesAt > PRICES_EVERY || now < pricesAt) && !failedRecently(pricesFailedAt, now)) {

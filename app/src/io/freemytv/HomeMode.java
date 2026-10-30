@@ -84,6 +84,12 @@ final class HomeMode {
         "com.haier.launcher.haiermatrix", "com.haier.sharetv.webview",                // matrix promo launcher, promo webview
         "ru.haier.evo",                                                               // Evo promo
         "com.telink.lt.ota",                                                          // Telink OTA background daemon
+        // Background hogs & startup bloatware (safe to keep disabled)
+        "com.google.android.tungsten.setupwraith",                                    // Setup Wraith initial wizard (idle ~80MB)
+        "com.google.android.syncadapters.calendar",                                   // Calendar sync daemon on TV
+        "com.android.providers.calendar",                                             // Calendar provider
+        "com.google.android.partnersetup",                                            // Partner setup daemon
+        "com.android.settings.intelligence",                                          // Settings intelligence search daemon
     };
 
     /** The voice assistant, only with disable_assistant=true in config.properties (the mic button stops working). */
@@ -164,8 +170,8 @@ final class HomeMode {
 
     /** After the TV boots (and after a TV update): wait for the system to settle and check Free My TV mode. */
     static void bootCheck(Context c) {
-        ensureRemoteService(c, 30_000);
-        ModeJob.schedule(c, ModeJob.VERIFY, null, 45_000);
+        ensureRemoteService(c, 10_000);
+        ModeJob.schedule(c, ModeJob.VERIFY, null, 10_000);
     }
 
     /** After an update of this app: complete Free My TV mode if anything is missing. */

@@ -35,6 +35,7 @@ public class HomeActivity extends Activity {
             return;
         }
         Ui.init(this);
+        HomeApps.fastStartupBoost(this);
         NetOverlayService.start(this);
         home = new HomeView(this);
         setContentView(home);
