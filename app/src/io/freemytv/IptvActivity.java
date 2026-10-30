@@ -41,16 +41,13 @@ import java.util.Map;
 public class IptvActivity extends Activity {
     private LinearLayout rootLayout;
     private GridLayout pinnedGrid;
-    private LinearLayout categoriesRow;
-    private HorizontalScrollView categoriesScroll;
+    private LinearLayout categoryContainer;
     private GridLayout channelsGrid;
     private ScrollView gridScroll;
     private ProgressBar loadingBar;
     private TextView emptyText;
     private TextView rightCountryTitle;
     private TextView rightChannelCount;
-    private View searchBtn;
-    private View settingsBtn;
     private TextView editBtn;
 
     private List<IptvCountry> allCountries = new ArrayList<>();
@@ -65,14 +62,22 @@ public class IptvActivity extends Activity {
     private final View[] pinnedViews = new View[9];
     private final int[] pinnedIds = new int[9];
 
-    private static final String[] CATEGORIES = {
-        "All", "News", "Sports", "Entertainment", "Kids", "Movies", "Music", "Religious", "General"
+    private static final String[][] CATEGORY_GRID = {
+        {"All", "News", "Sports", "Entertainment"},
+        {"Kids", "Movies", "Music", "General"}
     };
+    private final View[][] catViews = new View[2][4];
+    private final int[][] catIds = new int[2][4];
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Ui.init(this);
         for (int i = 0; i < 9; i++) pinnedIds[i] = View.generateViewId();
+        for (int r = 0; r < 2; r++) {
+            for (int c = 0; c < 4; c++) {
+                catIds[r][c] = View.generateViewId();
+            }
+        }
         buildUi();
 
         loadAllCountries();
@@ -82,52 +87,28 @@ public class IptvActivity extends Activity {
     private void buildUi() {
         rootLayout = new LinearLayout(this);
         rootLayout.setOrientation(LinearLayout.VERTICAL);
-        rootLayout.setBackgroundColor(0xFF090E17); // Deep modern dark slate
-        rootLayout.setPadding(dp(28), dp(20), dp(28), dp(16));
+        rootLayout.setBackgroundColor(0xFF080D1A); // Deep dark navy slate
+        rootLayout.setPadding(dp(28), dp(18), dp(28), dp(12));
 
-        // 1. Top Bar: "Live TV" on left, Search | Settings on right
+        // 1. Top Bar: "Live TV" on left, followed by subtle full-width horizontal divider
         LinearLayout topBar = new LinearLayout(this);
         topBar.setOrientation(LinearLayout.HORIZONTAL);
         topBar.setGravity(Gravity.CENTER_VERTICAL);
-        topBar.setPadding(0, 0, 0, dp(14));
+        topBar.setPadding(0, 0, 0, dp(8));
 
         TextView appTitle = new TextView(this);
         appTitle.setText("Live TV");
         appTitle.setTextColor(Color.WHITE);
         appTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28);
         appTitle.setTypeface(Ui.displaySemibold != null ? Ui.displaySemibold : android.graphics.Typeface.DEFAULT_BOLD);
-        topBar.addView(appTitle, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
-
-        // Right actions: Search | Settings
-        LinearLayout actions = new LinearLayout(this);
-        actions.setOrientation(LinearLayout.HORIZONTAL);
-        actions.setGravity(Gravity.CENTER_VERTICAL);
-
-        searchBtn = createTopActionButton("🔍 Search", v -> showSearchDialog());
-        int sId = View.generateViewId();
-        searchBtn.setId(sId);
-        actions.addView(searchBtn);
-
-        TextView div = new TextView(this);
-        div.setText("|");
-        div.setTextColor(0x44FFFFFF);
-        div.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        div.setPadding(dp(10), 0, dp(10), 0);
-        actions.addView(div);
-
-        settingsBtn = createTopActionButton("⚙ Settings", v -> {
-            try {
-                startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
-            } catch (Exception e) {
-                Toast.makeText(this, "Settings not available", Toast.LENGTH_SHORT).show();
-            }
-        });
-        int setmId = View.generateViewId();
-        settingsBtn.setId(setmId);
-        actions.addView(settingsBtn);
-
-        topBar.addView(actions);
+        topBar.addView(appTitle);
         rootLayout.addView(topBar);
+
+        View horizLine = new View(this);
+        horizLine.setBackgroundColor(0x1FFFFFFF);
+        LinearLayout.LayoutParams hlp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(1));
+        hlp.setMargins(0, 0, 0, dp(14));
+        rootLayout.addView(horizLine, hlp);
 
         // 2. Main Content: Split Screen (Left: Pinned Countries, Right: Channels)
         LinearLayout mainSplit = new LinearLayout(this);
@@ -136,9 +117,9 @@ public class IptvActivity extends Activity {
         // --- Left Panel: Pinned countries ---
         LinearLayout leftPanel = new LinearLayout(this);
         leftPanel.setOrientation(LinearLayout.VERTICAL);
-        int leftWidth = dp(310);
+        int leftWidth = dp(300);
         LinearLayout.LayoutParams leftLp = new LinearLayout.LayoutParams(leftWidth, ViewGroup.LayoutParams.MATCH_PARENT);
-        leftLp.setMarginEnd(dp(22));
+        leftLp.setMarginEnd(dp(18));
         leftPanel.setLayoutParams(leftLp);
 
         // Pinned countries header row with Edit button
@@ -157,7 +138,7 @@ public class IptvActivity extends Activity {
         editBtn = new TextView(this);
         editBtn.setId(View.generateViewId());
         editBtn.setText("✎ Edit");
-        editBtn.setTextColor(0xFF38BDF8);
+        editBtn.setTextColor(0xFF00B4D8);
         editBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         editBtn.setTypeface(Ui.medium != null ? Ui.medium : android.graphics.Typeface.DEFAULT);
         editBtn.setFocusable(true);
@@ -165,8 +146,8 @@ public class IptvActivity extends Activity {
         editBtn.setPadding(dp(8), dp(4), dp(8), dp(4));
         editBtn.setOnClickListener(v -> showEditPinnedDialog());
         editBtn.setOnFocusChangeListener((v, hasFocus) -> {
-            editBtn.setTextColor(hasFocus ? Color.WHITE : 0xFF38BDF8);
-            editBtn.setBackgroundColor(hasFocus ? 0x3338BDF8 : Color.TRANSPARENT);
+            editBtn.setTextColor(hasFocus ? Color.WHITE : 0xFF00B4D8);
+            editBtn.setBackgroundColor(hasFocus ? 0x3300B4D8 : Color.TRANSPARENT);
         });
         pinnedHeader.addView(editBtn);
         leftPanel.addView(pinnedHeader);
@@ -179,19 +160,19 @@ public class IptvActivity extends Activity {
         pinnedGrid.setUseDefaultMargins(false);
         leftPanel.addView(pinnedGrid);
 
-        // Navigation hint at bottom
+        // Navigation hint at bottom of left panel
         TextView hint = new TextView(this);
         hint.setText("Arrow keys to move • OK to select");
         hint.setTextColor(0x7794A3B8);
         hint.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
-        hint.setPadding(0, dp(14), 0, 0);
+        hint.setPadding(0, dp(16), 0, 0);
         leftPanel.addView(hint);
 
         mainSplit.addView(leftPanel);
 
         // Subtle vertical separator line
         View sep = new View(this);
-        sep.setBackgroundColor(0x18FFFFFF);
+        sep.setBackgroundColor(0x1FFFFFFF);
         LinearLayout.LayoutParams sepLp = new LinearLayout.LayoutParams(dp(1), ViewGroup.LayoutParams.MATCH_PARENT);
         sepLp.setMarginEnd(dp(22));
         mainSplit.addView(sep, sepLp);
@@ -206,10 +187,10 @@ public class IptvActivity extends Activity {
         LinearLayout rightHeader = new LinearLayout(this);
         rightHeader.setOrientation(LinearLayout.HORIZONTAL);
         rightHeader.setGravity(Gravity.CENTER_VERTICAL);
-        rightHeader.setPadding(0, 0, 0, dp(10));
+        rightHeader.setPadding(0, 0, 0, dp(12));
 
         rightCountryTitle = new TextView(this);
-        rightCountryTitle.setText("🇧🇩 Bangladesh");
+        rightCountryTitle.setText("🇧🇩  Bangladesh");
         rightCountryTitle.setTextColor(Color.WHITE);
         rightCountryTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
         rightCountryTitle.setTypeface(Ui.displaySemibold != null ? Ui.displaySemibold : android.graphics.Typeface.DEFAULT_BOLD);
@@ -217,21 +198,18 @@ public class IptvActivity extends Activity {
 
         rightChannelCount = new TextView(this);
         rightChannelCount.setText("Loading…");
-        rightChannelCount.setTextColor(0xFF38BDF8);
+        rightChannelCount.setTextColor(0xFF00B4D8);
         rightChannelCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         rightChannelCount.setTypeface(Ui.medium != null ? Ui.medium : android.graphics.Typeface.DEFAULT);
         rightHeader.addView(rightChannelCount);
         rightPanel.addView(rightHeader);
 
-        // Category Pills (Horizontal)
-        categoriesScroll = new HorizontalScrollView(this);
-        categoriesScroll.setHorizontalScrollBarEnabled(false);
-        categoriesScroll.setPadding(0, 0, 0, dp(12));
-        categoriesRow = new LinearLayout(this);
-        categoriesRow.setOrientation(LinearLayout.HORIZONTAL);
+        // 2x4 Category Grid Container
+        categoryContainer = new LinearLayout(this);
+        categoryContainer.setOrientation(LinearLayout.VERTICAL);
+        categoryContainer.setPadding(0, 0, 0, dp(14));
         buildCategoryPills();
-        categoriesScroll.addView(categoriesRow);
-        rightPanel.addView(categoriesScroll);
+        rightPanel.addView(categoryContainer);
 
         // Channels Grid Container (Vertical Scroll)
         FrameLayout channelContainer = new FrameLayout(this);
@@ -266,44 +244,50 @@ public class IptvActivity extends Activity {
         rootLayout.addView(mainSplit, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
 
+        // Bottom Bar: (OK) OK Select pill centered
+        LinearLayout bottomBar = new LinearLayout(this);
+        bottomBar.setOrientation(LinearLayout.HORIZONTAL);
+        bottomBar.setGravity(Gravity.CENTER);
+        bottomBar.setPadding(0, dp(8), 0, dp(4));
+
+        LinearLayout okPill = new LinearLayout(this);
+        okPill.setOrientation(LinearLayout.HORIZONTAL);
+        okPill.setGravity(Gravity.CENTER);
+        okPill.setPadding(dp(14), dp(4), dp(14), dp(4));
+
+        GradientDrawable pillBg = new GradientDrawable();
+        pillBg.setColor(0xFF0F172A);
+        pillBg.setCornerRadius(dp(14));
+        pillBg.setStroke(dp(1), 0xFF1E293B);
+        okPill.setBackground(pillBg);
+
+        TextView okBadge = new TextView(this);
+        okBadge.setText("OK");
+        okBadge.setTextColor(Color.WHITE);
+        okBadge.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9);
+        okBadge.setTypeface(Ui.displaySemibold != null ? Ui.displaySemibold : android.graphics.Typeface.DEFAULT_BOLD);
+        okBadge.setGravity(Gravity.CENTER);
+        okBadge.setPadding(dp(6), dp(1), dp(6), dp(1));
+
+        GradientDrawable badgeBg = new GradientDrawable();
+        badgeBg.setColor(0xFF1E293B);
+        badgeBg.setCornerRadius(dp(4));
+        badgeBg.setStroke(dp(1), 0xFF475569);
+        okBadge.setBackground(badgeBg);
+        okPill.addView(okBadge);
+
+        TextView okLabel = new TextView(this);
+        okLabel.setText("OK Select");
+        okLabel.setTextColor(0xFF94A3B8);
+        okLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
+        okLabel.setTypeface(Ui.medium != null ? Ui.medium : android.graphics.Typeface.DEFAULT);
+        okLabel.setPadding(dp(8), 0, 0, 0);
+        okPill.addView(okLabel);
+
+        bottomBar.addView(okPill);
+        rootLayout.addView(bottomBar);
+
         setContentView(rootLayout);
-    }
-
-    private View createTopActionButton(String text, View.OnClickListener click) {
-        TextView tv = new TextView(this);
-        tv.setText(text);
-        tv.setTextColor(0xCCFFFFFF);
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        tv.setTypeface(Ui.medium != null ? Ui.medium : android.graphics.Typeface.DEFAULT);
-        tv.setFocusable(true);
-        tv.setClickable(true);
-        tv.setPadding(dp(12), dp(6), dp(12), dp(6));
-
-        GradientDrawable bg = new GradientDrawable();
-        bg.setCornerRadius(dp(16));
-        bg.setColor(0x20FFFFFF);
-        bg.setStroke(dp(1), 0x22FFFFFF);
-        tv.setBackground(bg);
-
-        tv.setOnFocusChangeListener((v, hasFocus) -> {
-            GradientDrawable fbg = new GradientDrawable();
-            fbg.setCornerRadius(dp(16));
-            if (hasFocus) {
-                fbg.setColor(0x550284C7);
-                fbg.setStroke(dp(2), 0xFF38BDF8);
-                tv.setTextColor(Color.WHITE);
-                v.animate().scaleX(1.08f).scaleY(1.08f).setDuration(140).start();
-            } else {
-                fbg.setColor(0x20FFFFFF);
-                fbg.setStroke(dp(1), 0x22FFFFFF);
-                tv.setTextColor(0xCCFFFFFF);
-                v.animate().scaleX(1f).scaleY(1f).setDuration(140).start();
-            }
-            v.setBackground(fbg);
-        });
-
-        tv.setOnClickListener(click);
-        return tv;
     }
 
     private void loadAllCountries() {
@@ -333,75 +317,68 @@ public class IptvActivity extends Activity {
             IptvCountry c = map.get(code.toUpperCase());
             if (c != null && !pinnedCountries.contains(c)) pinnedCountries.add(c);
         }
+        if (pinnedCountries.isEmpty()) {
+            for (IptvCountry c : IptvManager.SOUTH_ASIA) {
+                if (!"AF".equalsIgnoreCase(c.code)) pinnedCountries.add(c);
+            }
+        }
     }
 
     /**
-     * Builds the 3x3 Pinned Grid:
-     * Card 0: Starred
-     * Cards 1–7: 7 pinned countries
-     * Card 8: All countries
+     * Builds the 3x3 Pinned Grid matching the mockup:
+     * Row 1: Bangladesh, India, Pakistan
+     * Row 2: Nepal, Sri Lanka, Bhutan
+     * Row 3: Maldives, All countries, (Spacer)
      */
     private void buildPinnedGrid() {
         pinnedGrid.removeAllViews();
-        int cardW = dp(96);
+        int cardW = dp(94);
         int cardH = dp(84);
         int margin = dp(4);
 
-        // 1. Starred Card (Index 0)
-        pinnedViews[0] = createPinnedCard("⭐", "Starred", isStarredMode, false, v -> {
-            isStarredMode = true;
-            rightCountryTitle.setText("⭐ Starred Channels");
-            fullChannelList = IptvManager.getStarredChannels(this);
-            applyFilter();
-            buildPinnedGrid();
-        });
-        pinnedViews[0].setId(pinnedIds[0]);
-        addGridCell(pinnedGrid, pinnedViews[0], cardW, cardH, margin);
-
-        // 2–8. Pinned Countries (up to 7, indices 1..7)
         int maxCountries = Math.min(7, pinnedCountries.size());
-        for (int i = 0; i < maxCountries; i++) {
-            final IptvCountry c = pinnedCountries.get(i);
-            boolean isSelected = !isStarredMode && selectedCountry != null && selectedCountry.code.equalsIgnoreCase(c.code);
-            pinnedViews[i + 1] = createPinnedCard(c.flag, c.name, isSelected, isSelected, v -> {
-                isStarredMode = false;
-                selectedCountry = c;
-                rightCountryTitle.setText(c.flag + " " + c.name);
-                loadChannels(c.code);
-                buildPinnedGrid();
-            });
-            pinnedViews[i + 1].setId(pinnedIds[i + 1]);
-            addGridCell(pinnedGrid, pinnedViews[i + 1], cardW, cardH, margin);
+        for (int i = 0; i < 7; i++) {
+            if (i < maxCountries) {
+                final IptvCountry c = pinnedCountries.get(i);
+                boolean isSelected = !isStarredMode && selectedCountry != null && selectedCountry.code.equalsIgnoreCase(c.code);
+                pinnedViews[i] = createPinnedCard(c.flag, c.name, isSelected, isSelected, v -> {
+                    isStarredMode = false;
+                    selectedCountry = c;
+                    rightCountryTitle.setText(c.flag + "  " + c.name);
+                    loadChannels(c.code);
+                    buildPinnedGrid();
+                });
+            } else {
+                View emptyCard = new View(this);
+                emptyCard.setVisibility(View.INVISIBLE);
+                pinnedViews[i] = emptyCard;
+            }
+            pinnedViews[i].setId(pinnedIds[i]);
+            addGridCell(pinnedGrid, pinnedViews[i], cardW, cardH, margin);
         }
 
-        // Fill empty if fewer than 7 countries
-        for (int i = maxCountries; i < 7; i++) {
-            View emptyCard = new View(this);
-            pinnedViews[i + 1] = emptyCard;
-            addGridCell(pinnedGrid, emptyCard, cardW, cardH, margin);
-        }
+        // Slot 7: "All countries" Card
+        pinnedViews[7] = createPinnedCard("🌐", "All countries", false, false, v -> showAllCountriesModal());
+        pinnedViews[7].setId(pinnedIds[7]);
+        addGridCell(pinnedGrid, pinnedViews[7], cardW, cardH, margin);
 
-        // 9. "All countries" Card (Index 8)
-        pinnedViews[8] = createPinnedCard("🌐", "All countries", false, false, v -> showAllCountriesModal());
+        // Slot 8: Empty spacer to complete 3x3 layout
+        View emptySlot = new View(this);
+        emptySlot.setVisibility(View.INVISIBLE);
+        pinnedViews[8] = emptySlot;
         pinnedViews[8].setId(pinnedIds[8]);
-        addGridCell(pinnedGrid, pinnedViews[8], cardW, cardH, margin);
+        addGridCell(pinnedGrid, emptySlot, cardW, cardH, margin);
 
-        // Wire 3x3 grid D-pad focus navigation explicitly
         wirePinnedFocus();
     }
 
     private void wirePinnedFocus() {
-        // Edit button
         if (editBtn != null) {
-            editBtn.setNextFocusDownId(pinnedIds[1]); // Move down to Bangladesh
-            if (searchBtn != null) editBtn.setNextFocusRightId(searchBtn.getId());
+            editBtn.setNextFocusDownId(pinnedIds[0]); // Move down to Bangladesh
+            if (catIds[0][0] != 0) editBtn.setNextFocusRightId(catIds[0][0]);
         }
 
-        // 3x3 Grid:
-        // 0 1 2
-        // 3 4 5
-        // 6 7 8
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 8; i++) {
             View v = pinnedViews[i];
             if (v == null) continue;
 
@@ -416,8 +393,10 @@ public class IptvActivity extends Activity {
             }
 
             // Down
-            if (row < 2) {
+            if (row == 0) {
                 v.setNextFocusDownId(pinnedIds[i + 3]);
+            } else if (row == 1) {
+                v.setNextFocusDownId(col < 2 ? pinnedIds[i + 3] : pinnedIds[7]);
             }
 
             // Left
@@ -425,12 +404,18 @@ public class IptvActivity extends Activity {
                 v.setNextFocusLeftId(pinnedIds[i - 1]);
             }
 
-            // Right: column 2 points into right panel (categories)
-            if (col < 2) {
+            // Right into categories:
+            if (col < 2 && (i != 7)) {
                 v.setNextFocusRightId(pinnedIds[i + 1]);
             } else {
-                if (categoriesRow != null && categoriesRow.getChildCount() > 0) {
-                    v.setNextFocusRightId(categoriesRow.getChildAt(0).getId());
+                if (row == 0) v.setNextFocusRightId(catIds[0][0]);
+                else if (row == 1) v.setNextFocusRightId(catIds[1][0]);
+                else {
+                    if (channelsGrid != null && channelsGrid.getChildCount() > 0) {
+                        v.setNextFocusRightId(channelsGrid.getChildAt(0).getId());
+                    } else {
+                        v.setNextFocusRightId(catIds[1][0]);
+                    }
                 }
             }
         }
@@ -451,17 +436,16 @@ public class IptvActivity extends Activity {
         card.setClickable(true);
 
         GradientDrawable normalBg = new GradientDrawable();
-        normalBg.setCornerRadius(dp(14));
+        normalBg.setCornerRadius(dp(12));
         if (isSelected) {
-            normalBg.setColor(0x350284C7);
-            normalBg.setStroke(dp(2), 0xFF38BDF8);
+            normalBg.setColor(0x2800B4D8);
+            normalBg.setStroke(dp(2), 0xFF00B4D8); // Cyan border
         } else {
-            normalBg.setColor(0x401E293B); // Dark slate glass
-            normalBg.setStroke(dp(1), 0x22FFFFFF);
+            normalBg.setColor(0xFF0F172A); // Dark slate
+            normalBg.setStroke(dp(1), 0xFF1E293B);
         }
         card.setBackground(normalBg);
 
-        // Content layout inside card
         LinearLayout content = new LinearLayout(this);
         content.setOrientation(LinearLayout.VERTICAL);
         content.setGravity(Gravity.CENTER);
@@ -475,7 +459,7 @@ public class IptvActivity extends Activity {
 
         TextView label = new TextView(this);
         label.setText(labelStr);
-        label.setTextColor(isSelected ? 0xFF38BDF8 : Color.WHITE);
+        label.setTextColor(isSelected ? 0xFF00B4D8 : Color.WHITE);
         label.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11.5f);
         label.setTypeface(Ui.medium != null ? Ui.medium : android.graphics.Typeface.DEFAULT);
         label.setSingleLine(true);
@@ -487,7 +471,7 @@ public class IptvActivity extends Activity {
         card.addView(content, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER));
 
-        // Check badge on top right if active/selected
+        // Circular check badge on top right for active selected country
         if (showCheck) {
             TextView checkBadge = new TextView(this);
             checkBadge.setText("✔");
@@ -497,7 +481,7 @@ public class IptvActivity extends Activity {
 
             GradientDrawable checkBg = new GradientDrawable();
             checkBg.setShape(GradientDrawable.OVAL);
-            checkBg.setColor(0xFF0284C7);
+            checkBg.setColor(0xFF00B4D8);
             checkBadge.setBackground(checkBg);
 
             FrameLayout.LayoutParams clp = new FrameLayout.LayoutParams(dp(16), dp(16), Gravity.TOP | Gravity.END);
@@ -507,23 +491,23 @@ public class IptvActivity extends Activity {
 
         card.setOnFocusChangeListener((v, hasFocus) -> {
             GradientDrawable fbg = new GradientDrawable();
-            fbg.setCornerRadius(dp(14));
+            fbg.setCornerRadius(dp(12));
             if (hasFocus) {
-                fbg.setColor(0x600284C7);
-                fbg.setStroke(dp(2.5f), 0xFF67E8F9); // Vibrant cyan-white glow border
+                fbg.setColor(0xFF1E2C48);
+                fbg.setStroke(dp(2.5f), 0xFFE0F2FE); // Bright focus outline matching Maldives in mockup
                 label.setTextColor(Color.WHITE);
-                v.animate().scaleX(1.08f).scaleY(1.08f).setDuration(140).start();
+                v.animate().scaleX(1.05f).scaleY(1.05f).setDuration(120).start();
             } else {
                 if (isSelected) {
-                    fbg.setColor(0x350284C7);
-                    fbg.setStroke(dp(2), 0xFF38BDF8);
-                    label.setTextColor(0xFF38BDF8);
+                    fbg.setColor(0x2800B4D8);
+                    fbg.setStroke(dp(2), 0xFF00B4D8);
+                    label.setTextColor(0xFF00B4D8);
                 } else {
-                    fbg.setColor(0x401E293B);
-                    fbg.setStroke(dp(1), 0x22FFFFFF);
+                    fbg.setColor(0xFF0F172A);
+                    fbg.setStroke(dp(1), 0xFF1E293B);
                     label.setTextColor(Color.WHITE);
                 }
-                v.animate().scaleX(1f).scaleY(1f).setDuration(140).start();
+                v.animate().scaleX(1f).scaleY(1f).setDuration(120).start();
             }
             v.setBackground(fbg);
         });
@@ -533,22 +517,70 @@ public class IptvActivity extends Activity {
     }
 
     private void buildCategoryPills() {
-        categoriesRow.removeAllViews();
-        for (int i = 0; i < CATEGORIES.length; i++) {
-            final String cat = CATEGORIES[i];
-            boolean isSelected = cat.equalsIgnoreCase(selectedCategory);
-            View pill = createCategoryPill(cat, isSelected, v -> {
-                selectedCategory = cat;
-                buildCategoryPills();
-                applyFilter();
-            });
-            int pillId = View.generateViewId();
-            pill.setId(pillId);
-            if (i == 0) {
-                // Moving left from first category pill goes to Sri Lanka or Pinned grid
-                pill.setNextFocusLeftId(pinnedIds[5]);
+        if (categoryContainer == null) return;
+        categoryContainer.removeAllViews();
+
+        for (int r = 0; r < 2; r++) {
+            LinearLayout rowLayout = new LinearLayout(this);
+            rowLayout.setOrientation(LinearLayout.HORIZONTAL);
+            rowLayout.setWeightSum(4f);
+            LinearLayout.LayoutParams rlp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            if (r == 0) rlp.setMargins(0, 0, 0, dp(8));
+            rowLayout.setLayoutParams(rlp);
+
+            for (int c = 0; c < 4; c++) {
+                final String cat = CATEGORY_GRID[r][c];
+                boolean isSelected = cat.equalsIgnoreCase(selectedCategory);
+                View pill = createCategoryPill(cat, isSelected, v -> {
+                    selectedCategory = cat;
+                    buildCategoryPills();
+                    applyFilter();
+                });
+                pill.setId(catIds[r][c]);
+                catViews[r][c] = pill;
+                rowLayout.addView(pill);
             }
-            categoriesRow.addView(pill);
+            categoryContainer.addView(rowLayout);
+        }
+        wireCategoryFocus();
+    }
+
+    private void wireCategoryFocus() {
+        for (int r = 0; r < 2; r++) {
+            for (int c = 0; c < 4; c++) {
+                View v = catViews[r][c];
+                if (v == null) continue;
+
+                // Up
+                if (r == 0) {
+                    if (editBtn != null) v.setNextFocusUpId(editBtn.getId());
+                } else {
+                    v.setNextFocusUpId(catIds[0][c]);
+                }
+
+                // Down
+                if (r == 0) {
+                    v.setNextFocusDownId(catIds[1][c]);
+                } else {
+                    if (channelsGrid != null && channelsGrid.getChildCount() > 0) {
+                        int targetCol = Math.min(channelsGrid.getChildCount() - 1, c % 3);
+                        v.setNextFocusDownId(channelsGrid.getChildAt(targetCol).getId());
+                    }
+                }
+
+                // Left
+                if (c > 0) {
+                    v.setNextFocusLeftId(catIds[r][c - 1]);
+                } else {
+                    int pinnedIndex = r == 0 ? 2 : 5; // Pakistan or Bhutan
+                    v.setNextFocusLeftId(pinnedIds[pinnedIndex]);
+                }
+
+                // Right
+                if (c < 3) {
+                    v.setNextFocusRightId(catIds[r][c + 1]);
+                }
+            }
         }
     }
 
@@ -557,7 +589,7 @@ public class IptvActivity extends Activity {
         tv.setText(title);
         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         tv.setTypeface(Ui.medium != null ? Ui.medium : android.graphics.Typeface.DEFAULT);
-        tv.setPadding(dp(16), dp(7), dp(16), dp(7));
+        tv.setGravity(Gravity.CENTER);
         tv.setFocusable(true);
         tv.setClickable(true);
 
@@ -566,35 +598,34 @@ public class IptvActivity extends Activity {
         tv.setOnFocusChangeListener((v, hasFocus) -> {
             updateCategoryPillStyle(tv, isSelected, hasFocus);
             if (hasFocus) {
-                v.animate().scaleX(1.07f).scaleY(1.07f).setDuration(140).start();
+                v.animate().scaleX(1.05f).scaleY(1.05f).setDuration(120).start();
             } else {
-                v.animate().scaleX(1f).scaleY(1f).setDuration(140).start();
+                v.animate().scaleX(1f).scaleY(1f).setDuration(120).start();
             }
         });
 
         tv.setOnClickListener(onClick);
 
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp.setMarginEnd(dp(10));
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, dp(38), 1f);
+        lp.setMargins(dp(4), 0, dp(4), 0);
         tv.setLayoutParams(lp);
         return tv;
     }
 
     private void updateCategoryPillStyle(TextView tv, boolean isSelected, boolean hasFocus) {
         GradientDrawable bg = new GradientDrawable();
-        bg.setCornerRadius(dp(16));
+        bg.setCornerRadius(dp(10));
         if (hasFocus) {
             bg.setColor(0xFF0284C7);
             bg.setStroke(dp(2), Color.WHITE);
             tv.setTextColor(Color.WHITE);
         } else if (isSelected) {
-            bg.setColor(0xFF0284C7); // Solid vivid cyan as in mockup
+            bg.setColor(0xFF00A3E0); // Solid vivid cyan as in mockup
             tv.setTextColor(Color.WHITE);
         } else {
-            bg.setColor(0x22FFFFFF);
-            bg.setStroke(dp(1), 0x22FFFFFF);
-            tv.setTextColor(0xCCFFFFFF);
+            bg.setColor(0xFF131D31); // Dark slate as in mockup
+            bg.setStroke(dp(1), 0x25FFFFFF);
+            tv.setTextColor(0xFFCBD5E1);
         }
         tv.setBackground(bg);
     }
@@ -609,6 +640,8 @@ public class IptvActivity extends Activity {
             @Override public void onResult(List<IptvChannel> channels) {
                 loadingBar.setVisibility(View.GONE);
                 fullChannelList = channels != null ? channels : new ArrayList<>();
+                // Sort alphabetically by name to match mockup
+                java.util.Collections.sort(fullChannelList, (a, b) -> a.name.compareToIgnoreCase(b.name));
                 applyFilter();
             }
 
@@ -651,7 +684,7 @@ public class IptvActivity extends Activity {
 
         // 3 columns in the right panel
         int screenW = getResources().getDisplayMetrics().widthPixels - dp(56);
-        int rightW = screenW - dp(310) - dp(45);
+        int rightW = screenW - dp(300) - dp(40);
         int cardW = Math.max(dp(200), (rightW - dp(24)) / 3);
 
         int count = Math.min(filteredChannels.size(), displayLimit);
@@ -675,12 +708,14 @@ public class IptvActivity extends Activity {
         card.setGravity(Gravity.CENTER);
         card.setFocusable(true);
         card.setClickable(true);
-        card.setPadding(dp(12), dp(12), dp(12), dp(12));
+        card.setPadding(dp(10), dp(10), dp(10), dp(10));
+        int cId = View.generateViewId();
+        card.setId(cId);
 
         GradientDrawable normalBg = new GradientDrawable();
-        normalBg.setColor(0x401E293B); // Dark slate glass
+        normalBg.setColor(0xFF0F172A); // Dark slate
         normalBg.setCornerRadius(dp(14));
-        normalBg.setStroke(dp(1), 0x22FFFFFF);
+        normalBg.setStroke(dp(1), 0xFF1E293B);
         card.setBackground(normalBg);
 
         // Logo Container: White framed box as in mockup (gives high contrast for all channel logos)
@@ -689,17 +724,17 @@ public class IptvActivity extends Activity {
         logoBg.setColor(0xFFFFFFFF);
         logoBg.setCornerRadius(dp(8));
         logoFrame.setBackground(logoBg);
-        logoFrame.setPadding(dp(8), dp(4), dp(8), dp(4));
+        logoFrame.setPadding(dp(6), dp(4), dp(6), dp(4));
 
         ImageView logoView = new ImageView(this);
         logoView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        FrameLayout.LayoutParams lParams = new FrameLayout.LayoutParams(dp(76), dp(46), Gravity.CENTER);
+        FrameLayout.LayoutParams lParams = new FrameLayout.LayoutParams(dp(86), dp(48), Gravity.CENTER);
         logoFrame.addView(logoView, lParams);
 
         TextView fallbackLogo = new TextView(this);
         fallbackLogo.setText(ch.name.length() > 0 ? ch.name.substring(0, Math.min(2, ch.name.length())).toUpperCase() : "TV");
         fallbackLogo.setTextColor(0xFF0284C7);
-        fallbackLogo.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        fallbackLogo.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         fallbackLogo.setTypeface(Ui.displaySemibold != null ? Ui.displaySemibold : android.graphics.Typeface.DEFAULT_BOLD);
         fallbackLogo.setGravity(Gravity.CENTER);
         fallbackLogo.setVisibility(View.GONE);
@@ -718,7 +753,7 @@ public class IptvActivity extends Activity {
         } else {
             fallbackLogo.setVisibility(View.VISIBLE);
         }
-        card.addView(logoFrame, new LinearLayout.LayoutParams(dp(96), dp(54)));
+        card.addView(logoFrame, new LinearLayout.LayoutParams(dp(110), dp(58)));
 
         // Channel Name
         TextView nameText = new TextView(this);
@@ -741,28 +776,27 @@ public class IptvActivity extends Activity {
         groupText.setText(ch.group != null ? ch.group : "General");
         groupText.setTextColor(0xFF38BDF8); // Cyan
         groupText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10.5f);
+        groupText.setTypeface(Ui.medium != null ? Ui.medium : android.graphics.Typeface.DEFAULT);
         metaRow.addView(groupText);
 
         String res = (ch.resolution != null && !ch.resolution.isEmpty()) ? ch.resolution : "HD";
         TextView resText = new TextView(this);
         resText.setText(" • " + res);
-        resText.setTextColor(0xFFF59E0B); // Amber
+        resText.setTextColor(0xFF38BDF8); // Cyan matching mockup
         resText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10.5f);
+        resText.setTypeface(Ui.medium != null ? Ui.medium : android.graphics.Typeface.DEFAULT);
         metaRow.addView(resText);
-
-        if (ch.isStarred) {
-            TextView starText = new TextView(this);
-            starText.setText(" • ⭐");
-            starText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10.5f);
-            metaRow.addView(starText);
-        }
 
         card.addView(metaRow);
 
         // Column 0 in channel grid: moving left focuses the pinned grid
         if (index % 3 == 0) {
-            int targetPinned = pinnedIds[Math.min(8, (index / 3) * 3 + 2)];
+            int targetPinned = pinnedIds[Math.min(7, (index / 3) * 3 + 2)];
             card.setNextFocusLeftId(targetPinned);
+        }
+        // First row in channel grid: moving up focuses category row 2
+        if (index < 3) {
+            card.setNextFocusUpId(catIds[1][index]);
         }
 
         // D-Pad Focus & Click
@@ -770,13 +804,13 @@ public class IptvActivity extends Activity {
             GradientDrawable fbg = new GradientDrawable();
             fbg.setCornerRadius(dp(14));
             if (hasFocus) {
-                fbg.setColor(0x881E293B);
+                fbg.setColor(0xFF1A2742);
                 fbg.setStroke(dp(2.5f), 0xFF38BDF8); // Cyan glow focus ring
-                v.animate().scaleX(1.06f).scaleY(1.06f).setDuration(140).start();
+                v.animate().scaleX(1.05f).scaleY(1.05f).setDuration(120).start();
             } else {
-                fbg.setColor(0x401E293B);
-                fbg.setStroke(dp(1), 0x22FFFFFF);
-                v.animate().scaleX(1f).scaleY(1f).setDuration(140).start();
+                fbg.setColor(0xFF0F172A);
+                fbg.setStroke(dp(1), 0xFF1E293B);
+                v.animate().scaleX(1f).scaleY(1f).setDuration(120).start();
             }
             v.setBackground(fbg);
         });
