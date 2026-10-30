@@ -1,7 +1,6 @@
 package io.freemytv;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -17,10 +16,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -29,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -36,7 +34,7 @@ import java.util.Map;
 
 /**
  * Modern Split-Screen Android TV Dashboard for Live TV / IPTV.
- * Left Panel: Pinned countries 3x3 grid & Quick Actions (Starred, Search).
+ * Left Panel: Pinned countries 3x3 grid & Edit Pinned Dialog.
  * Right Panel: Country header, category chips, and 3-column channel grid.
  */
 public class IptvActivity extends Activity {
@@ -51,21 +49,12 @@ public class IptvActivity extends Activity {
     private TextView rightChannelCount;
     private TextView editBtn;
 
-    private View starredActionView;
-    private TextView starredCountBadge;
-    private View searchActionView;
-    private TextView searchActionTitle;
-    private int starredActionId;
-    private int searchActionId;
-
     private List<IptvCountry> allCountries = new ArrayList<>();
     private final List<IptvCountry> pinnedCountries = new ArrayList<>();
     private IptvCountry selectedCountry = IptvManager.SOUTH_ASIA.get(0); // Default: Bangladesh
     private List<IptvChannel> fullChannelList = new ArrayList<>();
     private List<IptvChannel> filteredChannels = new ArrayList<>();
     private String selectedCategory = "All";
-    private boolean isStarredMode = false;
-    private String searchQuery = "";
 
     private final View[] pinnedViews = new View[9];
     private final int[] pinnedIds = new int[9];
@@ -86,8 +75,6 @@ public class IptvActivity extends Activity {
                 catIds[r][c] = View.generateViewId();
             }
         }
-        starredActionId = View.generateViewId();
-        searchActionId = View.generateViewId();
 
         buildUi();
 
@@ -121,14 +108,14 @@ public class IptvActivity extends Activity {
         hlp.setMargins(0, 0, 0, dp(12));
         rootLayout.addView(horizLine, hlp);
 
-        // 2. Main Content: Split Screen (Left: Pinned Countries + Actions, Right: Channels)
+        // 2. Main Content: Split Screen (Left: Pinned Countries, Right: Channels)
         LinearLayout mainSplit = new LinearLayout(this);
         mainSplit.setOrientation(LinearLayout.HORIZONTAL);
 
-        // --- Left Panel: Pinned countries + Actions ---
+        // --- Left Panel: Pinned countries ---
         LinearLayout leftPanel = new LinearLayout(this);
         leftPanel.setOrientation(LinearLayout.VERTICAL);
-        int leftWidth = dp(265);
+        int leftWidth = dp(275);
         LinearLayout.LayoutParams leftLp = new LinearLayout.LayoutParams(leftWidth, ViewGroup.LayoutParams.MATCH_PARENT);
         leftLp.setMarginEnd(dp(14));
         leftPanel.setLayoutParams(leftLp);
@@ -171,8 +158,13 @@ public class IptvActivity extends Activity {
         pinnedGrid.setUseDefaultMargins(false);
         leftPanel.addView(pinnedGrid);
 
-        // Build Sidebar Action Cards (Starred & Search) in the empty space below Pinned grid
-        buildSidebarActions(leftPanel);
+        // Navigation hint at bottom of left panel
+        TextView hint = new TextView(this);
+        hint.setText("Arrow keys to move • OK to select");
+        hint.setTextColor(0x7794A3B8);
+        hint.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10.5f);
+        hint.setPadding(0, dp(14), 0, 0);
+        leftPanel.addView(hint);
 
         mainSplit.addView(leftPanel);
 
@@ -296,134 +288,6 @@ public class IptvActivity extends Activity {
         setContentView(rootLayout);
     }
 
-    private void buildSidebarActions(LinearLayout leftPanel) {
-        LinearLayout actionsLayout = new LinearLayout(this);
-        actionsLayout.setOrientation(LinearLayout.VERTICAL);
-        actionsLayout.setPadding(0, dp(10), 0, 0);
-
-        starredActionView = createSidebarAction("⭐", "Starred channels", getStarredBadgeText(), isStarredMode, v -> {
-            loadStarredChannels();
-        });
-        starredActionView.setId(starredActionId);
-        actionsLayout.addView(starredActionView);
-
-        searchActionView = createSidebarAction("🔍", "Search channels", searchQuery.isEmpty() ? "" : searchQuery, false, v -> {
-            showSearchDialog();
-        });
-        searchActionView.setId(searchActionId);
-        LinearLayout.LayoutParams slp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(42));
-        slp.setMargins(0, dp(6), 0, 0);
-        actionsLayout.addView(searchActionView, slp);
-
-        // Navigation hint at bottom
-        TextView hint = new TextView(this);
-        hint.setText("Arrow keys to move • OK to select");
-        hint.setTextColor(0x7794A3B8);
-        hint.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10.5f);
-        hint.setPadding(0, dp(10), 0, 0);
-        actionsLayout.addView(hint);
-
-        leftPanel.addView(actionsLayout);
-    }
-
-    private View createSidebarAction(String iconStr, String titleStr, String badgeStr, boolean isSelected, View.OnClickListener click) {
-        LinearLayout row = new LinearLayout(this);
-        row.setOrientation(LinearLayout.HORIZONTAL);
-        row.setGravity(Gravity.CENTER_VERTICAL);
-        row.setFocusable(true);
-        row.setClickable(true);
-        row.setPadding(dp(10), dp(6), dp(10), dp(6));
-
-        updateSidebarItemStyle(row, isSelected, false);
-
-        TextView icon = new TextView(this);
-        icon.setText(iconStr);
-        icon.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        icon.setPadding(0, 0, dp(8), 0);
-        row.addView(icon);
-
-        TextView title = new TextView(this);
-        title.setText(titleStr);
-        title.setTextColor(Color.WHITE);
-        title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12.5f);
-        title.setTypeface(Ui.semibold != null ? Ui.semibold : android.graphics.Typeface.DEFAULT_BOLD);
-        title.setSingleLine(true);
-        title.setEllipsize(TextUtils.TruncateAt.END);
-        row.addView(title, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
-
-        TextView badge = new TextView(this);
-        badge.setText(badgeStr);
-        badge.setTextColor(0xFF38BDF8); // Cyan
-        badge.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
-        badge.setTypeface(Ui.medium != null ? Ui.medium : android.graphics.Typeface.DEFAULT);
-        row.addView(badge);
-
-        if ("⭐".equals(iconStr)) {
-            starredCountBadge = badge;
-        } else if ("🔍".equals(iconStr)) {
-            searchActionTitle = title;
-        }
-
-        row.setOnFocusChangeListener((v, hasFocus) -> {
-            boolean active = ("⭐".equals(iconStr) && isStarredMode);
-            updateSidebarItemStyle(row, active, hasFocus);
-            if (hasFocus) {
-                v.animate().scaleX(1.02f).scaleY(1.02f).setDuration(120).start();
-            } else {
-                v.animate().scaleX(1f).scaleY(1f).setDuration(120).start();
-            }
-        });
-
-        row.setOnClickListener(click);
-
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(42));
-        row.setLayoutParams(lp);
-        return row;
-    }
-
-    private void updateSidebarItemStyle(View v, boolean isSelected, boolean hasFocus) {
-        GradientDrawable gd = new GradientDrawable();
-        gd.setCornerRadius(dp(10));
-        if (hasFocus) {
-            gd.setColor(0xFF1E2C48);
-            gd.setStroke(dp(2), 0xFFE0F2FE);
-        } else if (isSelected) {
-            gd.setColor(0x2800B4D8);
-            gd.setStroke(dp(2), 0xFF00B4D8);
-        } else {
-            gd.setColor(0xFF0F172A);
-            gd.setStroke(dp(1), 0xFF1E293B);
-        }
-        v.setBackground(gd);
-    }
-
-    private void loadStarredChannels() {
-        isStarredMode = true;
-        rightCountryTitle.setText("⭐  Starred Channels");
-        fullChannelList = IptvManager.getStarredChannels(this);
-        java.util.Collections.sort(fullChannelList, (a, b) -> a.name.compareToIgnoreCase(b.name));
-        buildPinnedGrid();
-        updateSidebarActions();
-        applyFilter();
-    }
-
-    private void updateSidebarActions() {
-        if (starredActionView != null) {
-            updateSidebarItemStyle(starredActionView, isStarredMode, starredActionView.hasFocus());
-        }
-        if (starredCountBadge != null) {
-            starredCountBadge.setText(getStarredBadgeText());
-        }
-        if (searchActionTitle != null) {
-            searchActionTitle.setText(searchQuery.isEmpty() ? "Search channels" : "\"" + searchQuery + "\"");
-        }
-    }
-
-    private String getStarredBadgeText() {
-        List<IptvChannel> starred = IptvManager.getStarredChannels(this);
-        return starred.isEmpty() ? "0" : String.valueOf(starred.size());
-    }
-
     private void loadAllCountries() {
         IptvManager.getCountries(this, new IptvManager.Callback<List<IptvCountry>>() {
             @Override public void onResult(List<IptvCountry> list) {
@@ -443,27 +307,47 @@ public class IptvActivity extends Activity {
     private void rebuildPinnedList() {
         pinnedCountries.clear();
         Map<String, IptvCountry> map = new HashMap<>();
-        for (IptvCountry c : allCountries) map.put(c.code.toUpperCase(), c);
+        for (IptvCountry c : allCountries) {
+            if (c.code != null && !c.code.isEmpty()) {
+                map.put(c.code.toUpperCase().trim(), c);
+            }
+        }
         for (IptvCountry c : IptvManager.SOUTH_ASIA) {
-            if (!map.containsKey(c.code.toUpperCase())) map.put(c.code.toUpperCase(), c);
+            if (!map.containsKey(c.code.toUpperCase().trim())) {
+                map.put(c.code.toUpperCase().trim(), c);
+            }
+        }
+        for (IptvCountry c : IptvManager.POPULAR_WORLD) {
+            if (!map.containsKey(c.code.toUpperCase().trim())) {
+                map.put(c.code.toUpperCase().trim(), c);
+            }
         }
 
         List<String> codes = IptvManager.getPinnedCountryCodes(this);
         if (codes == null || codes.isEmpty()) {
-            codes = new ArrayList<>();
-            codes.add("BD");
-            codes.add("IN");
-            codes.add("PK");
-            codes.add("NP");
-            codes.add("LK");
-            codes.add("BT");
-            codes.add("MV");
+            codes = new ArrayList<>(Arrays.asList("BD", "IN", "PK", "NP", "LK", "BT", "MV"));
         }
 
         for (String code : codes) {
-            IptvCountry c = map.get(code.toUpperCase());
-            if (c != null && !pinnedCountries.contains(c)) pinnedCountries.add(c);
+            if (code == null) continue;
+            String key = code.toUpperCase().trim();
+            IptvCountry c = map.get(key);
+            if (c == null) {
+                for (IptvCountry ac : allCountries) {
+                    if (ac.code != null && ac.code.equalsIgnoreCase(key)) {
+                        c = ac;
+                        break;
+                    }
+                }
+                if (c == null) {
+                    c = new IptvCountry(key, key, "🌐");
+                }
+            }
+            if (!pinnedCountries.contains(c)) {
+                pinnedCountries.add(c);
+            }
         }
+
         if (pinnedCountries.isEmpty()) {
             for (IptvCountry c : IptvManager.SOUTH_ASIA) {
                 if (!"AF".equalsIgnoreCase(c.code)) pinnedCountries.add(c);
@@ -479,22 +363,20 @@ public class IptvActivity extends Activity {
      */
     private void buildPinnedGrid() {
         pinnedGrid.removeAllViews();
-        int cardW = dp(82);
-        int cardH = dp(76);
-        int margin = dp(3);
+        int cardW = dp(83);
+        int cardH = dp(84);
+        int margin = dp(4);
 
         int maxCountries = Math.min(7, pinnedCountries.size());
         for (int i = 0; i < 7; i++) {
             if (i < maxCountries) {
                 final IptvCountry c = pinnedCountries.get(i);
-                boolean isSelected = !isStarredMode && selectedCountry != null && selectedCountry.code.equalsIgnoreCase(c.code);
-                pinnedViews[i] = createPinnedCard(c.flag, c.name, isSelected, isSelected, v -> {
-                    isStarredMode = false;
+                boolean isSelected = selectedCountry != null && selectedCountry.code.equalsIgnoreCase(c.code);
+                pinnedViews[i] = createPinnedCard(c.flag, c.name, isSelected, isSelected, i, v -> {
                     selectedCountry = c;
                     rightCountryTitle.setText(c.flag + "  " + c.name);
                     loadChannels(c.code);
-                    buildPinnedGrid();
-                    updateSidebarActions();
+                    updatePinnedCardsSelection();
                 });
             } else {
                 View emptyCard = new View(this);
@@ -506,7 +388,7 @@ public class IptvActivity extends Activity {
         }
 
         // Slot 7: "All countries" Card
-        pinnedViews[7] = createPinnedCard("🌐", "All countries", false, false, v -> showAllCountriesModal());
+        pinnedViews[7] = createPinnedCard("🌐", "All countries", false, false, 7, v -> showAllCountriesModal());
         pinnedViews[7].setId(pinnedIds[7]);
         addGridCell(pinnedGrid, pinnedViews[7], cardW, cardH, margin);
 
@@ -518,6 +400,27 @@ public class IptvActivity extends Activity {
         addGridCell(pinnedGrid, emptySlot, cardW, cardH, margin);
 
         wirePinnedFocus();
+    }
+
+    private void updatePinnedCardsSelection() {
+        int maxCountries = Math.min(7, pinnedCountries.size());
+        for (int i = 0; i < 7; i++) {
+            View card = pinnedViews[i];
+            if (card instanceof FrameLayout && i < maxCountries) {
+                IptvCountry c = pinnedCountries.get(i);
+                boolean isSelected = selectedCountry != null && selectedCountry.code.equalsIgnoreCase(c.code);
+                updatePinnedCardStyle(card, isSelected, card.hasFocus());
+
+                View check = card.findViewWithTag("checkBadge");
+                if (check != null) {
+                    check.setVisibility(isSelected ? View.VISIBLE : View.GONE);
+                }
+                View label = card.findViewWithTag("label");
+                if (label instanceof TextView) {
+                    ((TextView) label).setTextColor(isSelected ? 0xFF00B4D8 : Color.WHITE);
+                }
+            }
+        }
     }
 
     private void wirePinnedFocus() {
@@ -545,8 +448,6 @@ public class IptvActivity extends Activity {
                 v.setNextFocusDownId(pinnedIds[i + 3]);
             } else if (row == 1) {
                 v.setNextFocusDownId(col < 2 ? pinnedIds[i + 3] : pinnedIds[7]);
-            } else {
-                v.setNextFocusDownId(starredActionId); // Row 2 moves down to Starred Action card
             }
 
             // Left
@@ -569,27 +470,6 @@ public class IptvActivity extends Activity {
                 }
             }
         }
-
-        // Wire Starred & Search action cards focus
-        if (starredActionView != null) {
-            starredActionView.setNextFocusUpId(pinnedIds[6]); // Up to Maldives
-            starredActionView.setNextFocusDownId(searchActionId);
-            if (channelsGrid != null && channelsGrid.getChildCount() > 0) {
-                starredActionView.setNextFocusRightId(channelsGrid.getChildAt(0).getId());
-            } else {
-                starredActionView.setNextFocusRightId(catIds[1][0]);
-            }
-        }
-
-        if (searchActionView != null) {
-            searchActionView.setNextFocusUpId(starredActionId);
-            searchActionView.setNextFocusDownId(starredActionId);
-            if (channelsGrid != null && channelsGrid.getChildCount() > 0) {
-                searchActionView.setNextFocusRightId(channelsGrid.getChildAt(0).getId());
-            } else {
-                searchActionView.setNextFocusRightId(catIds[1][0]);
-            }
-        }
     }
 
     private void addGridCell(GridLayout grid, View view, int w, int h, int m) {
@@ -601,21 +481,12 @@ public class IptvActivity extends Activity {
         grid.addView(view);
     }
 
-    private View createPinnedCard(String iconStr, String labelStr, boolean isSelected, boolean showCheck, View.OnClickListener click) {
+    private View createPinnedCard(String iconStr, String labelStr, boolean isSelected, boolean showCheck, int slotIndex, View.OnClickListener click) {
         FrameLayout card = new FrameLayout(this);
         card.setFocusable(true);
         card.setClickable(true);
 
-        GradientDrawable normalBg = new GradientDrawable();
-        normalBg.setCornerRadius(dp(12));
-        if (isSelected) {
-            normalBg.setColor(0x2800B4D8);
-            normalBg.setStroke(dp(2), 0xFF00B4D8); // Cyan border
-        } else {
-            normalBg.setColor(0xFF0F172A); // Dark slate
-            normalBg.setStroke(dp(1), 0xFF1E293B);
-        }
-        card.setBackground(normalBg);
+        updatePinnedCardStyle(card, isSelected, false);
 
         LinearLayout content = new LinearLayout(this);
         content.setOrientation(LinearLayout.VERTICAL);
@@ -629,6 +500,7 @@ public class IptvActivity extends Activity {
         content.addView(icon);
 
         TextView label = new TextView(this);
+        label.setTag("label");
         label.setText(labelStr);
         label.setTextColor(isSelected ? 0xFF00B4D8 : Color.WHITE);
         label.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11f);
@@ -643,48 +515,55 @@ public class IptvActivity extends Activity {
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER));
 
         // Circular check badge on top right for active selected country
-        if (showCheck) {
-            TextView checkBadge = new TextView(this);
-            checkBadge.setText("✔");
-            checkBadge.setTextColor(Color.WHITE);
-            checkBadge.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9);
-            checkBadge.setGravity(Gravity.CENTER);
+        TextView checkBadge = new TextView(this);
+        checkBadge.setTag("checkBadge");
+        checkBadge.setText("✔");
+        checkBadge.setTextColor(Color.WHITE);
+        checkBadge.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9);
+        checkBadge.setGravity(Gravity.CENTER);
 
-            GradientDrawable checkBg = new GradientDrawable();
-            checkBg.setShape(GradientDrawable.OVAL);
-            checkBg.setColor(0xFF00B4D8);
-            checkBadge.setBackground(checkBg);
+        GradientDrawable checkBg = new GradientDrawable();
+        checkBg.setShape(GradientDrawable.OVAL);
+        checkBg.setColor(0xFF00B4D8);
+        checkBadge.setBackground(checkBg);
 
-            FrameLayout.LayoutParams clp = new FrameLayout.LayoutParams(dp(16), dp(16), Gravity.TOP | Gravity.END);
-            clp.setMargins(0, dp(5), dp(5), 0);
-            card.addView(checkBadge, clp);
-        }
+        FrameLayout.LayoutParams clp = new FrameLayout.LayoutParams(dp(16), dp(16), Gravity.TOP | Gravity.END);
+        clp.setMargins(0, dp(5), dp(5), 0);
+        checkBadge.setVisibility(showCheck ? View.VISIBLE : View.GONE);
+        card.addView(checkBadge, clp);
 
         card.setOnFocusChangeListener((v, hasFocus) -> {
-            GradientDrawable fbg = new GradientDrawable();
-            fbg.setCornerRadius(dp(12));
+            boolean active = (slotIndex < pinnedCountries.size() &&
+                    selectedCountry != null &&
+                    selectedCountry.code.equalsIgnoreCase(pinnedCountries.get(slotIndex).code));
+            updatePinnedCardStyle(card, active, hasFocus);
             if (hasFocus) {
-                fbg.setColor(0xFF1E2C48);
-                fbg.setStroke(dp(2.5f), 0xFFE0F2FE); // Bright focus outline
                 label.setTextColor(Color.WHITE);
                 v.animate().scaleX(1.05f).scaleY(1.05f).setDuration(120).start();
             } else {
-                if (isSelected) {
-                    fbg.setColor(0x2800B4D8);
-                    fbg.setStroke(dp(2), 0xFF00B4D8);
-                    label.setTextColor(0xFF00B4D8);
-                } else {
-                    fbg.setColor(0xFF0F172A);
-                    fbg.setStroke(dp(1), 0xFF1E293B);
-                    label.setTextColor(Color.WHITE);
-                }
+                label.setTextColor(active ? 0xFF00B4D8 : Color.WHITE);
                 v.animate().scaleX(1f).scaleY(1f).setDuration(120).start();
             }
-            v.setBackground(fbg);
         });
 
         card.setOnClickListener(click);
         return card;
+    }
+
+    private void updatePinnedCardStyle(View card, boolean isSelected, boolean hasFocus) {
+        GradientDrawable bg = new GradientDrawable();
+        bg.setCornerRadius(dp(12));
+        if (hasFocus) {
+            bg.setColor(0xFF1E2C48);
+            bg.setStroke(dp(2.5f), 0xFFE0F2FE); // Bright focus outline
+        } else if (isSelected) {
+            bg.setColor(0x2800B4D8);
+            bg.setStroke(dp(2), 0xFF00B4D8); // Cyan border
+        } else {
+            bg.setColor(0xFF0F172A); // Dark slate
+            bg.setStroke(dp(1), 0xFF1E293B);
+        }
+        card.setBackground(bg);
     }
 
     private void buildCategoryPills() {
@@ -704,7 +583,8 @@ public class IptvActivity extends Activity {
                 boolean isSelected = cat.equalsIgnoreCase(selectedCategory);
                 View pill = createCategoryPill(cat, isSelected, v -> {
                     selectedCategory = cat;
-                    buildCategoryPills();
+                    // Update styles in-place without removing views to preserve focus on clicked pill!
+                    updateCategoryPillsSelection();
                     applyFilter();
                 });
                 pill.setId(catIds[r][c]);
@@ -714,6 +594,20 @@ public class IptvActivity extends Activity {
             categoryContainer.addView(rowLayout);
         }
         wireCategoryFocus();
+    }
+
+    private void updateCategoryPillsSelection() {
+        for (int r = 0; r < 2; r++) {
+            for (int c = 0; c < 4; c++) {
+                View v = catViews[r][c];
+                if (v instanceof TextView) {
+                    TextView tv = (TextView) v;
+                    String cat = CATEGORY_GRID[r][c];
+                    boolean isSelected = cat.equalsIgnoreCase(selectedCategory);
+                    updateCategoryPillStyle(tv, isSelected, tv.hasFocus());
+                }
+            }
+        }
     }
 
     private void wireCategoryFocus() {
@@ -767,7 +661,8 @@ public class IptvActivity extends Activity {
         updateCategoryPillStyle(tv, isSelected, false);
 
         tv.setOnFocusChangeListener((v, hasFocus) -> {
-            updateCategoryPillStyle(tv, isSelected, hasFocus);
+            boolean sel = title.equalsIgnoreCase(selectedCategory);
+            updateCategoryPillStyle(tv, sel, hasFocus);
             if (hasFocus) {
                 v.animate().scaleX(1.04f).scaleY(1.04f).setDuration(120).start();
             } else {
@@ -833,10 +728,8 @@ public class IptvActivity extends Activity {
         for (IptvChannel ch : fullChannelList) {
             boolean matchesCat = "All".equalsIgnoreCase(selectedCategory) ||
                     (ch.group != null && ch.group.equalsIgnoreCase(selectedCategory));
-            boolean matchesQuery = searchQuery.isEmpty() ||
-                    ch.name.toLowerCase(Locale.US).contains(searchQuery.toLowerCase(Locale.US));
 
-            if (matchesCat && matchesQuery) {
+            if (matchesCat) {
                 filteredChannels.add(ch);
             }
         }
@@ -854,9 +747,9 @@ public class IptvActivity extends Activity {
         emptyText.setVisibility(View.GONE);
 
         // Screen is 1280px wide on 720p TV
-        // Total non-grid width: dp(20) [left pad] + dp(265) [leftPanel] + dp(14) [sep margin] + dp(1) [sep] + dp(16) [sep margin] + dp(20) [right pad] = dp(336)
+        // Total non-grid width: dp(20) [left pad] + dp(275) [leftPanel] + dp(14) [sep margin] + dp(1) [sep] + dp(16) [sep margin] + dp(20) [right pad] = dp(346)
         int screenW = getResources().getDisplayMetrics().widthPixels;
-        int availRightPx = screenW - dp(336);
+        int availRightPx = screenW - dp(346);
         // 3 cards have 6 margins of dp(4) = dp(24). Reserve extra dp(8) safe padding from edge
         int cardW = (availRightPx - dp(32)) / 3;
 
@@ -997,14 +890,12 @@ public class IptvActivity extends Activity {
 
         card.addView(metaRow);
 
-        // Column 0 in channel grid: moving left focuses the pinned grid or sidebar actions
+        // Column 0 in channel grid: moving left focuses the pinned grid
         if (index % 3 == 0) {
             int rowInGrid = index / 3;
             if (rowInGrid == 0) card.setNextFocusLeftId(pinnedIds[2]);
             else if (rowInGrid == 1) card.setNextFocusLeftId(pinnedIds[5]);
-            else if (rowInGrid == 2) card.setNextFocusLeftId(pinnedIds[7]);
-            else if (rowInGrid == 3) card.setNextFocusLeftId(starredActionId);
-            else card.setNextFocusLeftId(searchActionId);
+            else card.setNextFocusLeftId(pinnedIds[7]);
         }
         // First row in channel grid: moving up focuses category row 2
         if (index < 3) {
@@ -1032,17 +923,6 @@ public class IptvActivity extends Activity {
             Intent intent = new Intent(IptvActivity.this, IptvPlayerActivity.class);
             intent.putExtra(IptvPlayerActivity.EXTRA_CHANNEL_INDEX, index);
             startActivity(intent);
-        });
-
-        card.setOnLongClickListener(v -> {
-            IptvManager.toggleStar(this, ch);
-            Toast.makeText(this, ch.isStarred ? "⭐ Added to Starred" : "Removed from Starred", Toast.LENGTH_SHORT).show();
-            updateSidebarActions();
-            if (isStarredMode) {
-                fullChannelList = IptvManager.getStarredChannels(this);
-            }
-            applyFilter();
-            return true;
         });
 
         GridLayout.LayoutParams glp = new GridLayout.LayoutParams();
@@ -1162,7 +1042,7 @@ public class IptvActivity extends Activity {
         mHeader.addView(closeBtn);
         modalRoot.addView(mHeader);
 
-        // Dense Grid in ScrollView: 10 columns!
+        // Dense Grid in ScrollView: 10 columns
         ScrollView scroll = new ScrollView(this);
         scroll.setVerticalScrollBarEnabled(true);
 
@@ -1223,12 +1103,13 @@ public class IptvActivity extends Activity {
 
             cell.setOnClickListener(v -> {
                 dialog.dismiss();
-                isStarredMode = false;
                 selectedCountry = c;
                 rightCountryTitle.setText(c.flag + "  " + c.name);
                 loadChannels(c.code);
-                buildPinnedGrid();
-                updateSidebarActions();
+                updatePinnedCardsSelection();
+                if (pinnedViews[7] != null) {
+                    pinnedViews[7].requestFocus();
+                }
             });
 
             GridLayout.LayoutParams glp = new GridLayout.LayoutParams();
@@ -1256,79 +1137,222 @@ public class IptvActivity extends Activity {
         dialog.show();
     }
 
-    private void showSearchDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert);
-        builder.setTitle("Search Channels");
-
-        final EditText input = new EditText(this);
-        input.setHint("Enter channel or show name…");
-        input.setText(searchQuery);
-        input.setTextColor(Color.WHITE);
-        input.setHintTextColor(0x77FFFFFF);
-        input.setSingleLine(true);
-        input.setPadding(dp(16), dp(16), dp(16), dp(16));
-        builder.setView(input);
-
-        builder.setPositiveButton("Search", (d, w) -> {
-            searchQuery = input.getText().toString().trim();
-            updateSidebarActions();
-            applyFilter();
-        });
-
-        builder.setNegativeButton("Clear", (d, w) -> {
-            searchQuery = "";
-            updateSidebarActions();
-            applyFilter();
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
+    /**
+     * Edit Pinned Countries Dialog:
+     * - NO Save or Cancel buttons: clicking any country immediately toggles pinned status and saves instantly!
+     * - Pinned countries appear first for instant access, followed by all remaining countries.
+     * - Newly added countries show up immediately on the home screen pinned grid.
+     */
     private void showEditPinnedDialog() {
         if (allCountries.isEmpty()) return;
-        List<String> currentCodes = IptvManager.getPinnedCountryCodes(this);
-        final String[] names = new String[allCountries.size()];
-        final boolean[] checked = new boolean[allCountries.size()];
 
-        for (int i = 0; i < allCountries.size(); i++) {
-            IptvCountry c = allCountries.get(i);
-            names[i] = c.flag + "  " + c.name + " (" + c.code + ")";
-            checked[i] = currentCodes.contains(c.code.toUpperCase());
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
 
-        AlertDialog.Builder b = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert);
-        b.setTitle("Select Pinned Countries (up to 7)");
-        b.setMultiChoiceItems(names, checked, (dialog, which, isChecked) -> {
-            checked[which] = isChecked;
+        int dialogW = Math.round(getResources().getDisplayMetrics().widthPixels * 0.88f);
+        int dialogH = Math.round(getResources().getDisplayMetrics().heightPixels * 0.88f);
+
+        LinearLayout modalRoot = new LinearLayout(this);
+        modalRoot.setOrientation(LinearLayout.VERTICAL);
+        modalRoot.setPadding(dp(24), dp(18), dp(24), dp(18));
+
+        GradientDrawable mBg = new GradientDrawable();
+        mBg.setColor(0xF60A0F1D);
+        mBg.setCornerRadius(dp(18));
+        mBg.setStroke(dp(1.5f), 0x4438BDF8);
+        modalRoot.setBackground(mBg);
+
+        // Header: Title + Done button (NO SAVE OR CANCEL BUTTONS!)
+        LinearLayout mHeader = new LinearLayout(this);
+        mHeader.setOrientation(LinearLayout.HORIZONTAL);
+        mHeader.setGravity(Gravity.CENTER_VERTICAL);
+        mHeader.setPadding(0, 0, 0, dp(12));
+
+        LinearLayout titleCol = new LinearLayout(this);
+        titleCol.setOrientation(LinearLayout.VERTICAL);
+
+        TextView mTitle = new TextView(this);
+        mTitle.setText("✎ Edit Pinned Countries");
+        mTitle.setTextColor(Color.WHITE);
+        mTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        mTitle.setTypeface(Ui.displaySemibold != null ? Ui.displaySemibold : android.graphics.Typeface.DEFAULT_BOLD);
+        titleCol.addView(mTitle);
+
+        final TextView subTitle = new TextView(this);
+        final List<String> currentCodes = new ArrayList<>(IptvManager.getPinnedCountryCodes(this));
+        subTitle.setText("Currently pinned: " + currentCodes.size() + "/7 • Click to pin/unpin • Instant save");
+        subTitle.setTextColor(0xFF38BDF8);
+        subTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        subTitle.setTypeface(Ui.medium != null ? Ui.medium : android.graphics.Typeface.DEFAULT);
+        titleCol.addView(subTitle);
+
+        mHeader.addView(titleCol, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+
+        TextView closeBtn = new TextView(this);
+        closeBtn.setText("✕ Done [BACK]");
+        closeBtn.setTextColor(0xAAFFFFFF);
+        closeBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+        closeBtn.setFocusable(true);
+        closeBtn.setClickable(true);
+        closeBtn.setPadding(dp(14), dp(6), dp(14), dp(6));
+        closeBtn.setOnClickListener(v -> dialog.dismiss());
+        closeBtn.setOnFocusChangeListener((v, hasFocus) -> {
+            closeBtn.setTextColor(hasFocus ? Color.WHITE : 0xAAFFFFFF);
+            closeBtn.setBackgroundColor(hasFocus ? 0x33FF0033 : Color.TRANSPARENT);
+        });
+        mHeader.addView(closeBtn);
+        modalRoot.addView(mHeader);
+
+        View sep = new View(this);
+        sep.setBackgroundColor(0x1FFFFFFF);
+        modalRoot.addView(sep, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(1)));
+
+        // 3-Column Country Grid in ScrollView
+        ScrollView scroll = new ScrollView(this);
+        scroll.setVerticalScrollBarEnabled(true);
+
+        GridLayout grid = new GridLayout(this);
+        grid.setColumnCount(3);
+        grid.setAlignmentMode(GridLayout.ALIGN_BOUNDS);
+        grid.setUseDefaultMargins(false);
+
+        int colW = (dialogW - dp(64)) / 3;
+
+        // Sort allCountries so currently pinned countries appear FIRST, followed by all others sorted alphabetically
+        List<IptvCountry> sortedList = new ArrayList<>(allCountries);
+        java.util.Collections.sort(sortedList, (a, b) -> {
+            boolean aPin = currentCodes.contains(a.code.toUpperCase().trim());
+            boolean bPin = currentCodes.contains(b.code.toUpperCase().trim());
+            if (aPin && !bPin) return -1;
+            if (!aPin && bPin) return 1;
+            return a.name.compareToIgnoreCase(b.name);
         });
 
-        b.setPositiveButton("Save", (dialog, which) -> {
-            List<String> newCodes = new ArrayList<>();
-            for (int i = 0; i < checked.length; i++) {
-                if (checked[i]) {
-                    newCodes.add(allCountries.get(i).code);
-                    if (newCodes.size() >= 7) break;
+        View firstCard = null;
+        for (final IptvCountry c : sortedList) {
+            final String upperCode = c.code.toUpperCase().trim();
+
+            LinearLayout card = new LinearLayout(this);
+            card.setOrientation(LinearLayout.HORIZONTAL);
+            card.setGravity(Gravity.CENTER_VERTICAL);
+            card.setFocusable(true);
+            card.setClickable(true);
+            card.setPadding(dp(10), dp(8), dp(10), dp(8));
+
+            TextView flag = new TextView(this);
+            flag.setText(c.flag);
+            flag.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            flag.setPadding(0, 0, dp(8), 0);
+            card.addView(flag);
+
+            TextView name = new TextView(this);
+            name.setText(c.name);
+            name.setTextColor(Color.WHITE);
+            name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            name.setTypeface(Ui.medium != null ? Ui.medium : android.graphics.Typeface.DEFAULT);
+            name.setSingleLine(true);
+            name.setEllipsize(TextUtils.TruncateAt.END);
+            card.addView(name, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+
+            final TextView status = new TextView(this);
+            status.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10.5f);
+            status.setTypeface(Ui.displaySemibold != null ? Ui.displaySemibold : android.graphics.Typeface.DEFAULT_BOLD);
+            status.setPadding(dp(6), dp(2), dp(6), dp(2));
+            card.addView(status);
+
+            // Runnable to refresh card appearance
+            Runnable refreshState = () -> {
+                boolean pinned = currentCodes.contains(upperCode);
+                GradientDrawable bg = new GradientDrawable();
+                bg.setCornerRadius(dp(8));
+                if (card.hasFocus()) {
+                    bg.setColor(0xFF1E2C48);
+                    bg.setStroke(dp(2), 0xFFE0F2FE);
+                } else if (pinned) {
+                    bg.setColor(0x2800B4D8);
+                    bg.setStroke(dp(1.5f), 0xFF00B4D8);
+                } else {
+                    bg.setColor(0xFF0F172A);
+                    bg.setStroke(dp(1), 0xFF1E293B);
                 }
-            }
-            if (newCodes.isEmpty()) newCodes.add("BD");
-            IptvManager.savePinnedCountryCodes(this, newCodes);
-            rebuildPinnedList();
-            buildPinnedGrid();
-            Toast.makeText(this, "Pinned countries updated", Toast.LENGTH_SHORT).show();
+                card.setBackground(bg);
+
+                if (pinned) {
+                    status.setText("✔ PINNED");
+                    status.setTextColor(0xFF00B4D8);
+                } else {
+                    status.setText("+ PIN");
+                    status.setTextColor(0xFF64748B);
+                }
+            };
+            refreshState.run();
+
+            card.setOnFocusChangeListener((v, hasFocus) -> {
+                refreshState.run();
+                if (hasFocus) {
+                    v.animate().scaleX(1.02f).scaleY(1.02f).setDuration(100).start();
+                } else {
+                    v.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
+                }
+            });
+
+            card.setOnClickListener(v -> {
+                boolean pinned = currentCodes.contains(upperCode);
+                if (pinned) {
+                    // Unpin
+                    currentCodes.remove(upperCode);
+                    IptvManager.savePinnedCountryCodes(IptvActivity.this, currentCodes);
+                    rebuildPinnedList();
+                    buildPinnedGrid();
+                    refreshState.run();
+                    subTitle.setText("Currently pinned: " + currentCodes.size() + "/7 • Click to pin/unpin • Instant save");
+                    Toast.makeText(IptvActivity.this, "Unpinned " + c.name, Toast.LENGTH_SHORT).show();
+                } else {
+                    // Pin
+                    if (currentCodes.size() >= 7) {
+                        Toast.makeText(IptvActivity.this, "Maximum 7 countries pinned. Please unpin one first.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        currentCodes.add(upperCode);
+                        IptvManager.savePinnedCountryCodes(IptvActivity.this, currentCodes);
+                        rebuildPinnedList();
+                        buildPinnedGrid();
+                        refreshState.run();
+                        subTitle.setText("Currently pinned: " + currentCodes.size() + "/7 • Click to pin/unpin • Instant save");
+                        Toast.makeText(IptvActivity.this, "Pinned " + c.name, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+            GridLayout.LayoutParams glp = new GridLayout.LayoutParams();
+            glp.width = colW;
+            glp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            glp.setMargins(dp(3), dp(3), dp(3), dp(3));
+            card.setLayoutParams(glp);
+            grid.addView(card);
+
+            if (firstCard == null) firstCard = card;
+        }
+
+        scroll.addView(grid, new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        modalRoot.addView(scroll, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
+
+        dialog.setContentView(modalRoot, new ViewGroup.LayoutParams(dialogW, dialogH));
+
+        final View f = firstCard;
+        dialog.setOnShowListener(d -> {
+            if (f != null) f.requestFocus();
         });
 
-        b.setNegativeButton("Cancel", null);
-        b.show();
-    }
+        dialog.setOnDismissListener(d -> {
+            if (editBtn != null) editBtn.requestFocus();
+        });
 
-    @Override protected void onResume() {
-        super.onResume();
-        if (isStarredMode) {
-            fullChannelList = IptvManager.getStarredChannels(this);
-            applyFilter();
-        }
-        updateSidebarActions();
+        dialog.show();
     }
 
     private int dp(float dp) {
