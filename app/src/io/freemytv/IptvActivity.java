@@ -375,6 +375,11 @@ public class IptvActivity extends Activity {
                 pinnedViews[i] = createPinnedCard(c.flag, c.name, isSelected, isSelected, i, v -> {
                     selectedCountry = c;
                     rightCountryTitle.setText(c.flag + "  " + c.name);
+                    selectedCategory = "All";
+                    updateCategoryPillsSelection();
+                    if (gridScroll != null) {
+                        gridScroll.scrollTo(0, 0);
+                    }
                     loadChannels(c.code);
                     updatePinnedCardsSelection();
                 });
@@ -696,6 +701,69 @@ public class IptvActivity extends Activity {
         tv.setBackground(bg);
     }
 
+    private static final List<String> TOP_BD_NAMES = Arrays.asList(
+        "channel 24", "news 24", "somoy tv", "jamuna tv", "independent tv",
+        "ekattor tv", "ntv", "rtv", "bangla vision", "maasranga tv",
+        "atn bangla", "atn news", "boishakhi tv", "btv national", "btv news",
+        "btv chattogram", "btv world", "t sports", "gazi tv", "duronto tv",
+        "desh tv", "ekushey tv", "nagorik tv", "channel i", "asian tv",
+        "ananda tv", "bijoy tv", "nexus tv", "ekhon tv", "global tv",
+        "my tv", "mohona tv", "sa tv", "channel 9", "channel 16",
+        "channel 1", "jago news 24", "bengali beats", "movie bangla",
+        "bangla tv", "channel 52", "dbc news", "deepto tv", "green tv",
+        "rajdhani tv", "enter tv", "g series drama", "g tv", "jonmobhumi tv",
+        "matribhumi tv", "rupashi bangla tv", "star news", "jalsha bangla bd"
+    );
+
+    private boolean isBangladeshiChannel(IptvChannel ch) {
+        if (ch == null) return false;
+        String name = ch.name != null ? ch.name.trim().toLowerCase(Locale.US) : "";
+        for (String bd : TOP_BD_NAMES) {
+            if (name.equals(bd) || name.startsWith(bd + " ")) return true;
+        }
+        String id = ch.id != null ? ch.id.trim().toLowerCase(Locale.US) : "";
+        if (id.endsWith(".bd") || id.contains(".bd@") || id.startsWith("bd-")) {
+            if (!name.contains("disney") && !name.contains("eurosport") && !name.contains("medina")
+                    && !name.contains("usa tv") && !name.contains("vissa")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int getBdChannelRank(IptvChannel ch) {
+        if (ch == null) return 999;
+        String name = ch.name != null ? ch.name.trim().toLowerCase(Locale.US) : "";
+        for (int i = 0; i < TOP_BD_NAMES.size(); i++) {
+            String bd = TOP_BD_NAMES.get(i);
+            if (name.equals(bd) || name.startsWith(bd + " ")) return i;
+        }
+        return 500;
+    }
+
+    private void sortChannelsForCountry(List<IptvChannel> list, String countryCode) {
+        if (list == null || list.isEmpty()) return;
+
+        if ("BD".equalsIgnoreCase(countryCode)) {
+            java.util.Collections.sort(list, (a, b) -> {
+                boolean aBd = isBangladeshiChannel(a);
+                boolean bBd = isBangladeshiChannel(b);
+                if (aBd && !bBd) return -1;
+                if (!aBd && bBd) return 1;
+                if (aBd && bBd) {
+                    int rankA = getBdChannelRank(a);
+                    int rankB = getBdChannelRank(b);
+                    if (rankA != rankB) return Integer.compare(rankA, rankB);
+                    return a.name.compareToIgnoreCase(b.name);
+                }
+                // Non-BD: sort alphabetically
+                return a.name.compareToIgnoreCase(b.name);
+            });
+        } else {
+            java.util.Collections.sort(list, (a, b) -> a.name.compareToIgnoreCase(b.name));
+        }
+    }
+
     private void loadChannels(String countryCode) {
         loadingBar.setVisibility(View.VISIBLE);
         emptyText.setVisibility(View.GONE);
@@ -706,8 +774,7 @@ public class IptvActivity extends Activity {
             @Override public void onResult(List<IptvChannel> channels) {
                 loadingBar.setVisibility(View.GONE);
                 fullChannelList = channels != null ? channels : new ArrayList<>();
-                // Sort alphabetically by name
-                java.util.Collections.sort(fullChannelList, (a, b) -> a.name.compareToIgnoreCase(b.name));
+                sortChannelsForCountry(fullChannelList, countryCode);
                 applyFilter();
             }
 
@@ -724,6 +791,9 @@ public class IptvActivity extends Activity {
 
     private void applyFilter() {
         displayLimit = 45;
+        if (gridScroll != null) {
+            gridScroll.post(() -> gridScroll.scrollTo(0, 0));
+        }
         filteredChannels.clear();
         for (IptvChannel ch : fullChannelList) {
             boolean matchesCat = "All".equalsIgnoreCase(selectedCategory) ||
@@ -1105,6 +1175,11 @@ public class IptvActivity extends Activity {
                 dialog.dismiss();
                 selectedCountry = c;
                 rightCountryTitle.setText(c.flag + "  " + c.name);
+                selectedCategory = "All";
+                updateCategoryPillsSelection();
+                if (gridScroll != null) {
+                    gridScroll.scrollTo(0, 0);
+                }
                 loadChannels(c.code);
                 updatePinnedCardsSelection();
                 if (pinnedViews[7] != null) {
