@@ -166,16 +166,19 @@ final class HomeApps {
         KILL_EXECUTOR.execute(() -> {
             try (Adb adb = Adb.connect(context, 3000, null)) {
                 StringBuilder sb = new StringBuilder();
+                String launched = lastLaunchedPackage;
                 for (String pkg : HEAVY_APPS) {
-                    if (pkg.equals(pkgToKeep)) continue;
+                    if (pkg.equals(pkgToKeep) || (launched != null && pkg.equals(launched))) continue;
                     sb.append("am force-stop ").append(pkg).append("; ");
                 }
                 for (String pkg : STARTUP_HOGS) {
-                    if (pkg.equals(pkgToKeep)) continue;
+                    if (pkg.equals(pkgToKeep) || (launched != null && pkg.equals(launched))) continue;
                     sb.append("am force-stop ").append(pkg).append("; ");
                 }
-                adb.shell(sb.toString());
-                AppLog.i("cleanHeavyBackgroundApps: background apps force-stopped");
+                if (sb.length() > 0) {
+                    adb.shell(sb.toString());
+                    AppLog.i("cleanHeavyBackgroundApps: background apps force-stopped");
+                }
             } catch (Throwable t) {
                 AppLog.w("cleanHeavyBackgroundApps ADB failed: " + t.getMessage());
             }
@@ -191,7 +194,9 @@ final class HomeApps {
             } catch (Throwable ignore) {}
         }
         KILL_EXECUTOR.execute(() -> {
+            if (pkg.equals(lastLaunchedPackage)) return;
             try (Adb adb = Adb.connect(context, 3000, null)) {
+                if (pkg.equals(lastLaunchedPackage)) return;
                 adb.shell("am force-stop " + pkg);
                 AppLog.i("terminateApp: force-stopped " + pkg);
             } catch (Throwable t) {
@@ -614,8 +619,8 @@ final class HomeApps {
         }
         if (intent == null) return false;
         if (it.pkg != null && !it.pkg.isEmpty() && !"io.freemytv.iptv".equals(it.pkg)) {
-            cleanHeavyBackgroundApps(a, it.pkg);
             lastLaunchedPackage = it.pkg;
+            cleanHeavyBackgroundApps(a, it.pkg);
         }
         if ("com.amazon.amazonvideo.livingroom".equals(it.pkg) 
                 || "com.netflix.ninja".equals(it.pkg)) {
